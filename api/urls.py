@@ -4,6 +4,7 @@ from rest_framework.urlpatterns import format_suffix_patterns
 from rest_framework import renderers
 
 from api.views import NewsFeedViewSet, NewsItemViewSet
+from api.views import PersonViewSet, AffiliationViewSet
 
 
 newsfeed_list = NewsFeedViewSet.as_view({
@@ -28,13 +29,45 @@ newsitem_detail = NewsItemViewSet.as_view({
     'delete': 'destroy'
 })
 
+person_list = PersonViewSet.as_view({
+    'get': 'list',
+    'post': 'create'
+})
+person_detail = PersonViewSet.as_view({
+    'get': 'retrieve',
+    'put': 'update',
+    'patch': 'partial_update',
+    'delete': 'destroy'
+})
+
+""" affiliations views not enabled by default """ """
+affiliation_list = AffiliationViewSet.as_view({
+    'get': 'list',
+    'post': 'create'
+})
+affiliation_detail = AffiliationViewSet.as_view({
+    'get': 'retrieve',
+    'put': 'update',
+    'patch': 'partial_update',
+    'delete': 'destroy'
+})
+"""
+
+
 
 urlpatterns = patterns('api.views',
 	url( r'^$',                           'api_root'                    ),
+
 	url( r'^newsfeeds$',                   newsfeed_list ,     name='newsfeed-list'     ),
 	url( r'^newsfeeds/(?P<pk>[0-9]+)$',    newsfeed_detail,    name='newsfeed-detail'   ),
-	url( r'^newsitems$',                   newsitem_list,      name='newsitem-list'        ),
-	url( r'^newsitems/(?P<pk>[0-9]+)$',    newsitem_detail,    name='newsitem-detail'      ),
+    url( r'^newsitems$',                   newsitem_list,      name='newsitem-list'     ),
+    url( r'^newsitems/(?P<pk>[0-9]+)$',    newsitem_detail,    name='newsitem-detail'   ),
+
+    url( r'^persons$',                     person_list,        name='person-list'       ),
+    url( r'^persons/(?P<pk>[0-9]+)$',      person_detail,      name='person-detail'     ),
+    # affiliations should not be exposed """
+    #url( r'^affiliations$',                     affiliation_list,        name='affiliation-list'        ),
+    #url( r'^affiliations/(?P<pk>[0-9]+)$',      affiliation_detail,      name='affiliation-detail'      ),
 )
 
 urlpatterns = format_suffix_patterns(urlpatterns)

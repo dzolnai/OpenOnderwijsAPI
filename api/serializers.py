@@ -1,8 +1,9 @@
 from django.forms import widgets
 from rest_framework import serializers
-from django.contrib.auth.models import User
 
 from api.models import NewsFeed, NewsItem
+from api.models import Person, Affiliation
+
 
 class NewsItemSerializer(serializers.HyperlinkedModelSerializer):
 	feeds = serializers.HyperlinkedRelatedField(many=True, view_name='newsfeed-detail')
@@ -18,5 +19,22 @@ class NewsFeedSerializer(serializers.HyperlinkedModelSerializer):
 	class Meta:
 		model = NewsFeed
 		fields = ('id','url','title','updated','items')
+
+
+""" Person """
+
+class AffiliationSerializer(serializers.HyperlinkedModelSerializer):
+	persons = serializers.HyperlinkedRelatedField(many=True, view_name='persons-detail')
+	class Meta:
+		model = Affiliation
+		fields = ('id','affiliation','persons')
+
+class PersonSerializer(serializers.HyperlinkedModelSerializer):
+	affiliations = serializers.SlugRelatedField(many=True, read_only=False, slug_field='affiliation')
+	class Meta:
+		model = Person
+		fields = ('id','url','givenName','surName','displayName','affiliations',
+			'mail', 'telephoneNumber','mobileNumber','photo','gender',
+			'organisation','department','title','office',)
 
 
