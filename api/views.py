@@ -9,6 +9,7 @@ from rest_framework.decorators import link
 
 from api.models import NewsItem,NewsFeed
 from api.serializers import NewsItemSerializer,NewsFeedSerializer
+from api.pagination import CustomPaginationSerializer
 
 @api_view(('GET',))
 def api_root(request, format=None):
@@ -18,9 +19,12 @@ def api_root(request, format=None):
 	})
 
 class NewsItemViewSet(viewsets.ModelViewSet):
-    queryset = NewsItem.objects.all()
-    serializer_class = NewsItemSerializer
+	queryset = NewsItem.objects.all()
+	serializer_class = NewsItemSerializer
+	pagination_serializer_class = CustomPaginationSerializer
+
 
 class NewsFeedViewSet(viewsets.ModelViewSet):
-    queryset = NewsFeed.objects.all()
-    serializer_class = NewsFeedSerializer
+	queryset = NewsFeed.objects.all()
+	serializer_class = NewsFeedSerializer
+	pagination_serializer_class = CustomPaginationSerializer
