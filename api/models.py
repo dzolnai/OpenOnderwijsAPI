@@ -15,7 +15,8 @@ class NewsItem(models.Model):
 
 
 class NewsFeed(models.Model):
-	title   = models.CharField(max_length=255)
+	title       = models.CharField(max_length=255)
+	description = models.TextField(blank=True)
 	#updated = models.DateTimeField(auto_now=True)
 
 	class Meta:

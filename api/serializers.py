@@ -18,7 +18,7 @@ class NewsFeedSerializer(serializers.HyperlinkedModelSerializer):
 	updated = serializers.Field(source='last_updated')
 	class Meta:
 		model = NewsFeed
-		fields = ('id','url','title','updated','items')
+		fields = ('id','url','title','description','updated','items')
 
 
 """ Person """
