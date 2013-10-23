@@ -1,0 +1,84 @@
+[
+    {
+        "fields": { "affiliation": "student" },
+        "model": "api.affiliation",
+        "pk": 1
+    },
+    {
+        "fields": { "affiliation": "faculty" },
+        "model": "api.affiliation",
+        "pk": 2
+    },
+    {
+        "fields": { "affiliation": "staff" },
+        "model": "api.affiliation",
+        "pk": 3
+    },
+    {
+        "fields": { "affiliation": "alum" },
+        "model": "api.affiliation",
+        "pk": 4
+    },
+    {
+        "fields": { "affiliation": "member" },
+        "model": "api.affiliation",
+        "pk": 5
+    },
+    {
+        "fields": { "affiliation": "affiliate" },
+        "model": "api.affiliation",
+        "pk": 6
+    },
+    {
+        "fields": { "affiliation": "employee" },
+        "model": "api.affiliation",
+        "pk": 7
+    },
+    {
+        "fields": {
+            "affiliations": [
+                2,
+                5,
+                7
+            ],
+            "department": "",
+            "displayName": "dr. Basje",
+            "gender": "M",
+            "givenName": "Bas",
+            "mail": "basje@harderwijk.edu",
+            "mobileNumber": "",
+            "office": "xxx",
+            "organisation": "",
+            "photo": "",
+            "surName": "Zoetekouw",
+            "telephoneNumber": "+31301234567",
+            "title": ""
+        },
+        "model": "api.person",
+        "pk": 1
+    },
+    {
+        "fields": {
+            "affiliations": [
+                2,
+                4,
+                6,
+                7
+            ],
+            "department": "",
+            "displayName": "Dr. Bibber",
+            "gender": "M",
+            "givenName": "Piet",
+            "mail": "bibber@harderwijk.edu",
+            "mobileNumber": "",
+            "office": "",
+            "organisation": "",
+            "photo": "",
+            "surName": "Bibber",
+            "telephoneNumber": "",
+            "title": ""
+        },
+        "model": "api.person",
+        "pk": 2
+    }
+]
