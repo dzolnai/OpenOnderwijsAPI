@@ -49,7 +49,7 @@ class Person(models.Model):
 	organisation    = models.TextField(blank=True,)
 	department      = models.TextField(blank=True,help_text='ou in X.520')  #multivalued
 	title           = models.TextField(blank=True,help_text='job title and/or description')
-	office          = models.TextField(blank=True,null=True)
+	office          = models.TextField(blank=True)
 
 #	employeenumber
 #	studentnr
