@@ -5,6 +5,7 @@ from rest_framework import renderers
 
 from api.views import NewsFeedViewSet, NewsItemViewSet
 from api.views import PersonViewSet, AffiliationViewSet
+from api.views import GroupViewSet, GroupRoleViewSet
 
 
 newsfeed_list = NewsFeedViewSet.as_view({
@@ -40,6 +41,29 @@ person_detail = PersonViewSet.as_view({
     'delete': 'destroy'
 })
 
+group_list = GroupViewSet.as_view({
+    'get': 'list',
+    'post': 'create'
+})
+group_detail = GroupViewSet.as_view({
+    'get': 'retrieve',
+    'put': 'update',
+    'patch': 'partial_update',
+    'delete': 'destroy'
+})
+
+grouprole_list = GroupRoleViewSet.as_view({
+    'get': 'list',
+    'post': 'create'
+})
+grouprole_detail = GroupRoleViewSet.as_view({
+    'get': 'retrieve',
+    'put': 'update',
+    'patch': 'partial_update',
+    'delete': 'destroy'
+})
+
+
 """ affiliations views not enabled by default """ """
 affiliation_list = AffiliationViewSet.as_view({
     'get': 'list',
@@ -68,6 +92,10 @@ urlpatterns = patterns('api.views',
     # affiliations should not be exposed """
     #url( r'^affiliations$',                     affiliation_list,        name='affiliation-list'        ),
     #url( r'^affiliations/(?P<pk>[0-9]+)$',      affiliation_detail,      name='affiliation-detail'      ),
+    url( r'^groups$',                      group_list,         name='group-list'       ),
+    url( r'^groups/(?P<pk>[0-9]+)$',       group_detail,       name='group-detail'     ),
+    url( r'^grouproles$',                  grouprole_list,     name='grouprole-list'       ),
+    url( r'^grouproles/(?P<pk>[0-9]+)$',   grouprole_detail,   name='grouprole-detail'     ),
 )
 
 urlpatterns = format_suffix_patterns(urlpatterns)

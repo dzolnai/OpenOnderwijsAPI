@@ -13,6 +13,9 @@ from api.serializers import NewsItemSerializer,NewsFeedSerializer
 from api.models import Person, Affiliation
 from api.serializers import PersonSerializer, AffiliationSerializer
 
+from api.models import Group, GroupRole
+from api.serializers import GroupSerializer, GroupRoleSerializer
+
 from api.pagination import CustomPaginationSerializer
 
 @api_view(('GET',))
@@ -41,4 +44,14 @@ class AffiliationViewSet(viewsets.ModelViewSet):
 class PersonViewSet(viewsets.ModelViewSet):
 	queryset = Person.objects.all()
 	serializer_class = PersonSerializer
+	pagination_serializer_class = CustomPaginationSerializer
+
+class GroupViewSet(viewsets.ModelViewSet):
+	queryset = Group.objects.all()
+	serializer_class = GroupSerializer
+	pagination_serializer_class = CustomPaginationSerializer
+
+class GroupRoleViewSet(viewsets.ModelViewSet):
+	queryset = GroupRole.objects.all()
+	serializer_class = GroupRoleSerializer
 	pagination_serializer_class = CustomPaginationSerializer

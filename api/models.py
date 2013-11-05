@@ -61,4 +61,29 @@ class Person(models.Model):
 	#groups          = models.ManyToManyField('Group',through='GroupRole')
 
 
+class Group(models.Model):
+	GROUP_TYPES = ('?LesGroep','?LeerGroep','ou','affiliation','Generic')
+
+	type        = models.CharField(max_length=32,choices=selfzip(GROUP_TYPES))
+	name        = models.CharField(blank=True,max_length=255)
+	description = models.TextField(blank=True)
+	#members     = models.ManyToManyField('Person',through='GroupRole')
+
+class GroupRole(models.Model):
+	ROLES = ('member','manager','administrator')
+
+	person = models.ForeignKey(Person,related_name='groups')
+	group  = models.ForeignKey(Group,related_name='members')
+	role   = models.CharField(choices=selfzip(ROLES),max_length=32)
+
+	class Meta:
+		unique_together = ('person','group')
+
+	def groupName(self):
+		return self.group.name
+	def groupType(self):
+		return self.group.type
+	def displayName(self):
+		return self.person.displayName
+
 

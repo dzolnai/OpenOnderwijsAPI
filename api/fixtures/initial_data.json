@@ -114,5 +114,68 @@
         },
         "model": "api.person",
         "pk": 2
+    },
+    {
+        "fields": {
+            "description": "hallo een test groep",
+            "name": "test group",
+            "type": "?LesGroep"
+        },
+        "model": "api.group",
+        "pk": 1
+    },
+    {
+        "fields": {
+            "description": "Kijk, nog 1",
+            "name": "Nog een andere group",
+            "type": "affiliation"
+        },
+        "model": "api.group",
+        "pk": 2
+    },
+    {
+        "fields": {
+            "description": "hallo",
+            "name": "een derde groep",
+            "type": "Generic"
+        },
+        "model": "api.group",
+        "pk": 3
+    },
+    {
+        "fields": {
+            "group": 1,
+            "person": 2,
+            "role": "member"
+        },
+        "model": "api.grouprole",
+        "pk": 1
+    },
+    {
+        "fields": {
+            "group": 2,
+            "person": 2,
+            "role": "member"
+        },
+        "model": "api.grouprole",
+        "pk": 2
+    },
+    {
+        "fields": {
+            "group": 3,
+            "person": 2,
+            "role": "member"
+        },
+        "model": "api.grouprole",
+        "pk": 3
+    },
+    {
+        "fields": {
+            "group": 3,
+            "person": 1,
+            "role": "administrator"
+        },
+        "model": "api.grouprole",
+        "pk": 4
     }
 ]
