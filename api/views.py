@@ -23,6 +23,8 @@ def api_root(request, format=None):
 	return Response({
 		'newsfeeds': reverse('newsfeed-list', request=request, format=format),
 		'newsitems': reverse('newsitem-list', request=request, format=format),
+		'persons'  : reverse('person-list', request=request, format=format),
+		'groups'   : reverse('group-list', request=request, format=format),
 	})
 
 class NewsItemViewSet(viewsets.ModelViewSet):
