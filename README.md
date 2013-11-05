@@ -14,19 +14,19 @@ started, follow these steps:
 * install python (2.7) and python-virtualenv
 * set up a pyhton environment: 
 
-    virtualenv env
-    source env/bin/activate
-    pip install django
-    pip install djangorestframework
-    pip install django-rest-swagger
+      virtualenv env
+      source env/bin/activate
+      pip install django
+      pip install djangorestframework
+      pip install django-rest-swagger
 
 * set up the databse
 
-    python manage.py syncdb
+      python manage.py syncdb
 
 * start the local server
 
-    python manage.py runserver
+      python manage.py runserver
 
 At that point, you should be able to browse to http://localhost:8000/. This should show an overview of the available APIs.
 A somewhat more extensive API description can be found at http://localhost:8000/docs
