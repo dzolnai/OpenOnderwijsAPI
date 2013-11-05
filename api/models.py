@@ -53,11 +53,12 @@ class Person(models.Model):
 	department      = models.TextField(blank=True,help_text='ou in X.520')  #multivalued
 	title           = models.TextField(blank=True,help_text='job title and/or description')
 	office          = models.TextField(blank=True)
+	employeeID      = models.CharField(blank=True,max_length=255)  # only for affiliation=employee
+	studentID       = models.CharField(blank=True,max_length=255)  # only for affiliation=student
+	#cluster
+	#education
+	#klas  # LesGroep
+	#groups          = models.ManyToManyField('Group',through='GroupRole')
 
-#	employeenumber
-#	studentnr
-#	cluster
-#	education
-#	klas
 
 
