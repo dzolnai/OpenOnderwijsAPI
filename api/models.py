@@ -1,5 +1,7 @@
 from django.db import models
 
+def selfzip(a):
+	return zip(a,a)
 
 class NewsItem(models.Model):
 	pubDate = models.DateTimeField(auto_now_add=True)
@@ -30,7 +32,7 @@ class NewsFeed(models.Model):
 
 class Affiliation(models.Model):
 	AFFILIATIONS=('student','faculty','staff','alum','member','affiliate','employee')
-	affiliation = models.CharField(choices=zip(AFFILIATIONS,AFFILIATIONS),max_length=9,help_text='as defined in eduPerson')
+	affiliation = models.CharField(choices=selfzip(AFFILIATIONS),max_length=9,help_text='as defined in eduPerson')
 
 class Person(models.Model):
 	GENDERS=('M','F')
@@ -46,7 +48,7 @@ class Person(models.Model):
 	telephoneNumber = models.CharField(blank=True,max_length=32)  #models.TelephoneField() IETU E.123 
 	mobileNumber    = models.CharField(blank=True,max_length=32)  #models.TelephoneField()
 	photo           = models.URLField(blank=True)
-	gender          = models.CharField(blank=True,choices=zip(GENDERS,GENDERS),max_length=1)
+	gender          = models.CharField(blank=True,choices=selfzip(GENDERS),max_length=1)
 	organisation    = models.TextField(blank=True,)
 	department      = models.TextField(blank=True,help_text='ou in X.520')  #multivalued
 	title           = models.TextField(blank=True,help_text='job title and/or description')
