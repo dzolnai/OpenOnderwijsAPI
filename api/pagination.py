@@ -12,4 +12,4 @@ class MetaSerializer(serializers.Serializer):
 
 class CustomPaginationSerializer(pagination.BasePaginationSerializer):
 	meta = MetaSerializer(source='*')
-	results_field = 'items'
+	results_field = 'data'
