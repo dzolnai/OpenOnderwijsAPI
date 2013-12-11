@@ -72,8 +72,8 @@ class Group(models.Model):
 class GroupRole(models.Model):
 	ROLES = ('member','manager','administrator')
 
-	person = models.ForeignKey(Person,related_name='groups')
-	group  = models.ForeignKey(Group,related_name='members')
+	person = models.ForeignKey('Person',related_name='groups')
+	group  = models.ForeignKey('Group',related_name='members')
 	role   = models.CharField(choices=selfzip(ROLES),max_length=32)
 
 	class Meta:
