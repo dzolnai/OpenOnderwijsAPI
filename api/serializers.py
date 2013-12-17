@@ -62,7 +62,7 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
 """ Person """
 
 class AffiliationSerializer(serializers.HyperlinkedModelSerializer):
-	persons = serializers.HyperlinkedRelatedField(many=True, view_name='persons-detail')
+	persons = serializers.HyperlinkedRelatedField(many=True, view_name='person-detail')
 	class Meta:
 		model = Affiliation
 		fields = ('id','affiliation','persons')
