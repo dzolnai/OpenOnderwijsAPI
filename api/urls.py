@@ -64,8 +64,7 @@ grouprole_detail = GroupRoleViewSet.as_view({
     'delete': 'destroy'
 })
 
-
-""" affiliations views not enabled by default """ """
+""" affiliations views not enabled by default """ 
 affiliation_list = AffiliationViewSet.as_view({
     'get': 'list',
     'post': 'create'
@@ -76,7 +75,6 @@ affiliation_detail = AffiliationViewSet.as_view({
     'patch': 'partial_update',
     'delete': 'destroy'
 })
-"""
 
 
 building_list = BuildingViewSet.as_view({
@@ -114,12 +112,17 @@ urlpatterns = patterns('api.views',
     url( r'^persons$',                     person_list,        name='person-list'       ),
     url( r'^persons/(?P<pk>[0-9]+)$',      person_detail,      name='person-detail'     ),
     # affiliations should not be exposed """
-    #url( r'^affiliations$',                     affiliation_list,        name='affiliation-list'        ),
-    #url( r'^affiliations/(?P<pk>[0-9]+)$',      affiliation_detail,      name='affiliation-detail'      ),
+    url( r'^affiliations$',                     affiliation_list,        name='affiliation-list'        ),
+    url( r'^affiliations/(?P<pk>[0-9]+)$',      affiliation_detail,      name='affiliation-detail'      ),
     url( r'^groups$',                      group_list,         name='group-list'       ),
     url( r'^groups/(?P<pk>[0-9]+)$',       group_detail,       name='group-detail'     ),
     url( r'^grouproles$',                  grouprole_list,     name='grouprole-list'       ),
     url( r'^grouproles/(?P<pk>[0-9]+)$',   grouprole_detail,   name='grouprole-detail'     ),
+
+    url( r'^buildings$',                  building_list,       name='building-list'       ),
+    url( r'^buildings/(?P<pk>[0-9]+)$',   building_detail,     name='building-detail'     ),
+    url( r'^rooms$',                      room_list,           name='room-list'       ),
+    url( r'^rooms/(?P<pk>[0-9]+)$',       room_detail,         name='room-detail'     ),
 )
 
 urlpatterns = format_suffix_patterns(urlpatterns)

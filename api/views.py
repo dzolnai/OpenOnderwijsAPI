@@ -25,10 +25,12 @@ from api.serializers import BuildingSerializer, RoomSerializer
 @api_view(('GET',))
 def api_root(request, format=None):
 	return Response({
-		'newsfeeds': reverse('newsfeed-list', request=request, format=format),
-		'newsitems': reverse('newsitem-list', request=request, format=format),
-		'persons'  : reverse('person-list', request=request, format=format),
-		'groups'   : reverse('group-list', request=request, format=format),
+		'newsfeeds' : reverse('newsfeed-list', request=request, format=format),
+		'newsitems' : reverse('newsitem-list', request=request, format=format),
+		'persons'   : reverse('person-list', request=request, format=format),
+		'groups'    : reverse('group-list', request=request, format=format),
+		'grouproles': reverse('grouprole-list', request=request, format=format),
+		'affiliations': reverse('affiliation-list', request=request, format=format),
 		'buildings' : reverse('building-list', request=request, format=format),
 		'rooms'     : reverse('room-list', request=request, format=format),
 	})
