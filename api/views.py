@@ -7,6 +7,9 @@ from rest_framework.response import Response
 from rest_framework.reverse import reverse
 from rest_framework.decorators import link
 
+from api.pagination import CustomPaginationSerializer
+
+
 from api.models import NewsItem,NewsFeed
 from api.serializers import NewsItemSerializer,NewsFeedSerializer
 
@@ -18,7 +21,6 @@ from api.serializers import GroupSerializer, GroupRoleSerializer
 
 from api.models import Building, Room
 from api.serializers import BuildingSerializer, RoomSerializer
-from api.pagination import CustomPaginationSerializer
 
 @api_view(('GET',))
 def api_root(request, format=None):
