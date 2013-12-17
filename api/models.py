@@ -86,4 +86,24 @@ class GroupRole(models.Model):
 	def displayName(self):
 		return self.person.displayName
 
+class Building(models.Model):
+	abbr        = models.CharField(max_length=32,unique=True)
+	name        = models.CharField(max_length=256)
+	description = models.TextField()
+	address     = models.CharField(max_length=256)
+	postalCode  = models.CharField(max_length=16)
+	city		= models.CharField(max_length=255)
+	lat         = models.DecimalField(max_digits=9,decimal_places=6)
+	lon         = models.DecimalField(max_digits=9,decimal_places=6)
+
+class Room(models.Model):
+	building            = models.ForeignKey('Building',related_name='rooms')
+	abbr                = models.CharField(max_length=32,unique=True)
+	name                = models.CharField(max_length=255,blank=True)
+	description         = models.TextField(blank=True)
+	totalSeats          = models.PositiveIntegerField(blank=True)
+	totalWorkspaces     = models.PositiveIntegerField(blank=True)
+	availableWorkspaces = models.PositiveIntegerField(blank=True)
+	# type              = models.TextField()
+
 

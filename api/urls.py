@@ -6,6 +6,7 @@ from rest_framework import renderers
 from api.views import NewsFeedViewSet, NewsItemViewSet
 from api.views import PersonViewSet, AffiliationViewSet
 from api.views import GroupViewSet, GroupRoleViewSet
+from api.views import BuildingViewSet, RoomViewSet
 
 
 newsfeed_list = NewsFeedViewSet.as_view({
@@ -76,6 +77,29 @@ affiliation_detail = AffiliationViewSet.as_view({
     'delete': 'destroy'
 })
 """
+
+
+building_list = BuildingViewSet.as_view({
+    'get': 'list',
+    'post': 'create'
+})
+building_detail = BuildingViewSet.as_view({
+    'get': 'retrieve',
+    'put': 'update',
+    'patch': 'partial_update',
+    'delete': 'destroy'
+})
+
+room_list = RoomViewSet.as_view({
+    'get': 'list',
+    'post': 'create'
+})
+room_detail = RoomViewSet.as_view({
+    'get': 'retrieve',
+    'put': 'update',
+    'patch': 'partial_update',
+    'delete': 'destroy'
+})
 
 
 

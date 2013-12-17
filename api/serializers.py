@@ -4,6 +4,7 @@ from rest_framework import serializers
 from api.models import NewsFeed, NewsItem
 from api.models import Person, Affiliation
 from api.models import Group, GroupRole
+from api.models import Building, Room
 
 import logging
 
@@ -78,4 +79,18 @@ class PersonSerializer(serializers.HyperlinkedModelSerializer):
 			'organisation','department','title','office','groups')
 
 
+""" Rooms """
+
+class BuildingSerializer(serializers.HyperlinkedModelSerializer):
+	class Meta:
+		model = Building
+		field = ('abbr','name','description','address','postalCode','city','lat','lon')
+
+class RoomSerializer(serializers.HyperlinkedModelSerializer):
+	#building =  serializers.HyperlinkedModelSerializer(view_name='building-detail',read_only=False)
+	building =  BuildingSerializer()
+	class Meta:
+		model = Room
+		depth = 1
+		field = ('building','abbr','name','description','totalSeats','totalWorkspaces','availableWorkspaces')
 
