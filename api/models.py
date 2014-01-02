@@ -106,4 +106,31 @@ class Room(models.Model):
 	availableWorkspaces = models.PositiveIntegerField(blank=True,null=True)
 	# type              = models.TextField()
 
+class Course(models.Model):
+	LEVELS    = ('HBO-B','HBO-M','WO-B','WO-M','WO-D')
+	LANGUAGES = ('nl','en','de')
+	name         = models.CharField(max_length=255,unique=True)
+	abbr         = models.CharField(max_length=32,primary_key=True)
+	ects         = models.PositiveIntegerField()
+	description  = models.TextField()
+	goals        = models.TextField(blank=True,null=True)
+	requirements = models.TextField(blank=True,null=True)
+	level        = models.CharField(choices=selfzip(LEVELS),max_length=8)
+	format       = models.TextField(blank=True,null=True)
+	language     = models.CharField(choices=selfzip(LANGUAGES),max_length=2)
+	enrollment   = models.TextField(blank=True,null=True)
+	literature   = models.TextField(blank=True,null=True)
+	exams        = models.TextField(blank=True,null=True)
+	schedule     = models.TextField(blank=True,null=True)
+	url          = models.URLField(blank=True,null=True)
+	organisation = models.CharField(max_length=255,blank=True,null=True)
+	department   = models.CharField(max_length=255,blank=True,null=True)
+	lecturers    = models.ForeignKey('Person',related_name='courses')
 
+
+
+#	feeds   = models.ManyToManyField('Minor',related_name='courses')
+
+#??
+class Minor(models.Model):
+	name = models.CharField(max_length=244,unique=True)

@@ -5,6 +5,7 @@ from api.models import NewsFeed, NewsItem
 from api.models import Person, Affiliation
 from api.models import Group, GroupRole
 from api.models import Building, Room
+from api.models import Course
 
 import logging
 
