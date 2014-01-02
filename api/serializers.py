@@ -12,7 +12,7 @@ class NewsItemSerializer(serializers.HyperlinkedModelSerializer):
 	feeds = serializers.HyperlinkedRelatedField(many=True, view_name='newsfeed-detail')
 	class Meta:
 		model = NewsItem
-		fields = ('url','feeds','pubDate','title','author','image','link','content')
+		#fields = ('url','feeds','pubDate','title','author','image','link','content')
 
 
 class NewsFeedSerializer(serializers.HyperlinkedModelSerializer):
@@ -21,14 +21,14 @@ class NewsFeedSerializer(serializers.HyperlinkedModelSerializer):
 	updated = serializers.Field(source='last_updated')
 	class Meta:
 		model = NewsFeed
-		fields = ('id','url','title','description','updated','items')
+		#fields = ('id','url','title','description','updated','items')
 
 
 """ GroupsRole """
 class GroupRoleSerializer(serializers.HyperlinkedModelSerializer):
 	class Meta:
 		model = GroupRole
-		fields = ('group','person','role')
+		#fields = ('group','person','role')
 
 class GroupRoleSerializerPerson(serializers.HyperlinkedModelSerializer):
 	group     = serializers.HyperlinkedRelatedField(view_name='group-detail',read_only=True)
@@ -36,7 +36,7 @@ class GroupRoleSerializerPerson(serializers.HyperlinkedModelSerializer):
 	groupType   = serializers.Field(source='groupType')
 	class Meta:
 		model = GroupRole
-		fields = ('group','groupName','groupType','role')
+		#fields = ('group','groupName','groupType','role')
 
 class GroupRoleSerializerGroup(serializers.HyperlinkedModelSerializer):
 	person      = serializers.HyperlinkedRelatedField(view_name='person-detail',read_only=True)
@@ -45,7 +45,7 @@ class GroupRoleSerializerGroup(serializers.HyperlinkedModelSerializer):
 
 	class Meta:
 		model = GroupRole
-		fields = ('person','displayName','groupType','role')
+		#fields = ('person','displayName','groupType','role')
 
 
 
@@ -55,7 +55,7 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
 	members = GroupRoleSerializerGroup(many=True,read_only=True)
 	class Meta:
 		model = Group
-		fields = ('id','url','name','description','type','members')
+		#fields = ('id','url','name','description','type','members')
 
 
 
@@ -65,7 +65,7 @@ class AffiliationSerializer(serializers.HyperlinkedModelSerializer):
 	persons = serializers.HyperlinkedRelatedField(many=True, view_name='person-detail')
 	class Meta:
 		model = Affiliation
-		fields = ('id','affiliation','persons')
+		#fields = ('id','affiliation','persons')
 
 
 class PersonSerializer(serializers.HyperlinkedModelSerializer):
@@ -74,9 +74,9 @@ class PersonSerializer(serializers.HyperlinkedModelSerializer):
 
 	class Meta:
 		model = Person
-		fields = ('id','url','givenName','surName','displayName','affiliations',
-			'mail', 'telephoneNumber','mobileNumber','photo','gender',
-			'organisation','department','title','office','groups')
+		#fields = ('id','url','givenName','surName','displayName','affiliations',
+		#	'mail', 'telephoneNumber','mobileNumber','photo','gender',
+		#	'organisation','department','title','office','groups')
 
 
 """ Rooms """
@@ -84,7 +84,7 @@ class PersonSerializer(serializers.HyperlinkedModelSerializer):
 class BuildingSerializer(serializers.HyperlinkedModelSerializer):
 	class Meta:
 		model = Building
-		field = ('abbr','name','description','address','postalCode','city','lat','lon')
+		#field = ('abbr','name','description','address','postalCode','city','lat','lon')
 
 class RoomSerializer(serializers.HyperlinkedModelSerializer):
 	building =  serializers.HyperlinkedRelatedField(view_name='building-detail')
