@@ -6,8 +6,8 @@ def selfzip(a):
 class NewsItem(models.Model):
 	pubDate = models.DateTimeField(auto_now_add=True)
 	title   = models.CharField(max_length=255)
-	author  = models.CharField(max_length=255)
-	image   = models.URLField()
+	author  = models.CharField(max_length=255,blank=True,null=True)
+	image   = models.URLField(blank=True,null=True)
 	link    = models.URLField()
 	content = models.TextField()
 	feeds   = models.ManyToManyField('NewsFeed',related_name='items')
@@ -18,7 +18,7 @@ class NewsItem(models.Model):
 
 class NewsFeed(models.Model):
 	title       = models.CharField(max_length=255)
-	description = models.TextField(blank=True)
+	description = models.TextField(blank=True,null=True)
 	#updated = models.DateTimeField(auto_now=True)
 
 	class Meta:
@@ -44,17 +44,17 @@ class Person(models.Model):
 	affiliations    = models.ManyToManyField('Affiliation',related_name='persons')
 
 	""" Optional attributes """
-	mail            = models.EmailField(blank=False)
-	telephoneNumber = models.CharField(blank=True,max_length=32)  #models.TelephoneField() IETU E.123 
-	mobileNumber    = models.CharField(blank=True,max_length=32)  #models.TelephoneField()
-	photo           = models.URLField(blank=True)
-	gender          = models.CharField(blank=True,choices=selfzip(GENDERS),max_length=1)
-	organisation    = models.TextField(blank=True,)
-	department      = models.TextField(blank=True,help_text='ou in X.520')  #multivalued
-	title           = models.TextField(blank=True,help_text='job title and/or description')
-	office          = models.TextField(blank=True)
-	employeeID      = models.CharField(blank=True,max_length=255)  # only for affiliation=employee
-	studentID       = models.CharField(blank=True,max_length=255)  # only for affiliation=student
+	mail            = models.EmailField(blank=True,null=True)
+	telephoneNumber = models.CharField(blank=True,null=True,max_length=32)  #models.TelephoneField() IETU E.123 
+	mobileNumber    = models.CharField(blank=True,null=True,max_length=32)  #models.TelephoneField()
+	photo           = models.URLField(blank=True,null=True)
+	gender          = models.CharField(blank=True,null=True,choices=selfzip(GENDERS),max_length=1)
+	organisation    = models.CharField(max_length=255,blank=True,null=True,)
+	department      = models.CharField(max_length=255,blank=True,null=True,help_text='ou in X.520')  #multivalued
+	title           = models.CharField(max_length=255,blank=True,null=True,help_text='job title and/or description')
+	office          = models.ForeignKey('Room',blank=True,null=True)
+	employeeID      = models.CharField(blank=True,null=True,max_length=255)  # only for affiliation=employee
+	studentID       = models.CharField(blank=True,null=True,max_length=255)  # only for affiliation=student
 	#cluster
 	#education
 	#klas  # LesGroep
@@ -65,8 +65,8 @@ class Group(models.Model):
 	GROUP_TYPES = ('?LesGroep','?LeerGroep','ou','affiliation','Generic')
 
 	type        = models.CharField(max_length=32,choices=selfzip(GROUP_TYPES))
-	name        = models.CharField(blank=True,max_length=255)
-	description = models.TextField(blank=True)
+	name        = models.CharField(max_length=255)
+	description = models.TextField(blank=True,null=True)
 	#members     = models.ManyToManyField('Person',through='GroupRole')
 
 class GroupRole(models.Model):
