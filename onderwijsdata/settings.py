@@ -162,7 +162,7 @@ LOGGING = {
 
 REST_FRAMEWORK  = {
     'DEFAULT_PAGINATION_SERIALIZER_CLASS': 'api.pagination.CustomPaginationSerializer',
-    'PAGINATE_BY': 5,
+    'PAGINATE_BY': 2,
     'DEFAULT_RENDERER_CLASSES': (
         'rest_framework.renderers.BrowsableAPIRenderer',
         'rest_framework.renderers.JSONRenderer',
