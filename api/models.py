@@ -87,7 +87,7 @@ class GroupRole(models.Model):
 		return self.person.displayName
 
 class Building(models.Model):
-	abbr        = models.CharField(max_length=32,unique=True)
+	abbr        = models.CharField(primary_key=True,max_length=32)
 	name        = models.CharField(max_length=256)
 	description = models.TextField()
 	address     = models.CharField(max_length=256)
@@ -98,12 +98,12 @@ class Building(models.Model):
 
 class Room(models.Model):
 	building            = models.ForeignKey('Building',related_name='rooms')
-	abbr                = models.CharField(max_length=32,unique=True)
+	abbr                = models.CharField(primary_key=True,max_length=32)
 	name                = models.CharField(max_length=255,blank=True)
-	description         = models.TextField(blank=True)
-	totalSeats          = models.PositiveIntegerField(blank=True)
-	totalWorkspaces     = models.PositiveIntegerField(blank=True)
-	availableWorkspaces = models.PositiveIntegerField(blank=True)
+	description         = models.TextField(blank=True,null=True)
+	totalSeats          = models.PositiveIntegerField(blank=True,null=True)
+	totalWorkspaces     = models.PositiveIntegerField(blank=True,null=True)
+	availableWorkspaces = models.PositiveIntegerField(blank=True,null=True)
 	# type              = models.TextField()
 
 

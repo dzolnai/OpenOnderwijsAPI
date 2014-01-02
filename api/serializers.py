@@ -87,8 +87,8 @@ class BuildingSerializer(serializers.HyperlinkedModelSerializer):
 		field = ('abbr','name','description','address','postalCode','city','lat','lon')
 
 class RoomSerializer(serializers.HyperlinkedModelSerializer):
-	#building =  serializers.HyperlinkedModelSerializer(view_name='building-detail',read_only=False)
-	building =  BuildingSerializer()
+	building =  serializers.HyperlinkedRelatedField(view_name='building-detail')
+#	building =  BuildingSerializer()
 	class Meta:
 		model = Room
 		depth = 1

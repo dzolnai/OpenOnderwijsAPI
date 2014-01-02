@@ -177,5 +177,18 @@
         },
         "model": "api.grouprole",
         "pk": 4
+    },
+    {
+        "fields": {
+            "address": "Eiklaan 12",
+            "city": "Harderwijk",
+            "description": "Gebouw genoemd naar Albert Einstein.  Thuisbasis van de faculteit natuurkunde.",
+            "lat": "52.355133",
+            "lon": "5.616567",
+            "name": "Albert-Einsteingebouw",
+            "postalCode": "1114FG"
+        },
+        "model": "api.building",
+        "pk": "AEGB"
     }
 ]

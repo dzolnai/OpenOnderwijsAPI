@@ -120,9 +120,9 @@ urlpatterns = patterns('api.views',
     url( r'^grouproles/(?P<pk>[0-9]+)$',   grouprole_detail,   name='grouprole-detail'     ),
 
     url( r'^buildings$',                  building_list,       name='building-list'       ),
-    url( r'^buildings/(?P<pk>[0-9]+)$',   building_detail,     name='building-detail'     ),
+    url( r'^buildings/(?P<pk>\w+)$',   building_detail,     name='building-detail'     ),
     url( r'^rooms$',                      room_list,           name='room-list'       ),
-    url( r'^rooms/(?P<pk>[0-9]+)$',       room_detail,         name='room-detail'     ),
+    url( r'^rooms/(?P<pk>\w+)$',       room_detail,         name='room-detail'     ),
 )
 
 urlpatterns = format_suffix_patterns(urlpatterns)
