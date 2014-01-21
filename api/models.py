@@ -67,6 +67,7 @@ class Group(models.Model):
 	type        = models.CharField(max_length=32,choices=selfzip(GROUP_TYPES))
 	name        = models.CharField(max_length=255)
 	description = models.TextField(blank=True,null=True)
+	
 	#members     = models.ManyToManyField('Person',through='GroupRole')
 
 class GroupRole(models.Model):
@@ -126,10 +127,17 @@ class Course(models.Model):
 	organisation = models.CharField(max_length=255,blank=True,null=True)
 	department   = models.CharField(max_length=255,blank=True,null=True)
 	lecturers    = models.ForeignKey('Person',related_name='courses')
-
-
-
-#	feeds   = models.ManyToManyField('Minor',related_name='courses')
+	groups 		 = models.ManyToManyField('Group',related_name='courses')
+	
+	#	feeds   = models.ManyToManyField('Minor',related_name='courses')
+	
+class Lesson(models.Model):
+	start		= models.DateTimeField()
+	end 		= models.DateTimeField()
+	course		= models.ForeignKey('Course',related_name = 'lessons')
+	room 		= models.ForeignKey('Room', related_name = 'lessons')
+	description	= models.TextField()
+	
 
 #??
 class Minor(models.Model):

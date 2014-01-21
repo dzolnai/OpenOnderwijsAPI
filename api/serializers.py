@@ -6,6 +6,7 @@ from api.models import Person, Affiliation
 from api.models import Group, GroupRole
 from api.models import Building, Room
 from api.models import Course
+from api.models import Lesson
 
 import logging
 
@@ -48,15 +49,14 @@ class GroupRoleSerializerGroup(serializers.HyperlinkedModelSerializer):
 		model = GroupRole
 		#fields = ('person','displayName','groupType','role')
 
-
-
-""" Group """
-
+		
+""" Group """	
 class GroupSerializer(serializers.HyperlinkedModelSerializer):
 	members = GroupRoleSerializerGroup(many=True,read_only=True)
+	courses = serializers.HyperlinkedRelatedField(many=True, view_name='course-detail')
 	class Meta:
 		model = Group
-		#fields = ('id','url','name','description','type','members')
+		#fields = ('id','url','name','description','type','members','courses')
 
 
 
@@ -89,9 +89,23 @@ class BuildingSerializer(serializers.HyperlinkedModelSerializer):
 
 class RoomSerializer(serializers.HyperlinkedModelSerializer):
 	building =  serializers.HyperlinkedRelatedField(view_name='building-detail')
-#	building =  BuildingSerializer()
 	class Meta:
 		model = Room
 		depth = 1
 		field = ('building','abbr','name','description','totalSeats','totalWorkspaces','availableWorkspaces')
 
+""" Lesson """
+class LessonSerializer(serializers.HyperlinkedModelSerializer):
+	class Meta:
+		model = Lesson
+		field = ('start','end','course','room','description')
+
+
+""" Course """
+
+class CourseSerializer(serializers.HyperlinkedModelSerializer):
+	lessons =  serializers.HyperlinkedRelatedField(many=True, view_name='lesson-detail')
+	class Meta:
+		model = Course	
+		
+	

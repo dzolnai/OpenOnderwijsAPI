@@ -22,6 +22,9 @@ from api.serializers import GroupSerializer, GroupRoleSerializer
 from api.models import Building, Room
 from api.serializers import BuildingSerializer, RoomSerializer
 
+from api.models import Lesson, Course
+from api.serializers import LessonSerializer, CourseSerializer
+
 @api_view(('GET',))
 def api_root(request, format=None):
 	return Response({
@@ -33,6 +36,7 @@ def api_root(request, format=None):
 		'affiliations': reverse('affiliation-list', request=request, format=format),
 		'buildings' : reverse('building-list', request=request, format=format),
 		'rooms'     : reverse('room-list', request=request, format=format),
+		'courses'	: reverse('course-list', request=request, format=format),
 	})
 
 class NewsItemViewSet(viewsets.ModelViewSet):
@@ -56,10 +60,33 @@ class PersonViewSet(viewsets.ModelViewSet):
 	serializer_class = PersonSerializer
 	pagination_serializer_class = CustomPaginationSerializer
 
+class PersonScheduleViewSet(viewsets.ModelViewSet):
+	queryset = Lesson.objects.all()
+	serializer_class = LessonSerializer
+	pagination_serializer_class = CustomPaginationSerializer
+	""" Selects only the lessons which are related to the person with the id person_pk"""
+	def list(self, request, person_pk):
+		queryset = Lesson.objects.filter(course__groups__members=person_pk)
+		serializer = LessonSerializer(queryset, many=True)
+		pagination_serializer_class = CustomPaginationSerializer
+		return Response(serializer.data)
+	
 class GroupViewSet(viewsets.ModelViewSet):
 	queryset = Group.objects.all()
 	serializer_class = GroupSerializer
 	pagination_serializer_class = CustomPaginationSerializer
+
+class GroupScheduleViewSet(viewsets.ModelViewSet):
+	queryset = Lesson.objects.all()
+	serializer_class = LessonSerializer
+	pagination_serializer_class = CustomPaginationSerializer
+	""" Selects only the lessons which are related to the group through group_pk"""
+	""" If the lesson's course has this group as selected group, then it's taken into account """
+	def list(self, request, group_pk):
+		queryset = Lesson.objects.filter(course__groups=group_pk)
+		serializer = LessonSerializer(queryset, many=True)
+		pagination_serializer_class = CustomPaginationSerializer
+		return Response(serializer.data)
 
 class GroupRoleViewSet(viewsets.ModelViewSet):
 	queryset = GroupRole.objects.all()
@@ -75,3 +102,39 @@ class RoomViewSet(viewsets.ModelViewSet):
 	queryset = Room.objects.all()
 	serializer_class = RoomSerializer
 	pagination_serializer_class = CustomPaginationSerializer
+
+class RoomScheduleViewSet(viewsets.ModelViewSet):
+	queryset = Lesson.objects.all()
+	serializer_class = LessonSerializer
+	pagination_serializer_class = CustomPaginationSerializer
+	""" Selects only the lessons which are related to the room through room_pk"""
+	def list(self, request, room_pk):
+		queryset = Lesson.objects.filter(room=room_pk)
+		serializer = LessonSerializer(queryset, many=True)
+		pagination_serializer_class = CustomPaginationSerializer
+		return Response(serializer.data)
+
+class CourseViewSet(viewsets.ModelViewSet):
+	queryset = Course.objects.all()
+	serializer_class = CourseSerializer
+	pagination_serializer_class = CustomPaginationSerializer
+	
+class LessonViewSet(viewsets.ModelViewSet):
+	queryset = Lesson.objects.all()
+	serializer_class = LessonSerializer
+	pagination_serializer_class = CustomPaginationSerializer
+	
+class CourseLessonViewSet(viewsets.ModelViewSet):
+	queryset = Lesson.objects.all()
+	serializer_class = LessonSerializer
+	pagination_serializer_class = CustomPaginationSerializer
+	""" Selects only the lessons which are related to the course with the id course_pk"""
+	def list(self, request, course_pk):
+		queryset = Lesson.objects.filter(course=course_pk)
+		serializer = LessonSerializer(queryset, many=True)
+		pagination_serializer_class = CustomPaginationSerializer
+		return Response(serializer.data)
+		
+		
+		
+		
