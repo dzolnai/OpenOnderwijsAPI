@@ -66,8 +66,8 @@ class PersonScheduleViewSet(viewsets.ModelViewSet):
 	# Selects only the lessons which are related to the person with the id person_pk
 	def list(self, request, person_pk):
             #Example date: 201401211206UTC = 2014.01.21 12:06 UTC timezone (you can use, EST, CET, etc.)
-            start = datetime.datetime.utcnow().strftime("%Y%m%d0000%Z")
-            end = start = datetime.datetime.utcnow().strftime("%Y%m%d2359%Z")
+            start = datetime.datetime.utcnow().strftime("%Y%m%d0000UTC")
+            end = start = datetime.datetime.utcnow().strftime("%Y%m%d2359UTC")
             if ('start' in request.GET):
                 start = request.QUERY_PARAMS.get('start')
             if ('end' in request.GET):
