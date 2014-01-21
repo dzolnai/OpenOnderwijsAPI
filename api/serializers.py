@@ -80,8 +80,6 @@ class PersonSerializer(serializers.HyperlinkedModelSerializer):
                         
 """ Buildings """
 class BuildingSerializer(serializers.HyperlinkedModelSerializer):
-        def get_pk_field(self, model_field):
-            return Building.abbr
 	class Meta:
 		model = Building
 		field = ('abbr','name','description','address','postalCode','city','lat','lon')
