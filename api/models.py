@@ -92,7 +92,7 @@ class Building(models.Model):
 	description = models.TextField()
 	address     = models.CharField(max_length=256)
 	postalCode  = models.CharField(max_length=16)
-	city		= models.CharField(max_length=255)
+	city        = models.CharField(max_length=255)
 	lat         = models.DecimalField(max_digits=9,decimal_places=6)
 	lon         = models.DecimalField(max_digits=9,decimal_places=6)
 
@@ -126,10 +126,17 @@ class Course(models.Model):
 	organisation = models.CharField(max_length=255,blank=True,null=True)
 	department   = models.CharField(max_length=255,blank=True,null=True)
 	lecturers    = models.ForeignKey('Person',related_name='courses')
-
-
-
-#	feeds   = models.ManyToManyField('Minor',related_name='courses')
+	groups       = models.ManyToManyField('Group',related_name='courses')
+	
+	#	feeds   = models.ManyToManyField('Minor',related_name='courses')
+	
+class Lesson(models.Model):
+	start		= models.DateTimeField()
+	end 		= models.DateTimeField()
+	course		= models.ForeignKey('Course',related_name = 'lessons')
+	room 		= models.ForeignKey('Room', related_name = 'lessons')
+	description	= models.TextField(blank=True)
+	
 
 #??
 class Minor(models.Model):
