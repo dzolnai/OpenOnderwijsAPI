@@ -196,7 +196,18 @@ class CourseScheduleViewSet(viewsets.ModelViewSet):
 	pagination_serializer_class = CustomPaginationSerializer
 	# Selects only the lessons which are related to the course with the id course_pk
 	def list(self, request, course_pk):
-		queryset = Lesson.objects.filter(course=course_pk)
+                #Example date: 201401211206UTC = 2014.01.21 12:06 UTC timezone (you can use, EST, CET, etc.)
+		start = datetime.datetime.utcnow().strftime("%Y%m%d%H%M%Z")
+                end = start
+                if ('start' in request.GET):
+                    start = request.QUERY_PARAMS.get('start')
+                if ('end' in request.GET):
+                    end = request.QUERY_PARAMS.get('end')
+                start_date = datetime.datetime.strptime(start, "%Y%m%d%H%M%Z")
+                end_date = datetime.datetime.strptime(end, "%Y%m%d%H%M%Z")
+                queryset = Lesson.objects.filter(course=course_pk,
+                start__gte=start_date, #Date of the lesson should be greater than or equal to begin date of query
+                end__lte=end_date) #Date of the lesson should be less than or equal to end date of query
                 #every page has 10 lessons
                 paginator = Paginator(queryset, 10)
                 page = request.QUERY_PARAMS.get('page')
