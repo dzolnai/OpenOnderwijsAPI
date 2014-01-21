@@ -8,7 +8,7 @@ from api.views import PersonViewSet, AffiliationViewSet
 from api.views import GroupViewSet, GroupRoleViewSet
 from api.views import BuildingViewSet, RoomViewSet
 from api.views import PersonScheduleViewSet, GroupScheduleViewSet, RoomScheduleViewSet
-from api.views import CourseViewSet, LessonViewSet, CourseLessonViewSet
+from api.views import CourseViewSet, LessonViewSet, CourseScheduleViewSet
 
 newsfeed_list = NewsFeedViewSet.as_view({
     'get': 'list',
@@ -124,7 +124,7 @@ course_detail = CourseViewSet.as_view({
     'delete': 'destroy'
 })
 
-course_detail_lessons = CourseLessonViewSet.as_view({
+course_detail_schedule = CourseScheduleViewSet.as_view({
 	'get': 'list',
 	'post': 'create'
 })
@@ -163,7 +163,7 @@ urlpatterns = patterns('api.views',
 	url( r'^rooms/(?P<room_pk>\w+)/schedule$',       room_detail_schedule,         name='room-detail-schedule'     ),
 	url( r'^courses/(?P<pk>[0-9]+)$',   course_detail,   name='course-detail'     ),
 	url( r'^courses$',   course_list,   name='course-list'     ),
-	url( r'^courses/(?P<course_pk>[0-9]+)/lessons$',   course_detail_lessons,   name='course-detail-lessons'     ),
+	url( r'^courses/(?P<course_pk>[0-9]+)/schedule$',   course_detail_schedule,   name='course-detail-schedule'     ),
 	url( r'^lessons/(?P<pk>[0-9]+)',   lesson_detail,   name='lesson-detail'     ),
 )
 

@@ -1,283 +1,281 @@
 [
-    {
-        "fields": {
-            "description": "test 1",
-            "title": "feed 1"
-        },
-        "model": "api.newsfeed",
-        "pk": 1
-    },
-    {
-        "fields": {
-            "description": "test 2",
-            "title": "feed 2"
-        },
-        "model": "api.newsfeed",
-        "pk": 2
-    },
-    {
-        "fields": {
-            "affiliation": "student"
-        },
-        "model": "api.affiliation",
-        "pk": 1
-    },
-    {
-        "fields": {
-            "affiliation": "faculty"
-        },
-        "model": "api.affiliation",
-        "pk": 2
-    },
-    {
-        "fields": {
-            "affiliation": "staff"
-        },
-        "model": "api.affiliation",
-        "pk": 3
-    },
-    {
-        "fields": {
-            "affiliation": "alum"
-        },
-        "model": "api.affiliation",
-        "pk": 4
-    },
-    {
-        "fields": {
-            "affiliation": "member"
-        },
-        "model": "api.affiliation",
-        "pk": 5
-    },
-    {
-        "fields": {
-            "affiliation": "affiliate"
-        },
-        "model": "api.affiliation",
-        "pk": 6
-    },
-    {
-        "fields": {
-            "affiliation": "employee"
-        },
-        "model": "api.affiliation",
-        "pk": 7
-    },
-    {
-        "fields": {
-            "affiliations": [
-                2,
-                5,
-                7
-            ],
-            "department": null,
-            "displayName": "dr. Basje",
-            "employeeID": null,
-            "gender": "M",
-            "givenName": "Bas",
-            "mail": "basje@harderwijk.edu",
-            "mobileNumber": null,
-            "office": null,
-            "organisation": null,
-            "photo": null,
-            "studentID": null,
-            "surName": "Zoetekouw",
-            "telephoneNumber": "+31301234567",
-            "title": null
-        },
-        "model": "api.person",
-        "pk": 1
-    },
-    {
-        "fields": {
-            "affiliations": [
-                2,
-                4,
-                6,
-                7
-            ],
-            "department": null,
-            "displayName": "Dr. Bibber",
-            "employeeID": null,
-            "gender": "M",
-            "givenName": "Piet",
-            "mail": "bibber@harderwijk.edu",
-            "mobileNumber": null,
-            "office": null,
-            "organisation": null,
-            "photo": null,
-            "studentID": null,
-            "surName": "Bibber",
-            "telephoneNumber": null,
-            "title": null
-        },
-        "model": "api.person",
-        "pk": 2
-    },
-    {
-        "fields": {
-            "description": "hallo een test groep",
-            "name": "test group",
-            "type": "?LesGroep"
-        },
-        "model": "api.group",
-        "pk": 1
-    },
-    {
-        "fields": {
-            "description": "Kijk, nog 1",
-            "name": "Nog een andere group",
-            "type": "affiliation"
-        },
-        "model": "api.group",
-        "pk": 2
-    },
-    {
-        "fields": {
-            "description": "hallo",
-            "name": "een derde groep",
-            "type": "Generic"
-        },
-        "model": "api.group",
-        "pk": 3
-    },
-    {
-        "fields": {
-            "group": 1,
-            "person": 2,
-            "role": "member"
-        },
-        "model": "api.grouprole",
-        "pk": 1
-    },
-    {
-        "fields": {
-            "group": 2,
-            "person": 2,
-            "role": "member"
-        },
-        "model": "api.grouprole",
-        "pk": 2
-    },
-    {
-        "fields": {
-            "group": 3,
-            "person": 2,
-            "role": "member"
-        },
-        "model": "api.grouprole",
-        "pk": 3
-    },
-    {
-        "fields": {
-            "group": 3,
-            "person": 1,
-            "role": "administrator"
-        },
-        "model": "api.grouprole",
-        "pk": 4
-    },
-    {
-        "fields": {
-            "address": "Eiklaan 12",
-            "city": "Harderwijk",
-            "description": "Gebouw genoemd naar Albert Einstein.  Thuisbasis van de faculteit natuurkunde.",
-            "lat": "52.355133",
-            "lon": "5.616567",
-            "name": "Albert-Einsteingebouw",
-            "postalCode": "1114FG"
-        },
-        "model": "api.building",
-        "pk": "AEGB"
-    },
-	{
-        "fields": {
-            "name":"String theory",
-			"ects": 1001,
-			"description": "In physics, string theory is a theoretical framework in which the point-like particles of particle physics are replaced by one-dimensional objects called strings.",
-			"level": "HBO-B",
-			"language": "en",
-			"department": "Physics department",
-			"lecturers" : 2,
-			"groups":	[
-						1
-						]
-        },
-        "model": "api.course",
-        "pk": 1
-    },
-	{
-        "fields": {
-            "name":"GPU programming",
-			"ects": 1003,
-			"description": "General-purpose computing on graphics processing units",
-			"level": "HBO-M",
-			"language": "nl",
-			"department": "CG department",
-			"lecturers": 1,
-			"groups": 	[ 
-						2,
-						3
-						]
-        },
-        "model": "api.course",
-        "pk": 2
-    },
-	{
-        "fields": {
-            "name":"Room 100",
-			"building": "AEGB",
-			"description":"Room 100",
-			"totalSeats": 21,
-			"totalWorkspaces": 10,
-			"availableWorkspaces": 10
-        },
-        "model": "api.room",
-        "pk": 1
-    },
-	{
-        "fields": {
-            "name":"Room 200",
-			"building": "AEGB",
-			"description":"Room 200",
-			"totalSeats": 300,
-			"totalWorkspaces": 0,
-			"availableWorkspaces": 0
-        },
-        "model": "api.room",
-        "pk": 2
-    },
-	{
-        "fields": {
-            "start": "1997-07-16T19:30:00.000Z",
-			"end": "1997-07-16T21:30:00.000Z",
-			"course": 1,
-			"room": 1
-        },
-        "model": "api.lesson",
-        "pk": 1
-    },
-	{
-        "fields": {
-            "start": "1997-07-17T19:30:00.000Z",
-			"end": "1997-07-17T21:30:00.000Z",
-			"course": 1,
-			"room": 1
-        },
-        "model": "api.lesson",
-        "pk": 2
-    },
-	{
-        "fields": {
-            "start": "1997-07-18T19:30:00.000Z",
-			"end": "1997-07-18T21:30:00.000Z",
-			"course": 2,
-			"room": 2
-        },
-        "model": "api.lesson",
-        "pk": 3
-    }
-	
-	
+   {
+      "fields":{
+         "description":"test 1",
+         "title":"feed 1"
+      },
+      "model":"api.newsfeed",
+      "pk":1
+   },
+   {
+      "fields":{
+         "description":"test 2",
+         "title":"feed 2"
+      },
+      "model":"api.newsfeed",
+      "pk":2
+   },
+   {
+      "fields":{
+         "affiliation":"student"
+      },
+      "model":"api.affiliation",
+      "pk":1
+   },
+   {
+      "fields":{
+         "affiliation":"faculty"
+      },
+      "model":"api.affiliation",
+      "pk":2
+   },
+   {
+      "fields":{
+         "affiliation":"staff"
+      },
+      "model":"api.affiliation",
+      "pk":3
+   },
+   {
+      "fields":{
+         "affiliation":"alum"
+      },
+      "model":"api.affiliation",
+      "pk":4
+   },
+   {
+      "fields":{
+         "affiliation":"member"
+      },
+      "model":"api.affiliation",
+      "pk":5
+   },
+   {
+      "fields":{
+         "affiliation":"affiliate"
+      },
+      "model":"api.affiliation",
+      "pk":6
+   },
+   {
+      "fields":{
+         "affiliation":"employee"
+      },
+      "model":"api.affiliation",
+      "pk":7
+   },
+   {
+      "fields":{
+         "affiliations":[
+            2,
+            5,
+            7
+         ],
+         "department":null,
+         "displayName":"dr. Basje",
+         "employeeID":null,
+         "gender":"M",
+         "givenName":"Bas",
+         "mail":"basje@harderwijk.edu",
+         "mobileNumber":null,
+         "office":null,
+         "organisation":null,
+         "photo":null,
+         "studentID":null,
+         "surName":"Zoetekouw",
+         "telephoneNumber":"+31301234567",
+         "title":null
+      },
+      "model":"api.person",
+      "pk":1
+   },
+   {
+      "fields":{
+         "affiliations":[
+            2,
+            4,
+            6,
+            7
+         ],
+         "department":null,
+         "displayName":"Dr. Bibber",
+         "employeeID":null,
+         "gender":"M",
+         "givenName":"Piet",
+         "mail":"bibber@harderwijk.edu",
+         "mobileNumber":null,
+         "office":null,
+         "organisation":null,
+         "photo":null,
+         "studentID":null,
+         "surName":"Bibber",
+         "telephoneNumber":null,
+         "title":null
+      },
+      "model":"api.person",
+      "pk":2
+   },
+   {
+      "fields":{
+         "description":"hallo een test groep",
+         "name":"test group",
+         "type":"?LesGroep"
+      },
+      "model":"api.group",
+      "pk":1
+   },
+   {
+      "fields":{
+         "description":"Kijk, nog 1",
+         "name":"Nog een andere group",
+         "type":"affiliation"
+      },
+      "model":"api.group",
+      "pk":2
+   },
+   {
+      "fields":{
+         "description":"hallo",
+         "name":"een derde groep",
+         "type":"Generic"
+      },
+      "model":"api.group",
+      "pk":3
+   },
+   {
+      "fields":{
+         "group":1,
+         "person":2,
+         "role":"member"
+      },
+      "model":"api.grouprole",
+      "pk":1
+   },
+   {
+      "fields":{
+         "group":2,
+         "person":2,
+         "role":"member"
+      },
+      "model":"api.grouprole",
+      "pk":2
+   },
+   {
+      "fields":{
+         "group":3,
+         "person":2,
+         "role":"member"
+      },
+      "model":"api.grouprole",
+      "pk":3
+   },
+   {
+      "fields":{
+         "group":3,
+         "person":1,
+         "role":"administrator"
+      },
+      "model":"api.grouprole",
+      "pk":4
+   },
+   {
+      "fields":{
+         "address":"Eiklaan 12",
+         "city":"Harderwijk",
+         "description":"Gebouw genoemd naar Albert Einstein.  Thuisbasis van de faculteit natuurkunde.",
+         "lat":"52.355133",
+         "lon":"5.616567",
+         "name":"Albert-Einsteingebouw",
+         "postalCode":"1114FG"
+      },
+      "model":"api.building",
+      "pk":"AEGB"
+   },
+   {
+      "fields":{
+         "name":"String theory",
+         "ects":1001,
+         "description":"In physics, string theory is a theoretical framework in which the point-like particles of particle physics are replaced by one-dimensional objects called strings.",
+         "level":"HBO-B",
+         "language":"en",
+         "department":"Physics department",
+         "lecturers":2,
+         "groups":[
+            1
+         ]
+      },
+      "model":"api.course",
+      "pk":1
+   },
+   {
+      "fields":{
+         "name":"GPU programming",
+         "ects":1003,
+         "description":"General-purpose computing on graphics processing units",
+         "level":"HBO-M",
+         "language":"nl",
+         "department":"CG department",
+         "lecturers":1,
+         "groups":[
+            2,
+            3
+         ]
+      },
+      "model":"api.course",
+      "pk":2
+   },
+   {
+      "fields":{
+         "name":"Room 100",
+         "building":"AEGB",
+         "description":"Room 100",
+         "totalSeats":21,
+         "totalWorkspaces":10,
+         "availableWorkspaces":10
+      },
+      "model":"api.room",
+      "pk":1
+   },
+   {
+      "fields":{
+         "name":"Room 200",
+         "building":"AEGB",
+         "description":"Room 200",
+         "totalSeats":300,
+         "totalWorkspaces":0,
+         "availableWorkspaces":0
+      },
+      "model":"api.room",
+      "pk":2
+   },
+   {
+      "fields":{
+         "start":"1997-07-16T19:30:00.000Z",
+         "end":"1997-07-16T21:30:00.000Z",
+         "course":1,
+         "room":1
+      },
+      "model":"api.lesson",
+      "pk":1
+   },
+   {
+      "fields":{
+         "start":"1997-07-17T19:30:00.000Z",
+         "end":"1997-07-17T21:30:00.000Z",
+         "course":1,
+         "room":1
+      },
+      "model":"api.lesson",
+      "pk":2
+   },
+   {
+      "fields":{
+         "start":"1997-07-18T19:30:00.000Z",
+         "end":"1997-07-18T21:30:00.000Z",
+         "course":2,
+         "room":2
+      },
+      "model":"api.lesson",
+      "pk":3
+   }
 ]

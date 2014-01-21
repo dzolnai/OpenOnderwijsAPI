@@ -67,7 +67,6 @@ class Group(models.Model):
 	type        = models.CharField(max_length=32,choices=selfzip(GROUP_TYPES))
 	name        = models.CharField(max_length=255)
 	description = models.TextField(blank=True,null=True)
-	
 	#members     = models.ManyToManyField('Person',through='GroupRole')
 
 class GroupRole(models.Model):

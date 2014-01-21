@@ -1,4 +1,5 @@
 from django.forms import widgets
+from rest_framework import pagination
 from rest_framework import serializers
 
 from api.models import NewsFeed, NewsItem
@@ -7,6 +8,8 @@ from api.models import Group, GroupRole
 from api.models import Building, Room
 from api.models import Course
 from api.models import Lesson
+
+from api.pagination import CustomPaginationSerializer
 
 import logging
 
@@ -98,9 +101,13 @@ class RoomSerializer(serializers.HyperlinkedModelSerializer):
 class LessonSerializer(serializers.HyperlinkedModelSerializer):
 	class Meta:
 		model = Lesson
-		field = ('start','end','course','room','description')
+		field = ('start','end','course','room','description')		
 
+class PaginatedLessonSerializer(CustomPaginationSerializer):
+	class Meta:
+            object_serializer_class = LessonSerializer
 
+		
 """ Course """
 
 class CourseSerializer(serializers.HyperlinkedModelSerializer):
