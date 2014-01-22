@@ -8,6 +8,7 @@ from api.views import PersonViewSet, AffiliationViewSet
 from api.views import GroupViewSet, GroupRoleViewSet
 from api.views import BuildingViewSet, RoomViewSet
 from api.views import CourseViewSet, MinorViewSet
+from api.views import TestResultViewSet, CourseResultViewSet
 
 
 newsfeed_list = NewsFeedViewSet.as_view({
@@ -122,6 +123,28 @@ minor_detail = MinorViewSet.as_view({
     'delete': 'destroy'
 })
 
+testresult_list = TestResultViewSet.as_view({
+    'get': 'list',
+    'post': 'create'
+})
+testresult_detail = TestResultViewSet.as_view({
+    'get': 'retrieve',
+    'put': 'update',
+    'patch': 'partial_update',
+    'delete': 'destroy'
+})
+
+courseresult_list = CourseResultViewSet.as_view({
+    'get': 'list',
+    'post': 'create'
+})
+courseresult_detail = CourseResultViewSet.as_view({
+    'get': 'retrieve',
+    'put': 'update',
+    'patch': 'partial_update',
+    'delete': 'destroy'
+})
+
 
 
 urlpatterns = patterns('api.views',
@@ -151,6 +174,10 @@ urlpatterns = patterns('api.views',
     url( r'^minors$',                      minor_list,           name='minor-list'       ),
     url( r'^minors/(?P<pk>\w+)$',          minor_detail,         name='minor-detail'     ),
 
+    url( r'^testresults$',                 testresult_list,      name='testresult-list'       ),
+    url( r'^testresults/(?P<pk>\w+)$',     testresult_detail,    name='testresult-detail'     ),
+    url( r'^courseresults$',               courseresult_list,    name='courseresult-list'       ),
+    url( r'^coursesresults/(?P<pk>\w+)$',  courseresult_detail,  name='courseresult-detail'     ),
 )
 
 urlpatterns = format_suffix_patterns(urlpatterns)

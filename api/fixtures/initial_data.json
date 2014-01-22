@@ -248,5 +248,49 @@
         },
         "model": "api.minor",
         "pk": 1
+    },
+    {
+        "fields": {
+            "course": 1,
+            "courseResult": 1,
+            "date": "2013-12-18",
+            "description": "Tweede deeltentamen",
+            "grade": "8",
+            "lastModified": "2013-12-21T13:11:00Z",
+            "passed": null,
+            "result": "",
+            "student": 2,
+            "weight": "0.5"
+        },
+        "model": "api.testresult",
+        "pk": 1
+    },
+    {
+        "fields": {
+            "course": 1,
+            "courseResult": 1,
+            "date": "2013-11-02",
+            "description": "Eerste deeltentamen",
+            "grade": "5",
+            "lastModified": "2013-11-11T15:32:00Z",
+            "passed": null,
+            "result": "",
+            "student": 2,
+            "weight": "0.5"
+        },
+        "model": "api.testresult",
+        "pk": 2
+    },
+    {
+        "fields": {
+            "course": 1,
+            "grade": "6.5",
+            "lastModified": "2013-12-31T10:01:00Z",
+            "passed": true,
+            "result": "",
+            "student": 2
+        },
+        "model": "api.courseresult",
+        "pk": 1
     }
 ]

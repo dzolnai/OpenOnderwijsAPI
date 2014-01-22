@@ -133,6 +133,28 @@ class Minor(models.Model):
 	description = models.TextField()
 	courses     = models.ManyToManyField('Course',related_name='minors')
 
+class TestResult(models.Model):
+	student       = models.ForeignKey('Person')
+	course        = models.ForeignKey('Course')
+	courseResult  = models.ForeignKey('CourseResult',blank=True,null=True,related_name='testResults')
+	description   = models.CharField(max_length=255)
+	lastModified  = models.DateTimeField()
+	date          = models.DateField()
+	grade         = models.DecimalField(max_digits=3,decimal_places=2,blank=True,null=True)
+	result        = models.CharField(max_length=15,blank=True,null=True)
+	passed        = models.NullBooleanField()
+	weight        = models.DecimalField(max_digits=4,decimal_places=3)
+
+class CourseResult(models.Model):
+	student      = models.ForeignKey('Person')
+	course       = models.ForeignKey('Course')
+	lastModified = models.DateTimeField()
+	grade        = models.DecimalField(max_digits=3,decimal_places=2,blank=True,null=True)
+	result       = models.CharField(blank=True,null=True,max_length=15)
+	passed       = models.NullBooleanField()
+
+
+
 
 
 

@@ -6,6 +6,7 @@ from api.models import Person, Affiliation
 from api.models import Group, GroupRole
 from api.models import Building, Room
 from api.models import Course, Minor
+from api.models import TestResult, CourseResult
 
 import logging
 
@@ -108,4 +109,18 @@ class MinorSerializer(serializers.HyperlinkedModelSerializer):
 	class Meta:
 		model = Minor
 
+""" Results """
+
+class TestResultSerializer(serializers.HyperlinkedModelSerializer):
+	student = serializers.HyperlinkedRelatedField(view_name='person-detail')
+	course  = serializers.HyperlinkedRelatedField(view_name='course-detail')
+	class Meta:
+		model = TestResult
+
+class CourseResultSerializer(serializers.HyperlinkedModelSerializer):
+	student     = serializers.HyperlinkedRelatedField(view_name='person-detail')
+	course      = serializers.HyperlinkedRelatedField(view_name='course-detail')
+	testResults = serializers.HyperlinkedRelatedField(many=True,view_name='testresult-detail')
+	class Meta:
+		model = CourseResult
 
