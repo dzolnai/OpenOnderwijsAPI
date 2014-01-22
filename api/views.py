@@ -66,11 +66,16 @@ class PersonViewSet(viewsets.ModelViewSet):
         def list(self, request):
             query_string = ''
             entries = Person.objects.all()
+            # Search 
             if ('q' in request.GET) and request.GET['q'].strip():
                 query_string = request.GET['q']
                 # you can add additional fields if needed
                 entry_query = search.get_query(query_string, ['givenName', 'surName','displayName','mail','telephoneNumber','employeeID','studentID'])
-                entries = Person.objects.filter(entry_query)
+                entries = entries.filter(entry_query)
+            # Affiliation filter
+            if ('affiliation' in request.GET):
+                query_string = request.GET['affiliation']
+                entries = entries.filter(affiliations__affiliation=query_string)
             # 5 persons / page
             paginator = Paginator(entries, 5)
             page = request.QUERY_PARAMS.get('page')
