@@ -67,8 +67,8 @@ class PersonScheduleViewSet(viewsets.ModelViewSet):
 	# Selects only the lessons which are related to the person with the id person_pk
 	def list(self, request, person_pk):
             #Example date: 201401211206UTC = 2014.01.21 12:06 UTC timezone (you can use, EST, CET, etc.)
-            start = datetime.datetime.utcnow().strftime("%Y%m%d0000UTC")
-            end = start = datetime.datetime.utcnow().strftime("%Y%m%d2359UTC")
+            start = timezone.localtime(timezone.now()).strftime("%Y%m%d0000%Z")
+            end = timezone.localtime(timezone.now()).strftime("%Y%m%d2359%Z")
             if ('start' in request.GET):
                 start = request.QUERY_PARAMS.get('start')
             if ('end' in request.GET):
@@ -106,8 +106,8 @@ class GroupScheduleViewSet(viewsets.ModelViewSet):
 	#If the lesson's course has this group as selected group, then it's taken into account
 	def list(self, request, group_pk):
                 #Example date: 201401211206UTC = 2014.01.21 12:06 UTC timezone (you can use, EST, CET, etc.)
-                start = datetime.datetime.utcnow().strftime("%Y%m%d0000UTC")
-                end = start = datetime.datetime.utcnow().strftime("%Y%m%d2359UTC")
+                start = timezone.localtime(timezone.now()).strftime("%Y%m%d0000%Z")
+                end = timezone.localtime(timezone.now()).strftime("%Y%m%d2359%Z")
                 if ('start' in request.GET):
                     start = request.QUERY_PARAMS.get('start')
                 if ('end' in request.GET):
@@ -154,8 +154,8 @@ class RoomScheduleViewSet(viewsets.ModelViewSet):
 	#Selects only the lessons which are related to the room through room_pk
 	def list(self, request, room_pk):
                 #Example date: 201401211206UTC = 2014.01.21 12:06 UTC timezone (you can use, EST, CET, etc.)
-                start = datetime.datetime.utcnow().strftime("%Y%m%d0000UTC")
-                end = start = datetime.datetime.utcnow().strftime("%Y%m%d2359UTC")
+                start = timezone.localtime(timezone.now()).strftime("%Y%m%d0000%Z")
+                end = timezone.localtime(timezone.now()).strftime("%Y%m%d2359%Z")
                 if ('start' in request.GET):
                     start = request.QUERY_PARAMS.get('start')
                 if ('end' in request.GET):
@@ -198,8 +198,8 @@ class CourseScheduleViewSet(viewsets.ModelViewSet):
 	# Selects only the lessons which are related to the course with the id course_pk
 	def list(self, request, course_pk):
                 #Example date: 201401211206UTC = 2014.01.21 12:06 UTC timezone (you can use, EST, CET, etc.)
-                start = datetime.datetime.utcnow().strftime("%Y%m%d0000UTC")
-                end = start = datetime.datetime.utcnow().strftime("%Y%m%d2359UTC")
+                start = timezone.localtime(timezone.now()).strftime("%Y%m%d0000%Z")
+                end = timezone.localtime(timezone.now()).strftime("%Y%m%d2359%Z")
                 if ('start' in request.GET):
                     start = request.QUERY_PARAMS.get('start')
                 if ('end' in request.GET):
