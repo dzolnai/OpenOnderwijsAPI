@@ -5,7 +5,7 @@ from api.models import NewsFeed, NewsItem
 from api.models import Person, Affiliation
 from api.models import Group, GroupRole
 from api.models import Building, Room
-from api.models import Course
+from api.models import Course, Minor
 
 import logging
 
@@ -94,4 +94,18 @@ class RoomSerializer(serializers.HyperlinkedModelSerializer):
 		model = Room
 		depth = 1
 		field = ('building','abbr','name','description','totalSeats','totalWorkspaces','availableWorkspaces')
+
+""" Courses """
+
+class CourseSerializer(serializers.HyperlinkedModelSerializer):
+	minors = serializers.HyperlinkedRelatedField(many=True, blank=True, view_name='minor-detail')
+	class Meta:
+		model = Course
+		#field = ('abbr','name','description','address','postalCode','city','lat','lon')
+
+class MinorSerializer(serializers.HyperlinkedModelSerializer):
+#	coourses = serializers.HyperlinkedRelatedField(view_name='course-detail')
+	class Meta:
+		model = Minor
+
 

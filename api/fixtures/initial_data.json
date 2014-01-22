@@ -190,5 +190,63 @@
         },
         "model": "api.building",
         "pk": "AEGB"
+    },
+    {
+        "fields": {
+            "abbr": "ABSTR101",
+            "department": "Logica",
+            "description": "Een inleiding in het abstraheren",
+            "ects": 12,
+            "enrollment": "Inschrijven via de balie",
+            "exams": "Twee deeltentamens (ieder 40%) en practicum concretiseren (20%)",
+            "format": "Hoorcolleges en practica",
+            "goals": "Je leert van abstraheren is, en het verschil tussen de begrippen concreet en abstract",
+            "language": "nl",
+            "lecturers": 2,
+            "level": "WO-B",
+            "literature": "Abstract and Concrete Categories: The Joy of Cats (Dover Books on Mathematics) by Adamek ing Jiri Adamek",
+            "name": "Abstraheren 101",
+            "organisation": "Universiteit van Harderwijk",
+            "requirements": "Een gezond verstand",
+            "schedule": "Maandag-, dinsdag- en donderdagochtend van 8-12.",
+            "url": ""
+        },
+        "model": "api.course",
+        "pk": 1
+    },
+    {
+        "fields": {
+            "abbr": "CONCR101",
+            "department": "Logica",
+            "description": "Een inleiding in het concreet maken van abstracte begrippen.",
+            "ects": 17,
+            "enrollment": "Via de balie",
+            "exams": "Veldwerk (60%), tentamen (40%)",
+            "format": "Hoorcollege en een veldwerk in Peru van 1 week",
+            "goals": "Na afloop van deze cursus kun je abstracte problemen op een concrete manier uitleggen",
+            "language": "nl",
+            "lecturers": 1,
+            "level": "WO-B",
+            "literature": "E.V. Ilyenkonv, The Dialectics of the Abstract and the Concrete in Marx's Capital ",
+            "name": "Concretiseren 101",
+            "organisation": "Universiteit van Harderwijk",
+            "requirements": "Het is aan te raden eerst ABSTR101 met minimaal een 8 te hebben afgerond",
+            "schedule": "Donderdagmiddag en vrijdag.  Veldwerk in week 17",
+            "url": ""
+        },
+        "model": "api.course",
+        "pk": 2
+    },
+    {
+        "fields": {
+            "courses": [
+                1,
+                2
+            ],
+            "description": "In deze minor wordt diep ingegaan op het abstraheren van concrete concepten.  Je leert het verschil tussen abstract en concreet en bereidt je voor op een beroep als abstracticeur.",
+            "name": "Abstractiekunde"
+        },
+        "model": "api.minor",
+        "pk": 1
     }
 ]

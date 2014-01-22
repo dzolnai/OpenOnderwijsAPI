@@ -127,10 +127,12 @@ class Course(models.Model):
 	department   = models.CharField(max_length=255,blank=True,null=True)
 	lecturers    = models.ForeignKey('Person',related_name='courses')
 
-
-
-#	feeds   = models.ManyToManyField('Minor',related_name='courses')
-
 #??
 class Minor(models.Model):
-	name = models.CharField(max_length=244,unique=True)
+	name        = models.CharField(max_length=255,unique=True)
+	description = models.TextField()
+	courses     = models.ManyToManyField('Course',related_name='minors')
+
+
+
+

@@ -22,6 +22,9 @@ from api.serializers import GroupSerializer, GroupRoleSerializer
 from api.models import Building, Room
 from api.serializers import BuildingSerializer, RoomSerializer
 
+from api.models import Course, Minor
+from api.serializers import CourseSerializer, MinorSerializer
+
 @api_view(('GET',))
 def api_root(request, format=None):
 	return Response({
@@ -33,6 +36,8 @@ def api_root(request, format=None):
 		'affiliations': reverse('affiliation-list', request=request, format=format),
 		'buildings' : reverse('building-list', request=request, format=format),
 		'rooms'     : reverse('room-list', request=request, format=format),
+		'courses'   : reverse('course-list', request=request, format=format),
+		'minors'    : reverse('minor-list', request=request, format=format),
 	})
 
 class NewsItemViewSet(viewsets.ModelViewSet):
@@ -75,3 +80,14 @@ class RoomViewSet(viewsets.ModelViewSet):
 	queryset = Room.objects.all()
 	serializer_class = RoomSerializer
 	pagination_serializer_class = CustomPaginationSerializer
+
+class CourseViewSet(viewsets.ModelViewSet):
+	queryset = Course.objects.all()
+	serializer_class = CourseSerializer
+	pagination_serializer_class = CustomPaginationSerializer
+
+class MinorViewSet(viewsets.ModelViewSet):
+	queryset = Minor.objects.all()
+	serializer_class = MinorSerializer
+	pagination_serializer_class = CustomPaginationSerializer
+
