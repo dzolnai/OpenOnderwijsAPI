@@ -85,7 +85,25 @@ class PersonViewSet(viewsets.ModelViewSet):
                 paged_entries = paginator.page(paginator.num_pages)
             serializer = PaginatedPersonSerializer(paged_entries, context={'request': request})
             return Response(serializer.data)
-                
+ 
+class PersonMeViewSet(viewsets.ModelViewSet):
+	model = Person
+        serializer_class = PersonSerializer
+        def list(self, request):
+            # Use it like this after installing authentication and session middlewares
+            #  >>> current_user = request.user
+            # You should create a connection between the django.contrib.auth.User object
+            # and between the Person object, for example, by adding a username field to
+            # the Person object.
+            #  >>> username = current_user.username 
+            # you can check if user is authenticated with: 
+            #  >>> if request.user.is_authenticated():
+            # Now we just test with displayName instead of username
+            userName = "Dr. Bibber"
+            queryset = Person.objects.filter(displayName=userName) #here you could check to userName
+            serializer = PersonSerializer(queryset, context={'request': request})
+            return Response(serializer.data)
+        
 class PersonScheduleViewSet(viewsets.ModelViewSet):
 	queryset = Lesson.objects.all()
 	serializer_class = LessonSerializer

@@ -4,7 +4,7 @@ from rest_framework.urlpatterns import format_suffix_patterns
 from rest_framework import renderers
 
 from api.views import NewsFeedViewSet, NewsItemViewSet
-from api.views import PersonViewSet, AffiliationViewSet
+from api.views import PersonViewSet, PersonMeViewSet, AffiliationViewSet
 from api.views import GroupViewSet, GroupRoleViewSet
 from api.views import BuildingViewSet, RoomViewSet
 from api.views import PersonScheduleViewSet, GroupScheduleViewSet, RoomScheduleViewSet
@@ -42,6 +42,11 @@ person_detail = PersonViewSet.as_view({
     'patch': 'partial_update',
     'delete': 'destroy'
 })
+
+person_me = PersonMeViewSet.as_view({
+    'get': 'list',
+})
+
 person_detail_schedule = PersonScheduleViewSet.as_view({
 	'get': 'list',
 })
@@ -134,7 +139,6 @@ lesson_list = LessonViewSet.as_view({
 	'post': 'create'
 })
 
-
 lesson_detail = LessonViewSet.as_view({
     'get': 'retrieve',
     'put': 'update',
@@ -143,34 +147,33 @@ lesson_detail = LessonViewSet.as_view({
 })
 
 urlpatterns = patterns('api.views',
-	url( r'^$',                           'api_root'                    ),
+    url( r'^$',                           'api_root'                    ),
 
-	url( r'^newsfeeds$',                   newsfeed_list ,     name='newsfeed-list'     ),
+    url( r'^newsfeeds$',                   newsfeed_list ,     name='newsfeed-list'     ),
 	url( r'^newsfeeds/(?P<pk>[0-9]+)$',    newsfeed_detail,    name='newsfeed-detail'   ),
     url( r'^newsitems$',                   newsitem_list,      name='newsitem-list'     ),
-    url( r'^newsitems/(?P<pk>[0-9]+)$',    newsitem_detail,    name='newsitem-detail'   ),
-
+        url( r'^newsitems/(?P<pk>[0-9]+)$',    newsitem_detail,    name='newsitem-detail'   ),
     url( r'^persons$',                     person_list,        name='person-list'       ),
-    url( r'^persons/(?P<pk>[0-9]+)$',      person_detail,      name='person-detail'     ),
+        url( r'^persons/(?P<pk>[0-9]+)$',      person_detail,      name='person-detail'     ),
 	url( r'^persons/(?P<person_pk>[0-9]+)/schedule$',	person_detail_schedule,		name='person-detail-schedule'	),
+    url( r'^persons/@me$',                     person_me,        name='person-me'       ),
     # affiliations should not be exposed """
     url( r'^affiliations$',                     affiliation_list,        name='affiliation-list'        ),
-    url( r'^affiliations/(?P<pk>[0-9]+)$',      affiliation_detail,      name='affiliation-detail'      ),
+        url( r'^affiliations/(?P<pk>[0-9]+)$',      affiliation_detail,      name='affiliation-detail'      ),
     url( r'^groups$',                      group_list,         name='group-list'       ),
-    url( r'^groups/(?P<pk>[0-9]+)$',       group_detail,       name='group-detail'     ),
+        url( r'^groups/(?P<pk>[0-9]+)$',       group_detail,       name='group-detail'     ),
 	url( r'^groups/(?P<group_pk>[0-9]+)/schedule$',       group_detail_schedule,       name='group-detail-schedule'     ),
     url( r'^grouproles$',                  grouprole_list,     name='grouprole-list'       ),
-    url( r'^grouproles/(?P<pk>[0-9]+)$',   grouprole_detail,   name='grouprole-detail'     ),
-
+        url( r'^grouproles/(?P<pk>[0-9]+)$',   grouprole_detail,   name='grouprole-detail'     ),
     url( r'^buildings$',                  building_list,       name='building-list'       ),
-    url( r'^buildings/(?P<pk>\w+)$',   building_detail,     name='building-detail'     ),
+        url( r'^buildings/(?P<pk>\w+)$',   building_detail,     name='building-detail'     ),
     url( r'^rooms$',                      room_list,           name='room-list'       ),
     url( r'^rooms/(?P<pk>\w+)$',       room_detail,         name='room-detail'),
-	url( r'^rooms/(?P<room_pk>\w+)/schedule$',       room_detail_schedule,         name='room-detail-schedule'     ),
-	url( r'^courses/(?P<pk>[0-9]+)$',   course_detail,   name='course-detail'     ),
-	url( r'^courses$',   course_list,   name='course-list'     ),
+        url( r'^rooms/(?P<room_pk>\w+)/schedule$',       room_detail_schedule,         name='room-detail-schedule'     ),
+    url( r'^courses$',   course_list,   name='course-list'     ),
+        url( r'^courses/(?P<pk>[0-9]+)$',   course_detail,   name='course-detail'     ),
 	url( r'^courses/(?P<course_pk>[0-9]+)/schedule$',   course_detail_schedule,   name='course-detail-schedule'     ),
-        url( r'^schedule$',   lesson_list,   name='lesson-list'     ),
+    url( r'^schedule$',   lesson_list,   name='lesson-list'     ),
 	url( r'^schedule/(?P<pk>[0-9]+)',   lesson_detail,   name='lesson-detail'     ),
 )
 
