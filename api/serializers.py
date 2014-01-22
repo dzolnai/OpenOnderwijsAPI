@@ -66,7 +66,6 @@ class GroupSerializer(WithPk, serializers.HyperlinkedModelSerializer):
 		model = Group
 		fields = ('id','url','name','description','type','members','courses')
 
-
 """ Affiliations """
 class AffiliationSerializer(WithPk, serializers.HyperlinkedModelSerializer):
 	persons = serializers.HyperlinkedRelatedField(many=True, view_name='person-detail')
@@ -99,9 +98,9 @@ class RoomSerializer(WithPk, serializers.HyperlinkedModelSerializer):
 		#field = ('building','abbr','name','description','totalSeats','totalWorkspaces','availableWorkspaces')
 
 """ Courses """
-
 class CourseSerializer(serializers.HyperlinkedModelSerializer):
-	minors = serializers.HyperlinkedRelatedField(many=True, blank=True, view_name='minor-detail')
+	lessons = serializers.HyperlinkedRelatedField(many=True, view_name='lesson-detail')
+	minors  = serializers.HyperlinkedRelatedField(many=True, blank=True, view_name='minor-detail')
 	class Meta:
 		model = Course
 		#field = ('abbr','name','description','address','postalCode','city','lat','lon')
@@ -110,6 +109,17 @@ class MinorSerializer(serializers.HyperlinkedModelSerializer):
 #	coourses = serializers.HyperlinkedRelatedField(view_name='course-detail')
 	class Meta:
 		model = Minor
+
+""" Lessons """
+class LessonSerializer(WithPk, serializers.HyperlinkedModelSerializer):
+	class Meta:
+		model = Lesson
+		field = ('id','start','end','course','room','description')		
+
+class PaginatedLessonSerializer(CustomPaginationSerializer):
+	class Meta:
+            object_serializer_class = LessonSerializer
+
 
 """ Results """
 
@@ -126,24 +136,3 @@ class CourseResultSerializer(serializers.HyperlinkedModelSerializer):
 	class Meta:
 		model = CourseResult
 
-""" Lessons """
-class LessonSerializer(WithPk, serializers.HyperlinkedModelSerializer):
-	class Meta:
-		model = Lesson
-		field = ('id','start','end','course','room','description')		
-
-class PaginatedLessonSerializer(CustomPaginationSerializer):
-	class Meta:
-            object_serializer_class = LessonSerializer
-
-		
-""" Courses """
-class CourseSerializer(WithPk, serializers.HyperlinkedModelSerializer):
-	lessons =  serializers.HyperlinkedRelatedField(many=True, view_name='lesson-detail')
-	class Meta:
-		model = Course
-                field = ('abbr', 'name', 'ects', 'description', 'goals', 'requirements', 'level', 'format',
-                'language', 'enrollment', 'literature', 'exams', 'schedule', 'url', 'organisation', 'department',
-                'lecturers', 'groups')
-		
-	
