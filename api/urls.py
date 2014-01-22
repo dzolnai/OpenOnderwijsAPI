@@ -6,7 +6,7 @@ from rest_framework import renderers
 from api.views import NewsFeedViewSet, NewsItemViewSet
 from api.views import PersonViewSet, PersonMeViewSet, AffiliationViewSet
 from api.views import GroupViewSet, GroupRoleViewSet
-from api.views import BuildingViewSet, RoomViewSet
+from api.views import BuildingViewSet, RoomViewSet, BuildingRoomViewSet
 from api.views import PersonScheduleViewSet, GroupScheduleViewSet, RoomScheduleViewSet
 from api.views import CourseViewSet, LessonViewSet, CourseScheduleViewSet
 
@@ -89,16 +89,21 @@ affiliation_detail = AffiliationViewSet.as_view({
     'delete': 'destroy'
 })
 
-
 building_list = BuildingViewSet.as_view({
     'get': 'list',
     'post': 'create'
 })
+
 building_detail = BuildingViewSet.as_view({
     'get': 'retrieve',
     'put': 'update',
     'patch': 'partial_update',
     'delete': 'destroy'
+})
+
+building_detail_rooms = BuildingRoomViewSet.as_view({
+    'get': 'list',
+    'post': 'create'
 })
 
 room_list = RoomViewSet.as_view({
@@ -112,6 +117,7 @@ room_detail = RoomViewSet.as_view({
     'patch': 'partial_update',
     'delete': 'destroy'
 })
+
 room_detail_schedule = RoomScheduleViewSet.as_view({
 	'get': 'list',
 	'post': 'create'
@@ -167,6 +173,7 @@ urlpatterns = patterns('api.views',
         url( r'^grouproles/(?P<pk>[0-9]+)$',   grouprole_detail,   name='grouprole-detail'     ),
     url( r'^buildings$',                  building_list,       name='building-list'       ),
         url( r'^buildings/(?P<pk>\w+)$',   building_detail,     name='building-detail'     ),
+        url( r'^buildings/(?P<building_pk>\w+)/rooms$',   building_detail_rooms,     name='building-detail-rooms'     ),
     url( r'^rooms$',                      room_list,           name='room-list'       ),
     url( r'^rooms/(?P<pk>\w+)$',       room_detail,         name='room-detail'),
         url( r'^rooms/(?P<room_pk>\w+)/schedule$',       room_detail_schedule,         name='room-detail-schedule'     ),

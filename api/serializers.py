@@ -100,6 +100,10 @@ class RoomSerializer(WithPk, serializers.HyperlinkedModelSerializer):
 		model = Room
 		depth = 1
 		field = ('building','abbr','name','description','totalSeats','totalWorkspaces','availableWorkspaces')
+                
+class PaginatedRoomSerializer(CustomPaginationSerializer):
+	class Meta:
+            object_serializer_class = RoomSerializer
 
 """ Lessons """
 class LessonSerializer(WithPk, serializers.HyperlinkedModelSerializer):

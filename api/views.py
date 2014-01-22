@@ -21,7 +21,7 @@ from api.models import Group, GroupRole
 from api.serializers import GroupSerializer, GroupRoleSerializer
 
 from api.models import Building, Room
-from api.serializers import BuildingSerializer, RoomSerializer
+from api.serializers import BuildingSerializer, RoomSerializer, PaginatedRoomSerializer
 
 from api.models import Lesson, Course
 from api.serializers import LessonSerializer, CourseSerializer, PaginatedLessonSerializer
@@ -203,6 +203,27 @@ class RoomViewSet(viewsets.ModelViewSet):
 	queryset = Room.objects.all()
 	serializer_class = RoomSerializer
 	pagination_serializer_class = CustomPaginationSerializer
+
+class BuildingRoomViewSet(viewsets.ModelViewSet):
+	queryset = Room.objects.all()
+	serializer_class = RoomSerializer
+	pagination_serializer_class = CustomPaginationSerializer
+        def list(self, request, building_pk):
+            queryset = Room.objects.filter(building=building_pk)
+            #every page has 5 rooms
+            paginator = Paginator(queryset, 5)
+            page = request.QUERY_PARAMS.get('page')
+            try:
+                rooms = paginator.page(page)
+            except PageNotAnInteger:
+                # If page is not an integer, deliver first page.
+                rooms = paginator.page(1)
+            except EmptyPage:
+                # If page is out of range (e.g. 9999),
+                # deliver last page of results.
+                rooms = paginator.page(paginator.num_pages)
+            serializer = PaginatedRoomSerializer(rooms, context={'request': request})
+            return Response(serializer.data)
 
 class RoomScheduleViewSet(viewsets.ModelViewSet):
 	queryset = Lesson.objects.all()

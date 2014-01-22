@@ -193,6 +193,19 @@
    },
    {
       "fields":{
+         "address":"Eiklaan 14",
+         "city":"Harderwijk",
+         "description":"Gebouw genoemd naar George Washington.  Thuisbasis van de faculteit historie.",
+         "lat":"52.356133",
+         "lon":"5.617567",
+         "name":"Washingtongebouw",
+         "postalCode":"1234AB"
+      },
+      "model":"api.building",
+      "pk":"GWGB"
+   },
+   {
+      "fields":{
          "name":"String theory",
          "ects":1001,
          "description":"In physics, string theory is a theoretical framework in which the point-like particles of particle physics are replaced by one-dimensional objects called strings.",
@@ -247,6 +260,30 @@
       },
       "model":"api.room",
       "pk":2
+   },
+   {
+      "fields":{
+         "name":"Room A12",
+         "building":"GWGB",
+         "description":"Room A12",
+         "totalSeats":48,
+         "totalWorkspaces":2,
+         "availableWorkspaces":2
+      },
+      "model":"api.room",
+      "pk":3
+   },
+   {
+      "fields":{
+         "name":"Room B7",
+         "building":"GWGB",
+         "description":"Room B7",
+         "totalSeats":80,
+         "totalWorkspaces":3,
+         "availableWorkspaces":1
+      },
+      "model":"api.room",
+      "pk":4
    },
    {
       "fields":{
