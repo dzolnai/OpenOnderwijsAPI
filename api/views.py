@@ -35,7 +35,8 @@ def api_root(request, format=None):
 		'affiliations': reverse('affiliation-list', request=request, format=format),
 		'buildings' : reverse('building-list', request=request, format=format),
 		'rooms'     : reverse('room-list', request=request, format=format),
-		'courses'	: reverse('course-list', request=request, format=format),
+		'courses'   : reverse('course-list', request=request, format=format),
+                'schedule'  : reverse('lesson-list', request=request, format=format),
 	})
 
 class NewsItemViewSet(viewsets.ModelViewSet):

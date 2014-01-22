@@ -129,8 +129,14 @@ course_detail_schedule = CourseScheduleViewSet.as_view({
 	'post': 'create'
 })
 
+lesson_list = LessonViewSet.as_view({
+	'get': 'list',
+	'post': 'create'
+})
+
+
 lesson_detail = LessonViewSet.as_view({
-	'get': 'retrieve',
+    'get': 'retrieve',
     'put': 'update',
     'patch': 'partial_update',
     'delete': 'destroy'
@@ -164,7 +170,8 @@ urlpatterns = patterns('api.views',
 	url( r'^courses/(?P<pk>[0-9]+)$',   course_detail,   name='course-detail'     ),
 	url( r'^courses$',   course_list,   name='course-list'     ),
 	url( r'^courses/(?P<course_pk>[0-9]+)/schedule$',   course_detail_schedule,   name='course-detail-schedule'     ),
-	url( r'^lessons/(?P<pk>[0-9]+)',   lesson_detail,   name='lesson-detail'     ),
+        url( r'^schedule$',   lesson_list,   name='lesson-list'     ),
+	url( r'^schedule/(?P<pk>[0-9]+)',   lesson_detail,   name='lesson-detail'     ),
 )
 
 urlpatterns = format_suffix_patterns(urlpatterns)

@@ -113,8 +113,8 @@ class CourseSerializer(WithPk, serializers.HyperlinkedModelSerializer):
 	lessons =  serializers.HyperlinkedRelatedField(many=True, view_name='lesson-detail')
 	class Meta:
 		model = Course
-                field = ('abbr', 'name', 'ects', 'description', 'goals', 'requirements', 'level', 'format',
-                'language', 'enrollment', 'literature', 'exams', 'schedule', 'url', 'organisation', 'department',
+                field = ('abbr', 'url', 'name', 'ects', 'description', 'goals', 'requirements', 'level', 'format',
+                'language', 'enrollment', 'literature', 'exams', 'schedule', 'link', 'organisation', 'department',
                 'lecturers', 'groups')
 		
 	
