@@ -1,6 +1,8 @@
 from rest_framework import viewsets
 from django.utils import timezone
 import datetime
+import dateutil.tz as tz
+import dateutil.parser as parser
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -66,15 +68,19 @@ class PersonScheduleViewSet(viewsets.ModelViewSet):
 	pagination_serializer_class = CustomPaginationSerializer
 	# Selects only the lessons which are related to the person with the id person_pk
 	def list(self, request, person_pk):
-            #Example date: 201401211206UTC = 2014.01.21 12:06 UTC timezone (you can use, EST, CET, etc.)
-            start = timezone.localtime(timezone.now()).strftime("%Y%m%d0000%Z")
-            end = timezone.localtime(timezone.now()).strftime("%Y%m%d2359%Z")
+            startTime = datetime.datetime.now().replace(hour = 0, minute = 0)
+            endTime = start = datetime.datetime.now().replace(hour = 23, minute = 59)
+            start = startTime.isoformat()
+            end = endTime.isoformat()
             if ('start' in request.GET):
                 start = request.QUERY_PARAMS.get('start')
             if ('end' in request.GET):
                 end = request.QUERY_PARAMS.get('end')
-            start_date = datetime.datetime.strptime(start, "%Y%m%d%H%M%Z")
-            end_date = datetime.datetime.strptime(end, "%Y%m%d%H%M%Z")
+            start_date = parser.parse(start)
+            end_date = parser.parse(end)
+            utc = tz.gettz('UTC')
+            start_date = start_date.replace(tzinfo=utc)
+            end_date = end_date.replace(tzinfo=utc)
             queryset = Lesson.objects.filter(course__groups__members=person_pk, 
             start__gte=start_date, #Date of the lesson should be greater than or equal to begin date of query
             end__lte=end_date) #Date of the lesson should be less than or equal to end date of query
@@ -105,15 +111,19 @@ class GroupScheduleViewSet(viewsets.ModelViewSet):
 	# Selects only the lessons which are related to the group through group_pk
 	#If the lesson's course has this group as selected group, then it's taken into account
 	def list(self, request, group_pk):
-                #Example date: 201401211206UTC = 2014.01.21 12:06 UTC timezone (you can use, EST, CET, etc.)
-                start = timezone.localtime(timezone.now()).strftime("%Y%m%d0000%Z")
-                end = timezone.localtime(timezone.now()).strftime("%Y%m%d2359%Z")
+                startTime = datetime.datetime.now().replace(hour = 0, minute = 0)
+                endTime = start = datetime.datetime.now().replace(hour = 23, minute = 59)
+                start = startTime.isoformat()
+                end = endTime.isoformat()
                 if ('start' in request.GET):
                     start = request.QUERY_PARAMS.get('start')
                 if ('end' in request.GET):
                     end = request.QUERY_PARAMS.get('end')
-                start_date = datetime.datetime.strptime(start, "%Y%m%d%H%M%Z")
-                end_date = datetime.datetime.strptime(end, "%Y%m%d%H%M%Z")
+                start_date = parser.parse(start)
+                end_date = parser.parse(end)
+                utc = tz.gettz('UTC')
+                start_date = start_date.replace(tzinfo=utc)
+                end_date = end_date.replace(tzinfo=utc)
 		queryset = Lesson.objects.filter(course__groups=group_pk,
                 start__gte=start_date, #Date of the lesson should be greater than or equal to begin date of query
                 end__lte=end_date) #Date of the lesson should be less than or equal to end date of query)
@@ -153,15 +163,19 @@ class RoomScheduleViewSet(viewsets.ModelViewSet):
 	pagination_serializer_class = CustomPaginationSerializer
 	#Selects only the lessons which are related to the room through room_pk
 	def list(self, request, room_pk):
-                #Example date: 201401211206UTC = 2014.01.21 12:06 UTC timezone (you can use, EST, CET, etc.)
-                start = timezone.localtime(timezone.now()).strftime("%Y%m%d0000%Z")
-                end = timezone.localtime(timezone.now()).strftime("%Y%m%d2359%Z")
+                startTime = datetime.datetime.now().replace(hour = 0, minute = 0)
+                endTime = start = datetime.datetime.now().replace(hour = 23, minute = 59)
+                start = startTime.isoformat()
+                end = endTime.isoformat()
                 if ('start' in request.GET):
                     start = request.QUERY_PARAMS.get('start')
                 if ('end' in request.GET):
                     end = request.QUERY_PARAMS.get('end')
-                start_date = datetime.datetime.strptime(start, "%Y%m%d%H%M%Z")
-                end_date = datetime.datetime.strptime(end, "%Y%m%d%H%M%Z")
+                start_date = parser.parse(start)
+                end_date = parser.parse(end)
+                utc = tz.gettz('UTC')
+                start_date = start_date.replace(tzinfo=utc)
+                end_date = end_date.replace(tzinfo=utc)
                 queryset = Lesson.objects.filter(room=room_pk,
                 start__gte=start_date, #Date of the lesson should be greater than or equal to begin date of query
                 end__lte=end_date) #Date of the lesson should be less than or equal to end date of query
@@ -197,15 +211,19 @@ class CourseScheduleViewSet(viewsets.ModelViewSet):
 	pagination_serializer_class = CustomPaginationSerializer
 	# Selects only the lessons which are related to the course with the id course_pk
 	def list(self, request, course_pk):
-                #Example date: 201401211206UTC = 2014.01.21 12:06 UTC timezone (you can use, EST, CET, etc.)
-                start = timezone.localtime(timezone.now()).strftime("%Y%m%d0000%Z")
-                end = timezone.localtime(timezone.now()).strftime("%Y%m%d2359%Z")
+                startTime = datetime.datetime.now().replace(hour = 0, minute = 0)
+                endTime = start = datetime.datetime.now().replace(hour = 23, minute = 59)
+                start = startTime.isoformat()
+                end = endTime.isoformat()
                 if ('start' in request.GET):
                     start = request.QUERY_PARAMS.get('start')
                 if ('end' in request.GET):
                     end = request.QUERY_PARAMS.get('end')
-                start_date = datetime.datetime.strptime(start, "%Y%m%d%H%M%Z")
-                end_date = datetime.datetime.strptime(end, "%Y%m%d%H%M%Z")
+                start_date = parser.parse(start)
+                end_date = parser.parse(end)
+                utc = tz.gettz('UTC')
+                start_date = start_date.replace(tzinfo=utc)
+                end_date = end_date.replace(tzinfo=utc)
                 queryset = Lesson.objects.filter(course=course_pk,
                 start__gte=start_date, #Date of the lesson should be greater than or equal to begin date of query
                 end__lte=end_date) #Date of the lesson should be less than or equal to end date of query
