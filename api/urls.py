@@ -225,7 +225,7 @@ urlpatterns = patterns('api.views',
     url( r'^testresults$',                              testresult_list,        name='testresult-list'),
     url( r'^testresults/(?P<pk>\w+)$',                  testresult_detail,      name='testresult-detail'),
     url( r'^courseresults$',                            courseresult_list,      name='courseresult-list'),
-    url( r'^coursesresults/(?P<pk>\w+)$',               courseresult_detail,    name='courseresult-detail'),
+    url( r'^courseresults/(?P<pk>\w+)$',               	courseresult_detail,    name='courseresult-detail'),
 )
 
 urlpatterns = format_suffix_patterns(urlpatterns)
