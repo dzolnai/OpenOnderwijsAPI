@@ -110,7 +110,7 @@ class Course(models.Model):
 	LEVELS    = ('HBO-B','HBO-M','WO-B','WO-M','WO-D')
 	LANGUAGES = ('nl','en','de')
 	name         = models.CharField(max_length=255,unique=True)
-	abbr         = models.CharField(max_length=32,primary_key=True)
+	abbr         = models.CharField(max_length=32,unique=True)
 	ects         = models.PositiveIntegerField()
 	description  = models.TextField()
 	goals        = models.TextField(blank=True,null=True)
