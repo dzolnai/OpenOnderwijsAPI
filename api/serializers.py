@@ -93,7 +93,7 @@ class RoomSerializer(serializers.HyperlinkedModelSerializer):
 	class Meta:
 		model = Room
 		depth = 1
-		field = ('building','abbr','name','description','totalSeats','totalWorkspaces','availableWorkspaces')
+		#field = ('building','abbr','name','description','totalSeats','totalWorkspaces','availableWorkspaces')
 
 """ Courses """
 
