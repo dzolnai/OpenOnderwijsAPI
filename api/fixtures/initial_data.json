@@ -193,7 +193,6 @@
     },
    {
       "fields":{
-<<<<<<< HEAD
          "description":"test 1",
          "title":"feed 1"
       },
@@ -401,10 +400,8 @@
       "fields":{
          "name":"String theory",
          "ects":1001,
-=======
          "abbr":"STRING413",
          "department":"Physics department",
->>>>>>> upstream/master
          "description":"In physics, string theory is a theoretical framework in which the point-like particles of particle physics are replaced by one-dimensional objects called strings.",
          "ects":1001,
          "enrollment":"online",
@@ -418,7 +415,7 @@
          "organisation":"University of Harderwijk",
          "requirements":"Advanced Mathematics 401, Field Theory 401",
          "schedule":"wednesday mornings",
-         "url": null,
+         "link": null,
          "groups":[
             1
          ]
@@ -444,7 +441,7 @@
          "organisation":"Universiteit van Harderwijk",
          "requirements":"Algemene programmeerkennis, succesvol afgeronde cursus Introductie programmeren, en minimaal een 8 voor CPU architectures",
          "schedule":"maandag- en woensdagmiddag en vrijdag",
-         "url":null,
+         "link":null,
          "groups":[
             2,
             3
@@ -471,7 +468,7 @@
             "organisation": "Universiteit van Harderwijk",
             "requirements": "Een gezond verstand",
             "schedule": "Maandag-, dinsdag- en donderdagochtend van 8-12.",
-            "url": "",
+            "link": "",
             "groups":[
             ]
         },
@@ -496,7 +493,7 @@
             "organisation": "Universiteit van Harderwijk",
             "requirements": "Het is aan te raden eerst ABSTR101 met minimaal een 8 te hebben afgerond",
             "schedule": "Donderdagmiddag en vrijdag.  Veldwerk in week 17",
-            "url": "",
+            "link": "",
             "groups":[
             ]
         },
