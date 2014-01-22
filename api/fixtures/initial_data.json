@@ -191,7 +191,59 @@
         "model": "api.building",
         "pk": "AEGB"
     },
-    {
+   {
+      "fields":{
+         "abbr":"STRING413",
+         "department":"Physics department",
+         "description":"In physics, string theory is a theoretical framework in which the point-like particles of particle physics are replaced by one-dimensional objects called strings.",
+         "ects":1001,
+         "enrollment":"online",
+         "exams":"One final exam",
+         "format":"lectures and homework",
+         "goals":"After this course, you'll be able to construct a Theory of Everything",
+         "language":"en",
+         "lecturers":2,
+         "level":"HBO-B",
+         "name":"String theory",
+         "organisation":"University of Harderwijk",
+         "requirements":"Advanced Mathematics 401, Field Theory 401",
+         "schedule":"wednesday mornings",
+         "url": null,
+         "groups":[
+            1
+         ]
+      },
+      "model":"api.course",
+      "pk":1
+   },
+   {
+      "fields":{
+         "abbr":"CSPROGCPU1",
+         "department":"CG department",
+         "description":"General-purpose computing on graphics processing units",
+         "ects":1003,
+         "enrollment":"Inschrijven via studieadviseur",
+         "exams":"tentamen, programmeeropdracht",
+         "format":"hoorcolleges, werkcolleges",
+         "goals":"In deze cursus leer je een standaard GPU te programmeren en er bitcoins mee te minen",
+         "language":"nl",
+         "lecturers":1,
+         "level":"HBO-M",
+         "literature":"Sanders &amp; Kandrot: CUDA by Example: An Introduction to General-Purpose GPU Programming, bijvoorbeeld verkrijgbaar <a href=\"http://www.amazon.de/CUDA-Example-Introduction-General-Purpose-Programming/dp/0131387685\">via Amazon</a>",
+         "name":"GPU programming",
+         "organisation":"Universiteit van Harderwijk",
+         "requirements":"Algemene programmeerkennis, succesvol afgeronde cursus Introductie programmeren, en minimaal een 8 voor CPU architectures",
+         "schedule":"maandag- en woensdagmiddag en vrijdag",
+         "url":null,
+         "groups":[
+            2,
+            3
+         ]
+      },
+      "model":"api.course",
+      "pk":2
+   },   
+   {
         "fields": {
             "abbr": "ABSTR101",
             "department": "Logica",
@@ -209,10 +261,12 @@
             "organisation": "Universiteit van Harderwijk",
             "requirements": "Een gezond verstand",
             "schedule": "Maandag-, dinsdag- en donderdagochtend van 8-12.",
-            "url": ""
+            "url": "",
+            "groups":[
+            ]
         },
         "model": "api.course",
-        "pk": 1
+        "pk": 3
     },
     {
         "fields": {
@@ -232,16 +286,18 @@
             "organisation": "Universiteit van Harderwijk",
             "requirements": "Het is aan te raden eerst ABSTR101 met minimaal een 8 te hebben afgerond",
             "schedule": "Donderdagmiddag en vrijdag.  Veldwerk in week 17",
-            "url": ""
+            "url": "",
+            "groups":[
+            ]
         },
         "model": "api.course",
-        "pk": 2
+        "pk": 4
     },
     {
         "fields": {
             "courses": [
-                1,
-                2
+                3,
+                4
             ],
             "description": "In deze minor wordt diep ingegaan op het abstraheren van concrete concepten.  Je leert het verschil tussen abstract en concreet en bereidt je voor op een beroep als abstracticeur.",
             "name": "Abstractiekunde"
@@ -251,7 +307,7 @@
     },
     {
         "fields": {
-            "course": 1,
+            "course": 3,
             "courseResult": 1,
             "date": "2013-12-18",
             "description": "Tweede deeltentamen",
@@ -267,7 +323,7 @@
     },
     {
         "fields": {
-            "course": 1,
+            "course": 3,
             "courseResult": 1,
             "date": "2013-11-02",
             "description": "Eerste deeltentamen",
@@ -283,7 +339,7 @@
     },
     {
         "fields": {
-            "course": 1,
+            "course": 3,
             "grade": "6.5",
             "lastModified": "2013-12-31T10:01:00Z",
             "passed": true,
@@ -292,5 +348,59 @@
         },
         "model": "api.courseresult",
         "pk": 1
-    }
+   },
+   {
+      "fields":{
+         "name":"Room 100",
+         "building":"AEGB",
+         "description":"Room 100",
+         "totalSeats":21,
+         "totalWorkspaces":10,
+         "availableWorkspaces":10
+      },
+      "model":"api.room",
+      "pk":1
+   },
+   {
+      "fields":{
+         "name":"Room 200",
+         "building":"AEGB",
+         "description":"Room 200",
+         "totalSeats":300,
+         "totalWorkspaces":0,
+         "availableWorkspaces":0
+      },
+      "model":"api.room",
+      "pk":2
+   },
+   {
+      "fields":{
+         "start":"1997-07-16T19:30:00.000Z",
+         "end":"1997-07-16T21:30:00.000Z",
+         "course":1,
+         "room":1
+      },
+      "model":"api.lesson",
+      "pk":1
+   },
+   {
+      "fields":{
+         "start":"1997-07-17T19:30:00.000Z",
+         "end":"1997-07-17T21:30:00.000Z",
+         "course":1,
+         "room":1
+      },
+      "model":"api.lesson",
+      "pk":2
+   },
+   {
+      "fields":{
+         "start":"1997-07-18T19:30:00.000Z",
+         "end":"1997-07-18T21:30:00.000Z",
+         "course":2,
+         "room":2
+      },
+      "model":"api.lesson",
+      "pk":3
+   }
 ]
