@@ -4,8 +4,9 @@ from api.models import NewsFeed, NewsItem
 from api.models import Person, Affiliation
 from api.models import Group, GroupRole
 from api.models import Building, Room
-from api.models import Course
+from api.models import Course, Minor
 from api.models import Lesson
+from api.models import TestResult, CourseResult
 
 from api.pagination import CustomPaginationSerializer
 
@@ -105,6 +106,19 @@ class PaginatedRoomSerializer(CustomPaginationSerializer):
 	class Meta:
             object_serializer_class = RoomSerializer
 
+""" Courses """
+class CourseSerializer(serializers.HyperlinkedModelSerializer):
+	lessons = serializers.HyperlinkedRelatedField(many=True, view_name='lesson-detail')
+	minors  = serializers.HyperlinkedRelatedField(many=True, blank=True, view_name='minor-detail')
+	class Meta:
+		model = Course
+		#field = ('abbr','name','description','address','postalCode','city','lat','lon')
+
+class MinorSerializer(serializers.HyperlinkedModelSerializer):
+#	coourses = serializers.HyperlinkedRelatedField(view_name='course-detail')
+	class Meta:
+		model = Minor
+
 """ Lessons """
 class LessonSerializer(WithPk, serializers.HyperlinkedModelSerializer):
 	class Meta:
@@ -115,14 +129,18 @@ class PaginatedLessonSerializer(CustomPaginationSerializer):
 	class Meta:
             object_serializer_class = LessonSerializer
 
-		
-""" Courses """
-class CourseSerializer(WithPk, serializers.HyperlinkedModelSerializer):
-	lessons =  serializers.HyperlinkedRelatedField(many=True, view_name='lesson-detail')
-	class Meta:
-		model = Course
-                field = ('abbr', 'url', 'name', 'ects', 'description', 'goals', 'requirements', 'level', 'format',
-                'language', 'enrollment', 'literature', 'exams', 'schedule', 'link', 'organisation', 'department',
-                'lecturers', 'groups')
-		
-	
+
+""" Results """
+
+class TestResultSerializer(serializers.HyperlinkedModelSerializer):
+        student = serializers.HyperlinkedRelatedField(view_name='person-detail')
+        course  = serializers.HyperlinkedRelatedField(view_name='course-detail')
+        class Meta:
+                model = TestResult
+
+class CourseResultSerializer(serializers.HyperlinkedModelSerializer):
+        student     = serializers.HyperlinkedRelatedField(view_name='person-detail')
+        course      = serializers.HyperlinkedRelatedField(view_name='course-detail')
+        testResults = serializers.HyperlinkedRelatedField(many=True,view_name='testresult-detail')
+        class Meta:
+                model = CourseResult

@@ -1,6 +1,199 @@
 [
+    {
+        "fields": {
+            "description": "test 1",
+            "title": "feed 1"
+        },
+        "model": "api.newsfeed",
+        "pk": 1
+    },
+    {
+        "fields": {
+            "description": "test 2",
+            "title": "feed 2"
+        },
+        "model": "api.newsfeed",
+        "pk": 2
+    },
+    {
+        "fields": {
+            "affiliation": "student"
+        },
+        "model": "api.affiliation",
+        "pk": 1
+    },
+    {
+        "fields": {
+            "affiliation": "faculty"
+        },
+        "model": "api.affiliation",
+        "pk": 2
+    },
+    {
+        "fields": {
+            "affiliation": "staff"
+        },
+        "model": "api.affiliation",
+        "pk": 3
+    },
+    {
+        "fields": {
+            "affiliation": "alum"
+        },
+        "model": "api.affiliation",
+        "pk": 4
+    },
+    {
+        "fields": {
+            "affiliation": "member"
+        },
+        "model": "api.affiliation",
+        "pk": 5
+    },
+    {
+        "fields": {
+            "affiliation": "affiliate"
+        },
+        "model": "api.affiliation",
+        "pk": 6
+    },
+    {
+        "fields": {
+            "affiliation": "employee"
+        },
+        "model": "api.affiliation",
+        "pk": 7
+    },
+    {
+        "fields": {
+            "affiliations": [
+                2,
+                5,
+                7
+            ],
+            "department": null,
+            "displayName": "dr. Basje",
+            "employeeID": null,
+            "gender": "M",
+            "givenName": "Bas",
+            "mail": "basje@harderwijk.edu",
+            "mobileNumber": null,
+            "office": null,
+            "organisation": null,
+            "photo": null,
+            "studentID": null,
+            "surName": "Zoetekouw",
+            "telephoneNumber": "+31301234567",
+            "title": null
+        },
+        "model": "api.person",
+        "pk": 1
+    },
+    {
+        "fields": {
+            "affiliations": [
+                2,
+                4,
+                6,
+                7
+            ],
+            "department": null,
+            "displayName": "Dr. Bibber",
+            "employeeID": null,
+            "gender": "M",
+            "givenName": "Piet",
+            "mail": "bibber@harderwijk.edu",
+            "mobileNumber": null,
+            "office": null,
+            "organisation": null,
+            "photo": null,
+            "studentID": null,
+            "surName": "Bibber",
+            "telephoneNumber": null,
+            "title": null
+        },
+        "model": "api.person",
+        "pk": 2
+    },
+    {
+        "fields": {
+            "description": "hallo een test groep",
+            "name": "test group",
+            "type": "?LesGroep"
+        },
+        "model": "api.group",
+        "pk": 1
+    },
+    {
+        "fields": {
+            "description": "Kijk, nog 1",
+            "name": "Nog een andere group",
+            "type": "affiliation"
+        },
+        "model": "api.group",
+        "pk": 2
+    },
+    {
+        "fields": {
+            "description": "hallo",
+            "name": "een derde groep",
+            "type": "Generic"
+        },
+        "model": "api.group",
+        "pk": 3
+    },
+    {
+        "fields": {
+            "group": 1,
+            "person": 2,
+            "role": "member"
+        },
+        "model": "api.grouprole",
+        "pk": 1
+    },
+    {
+        "fields": {
+            "group": 2,
+            "person": 2,
+            "role": "member"
+        },
+        "model": "api.grouprole",
+        "pk": 2
+    },
+    {
+        "fields": {
+            "group": 3,
+            "person": 2,
+            "role": "member"
+        },
+        "model": "api.grouprole",
+        "pk": 3
+    },
+    {
+        "fields": {
+            "group": 3,
+            "person": 1,
+            "role": "administrator"
+        },
+        "model": "api.grouprole",
+        "pk": 4
+    },
+    {
+        "fields": {
+            "address": "Eiklaan 12",
+            "city": "Harderwijk",
+            "description": "Gebouw genoemd naar Albert Einstein.  Thuisbasis van de faculteit natuurkunde.",
+            "lat": "52.355133",
+            "lon": "5.616567",
+            "name": "Albert-Einsteingebouw",
+            "postalCode": "1114FG"
+        },
+        "model": "api.building",
+        "pk": "AEGB"
+    },
    {
       "fields":{
+<<<<<<< HEAD
          "description":"test 1",
          "title":"feed 1"
       },
@@ -208,11 +401,24 @@
       "fields":{
          "name":"String theory",
          "ects":1001,
-         "description":"In physics, string theory is a theoretical framework in which the point-like particles of particle physics are replaced by one-dimensional objects called strings.",
-         "level":"HBO-B",
-         "language":"en",
+=======
+         "abbr":"STRING413",
          "department":"Physics department",
+>>>>>>> upstream/master
+         "description":"In physics, string theory is a theoretical framework in which the point-like particles of particle physics are replaced by one-dimensional objects called strings.",
+         "ects":1001,
+         "enrollment":"online",
+         "exams":"One final exam",
+         "format":"lectures and homework",
+         "goals":"After this course, you'll be able to construct a Theory of Everything",
+         "language":"en",
          "lecturers":2,
+         "level":"HBO-B",
+         "name":"String theory",
+         "organisation":"University of Harderwijk",
+         "requirements":"Advanced Mathematics 401, Field Theory 401",
+         "schedule":"wednesday mornings",
+         "url": null,
          "groups":[
             1
          ]
@@ -222,13 +428,23 @@
    },
    {
       "fields":{
-         "name":"GPU programming",
-         "ects":1003,
-         "description":"General-purpose computing on graphics processing units",
-         "level":"HBO-M",
-         "language":"nl",
+         "abbr":"CSPROGCPU1",
          "department":"CG department",
+         "description":"General-purpose computing on graphics processing units",
+         "ects":1003,
+         "enrollment":"Inschrijven via studieadviseur",
+         "exams":"tentamen, programmeeropdracht",
+         "format":"hoorcolleges, werkcolleges",
+         "goals":"In deze cursus leer je een standaard GPU te programmeren en er bitcoins mee te minen",
+         "language":"nl",
          "lecturers":1,
+         "level":"HBO-M",
+         "literature":"Sanders &amp; Kandrot: CUDA by Example: An Introduction to General-Purpose GPU Programming, bijvoorbeeld verkrijgbaar <a href=\"http://www.amazon.de/CUDA-Example-Introduction-General-Purpose-Programming/dp/0131387685\">via Amazon</a>",
+         "name":"GPU programming",
+         "organisation":"Universiteit van Harderwijk",
+         "requirements":"Algemene programmeerkennis, succesvol afgeronde cursus Introductie programmeren, en minimaal een 8 voor CPU architectures",
+         "schedule":"maandag- en woensdagmiddag en vrijdag",
+         "url":null,
          "groups":[
             2,
             3
@@ -236,6 +452,112 @@
       },
       "model":"api.course",
       "pk":2
+   },   
+   {
+        "fields": {
+            "abbr": "ABSTR101",
+            "department": "Logica",
+            "description": "Een inleiding in het abstraheren",
+            "ects": 12,
+            "enrollment": "Inschrijven via de balie",
+            "exams": "Twee deeltentamens (ieder 40%) en practicum concretiseren (20%)",
+            "format": "Hoorcolleges en practica",
+            "goals": "Je leert van abstraheren is, en het verschil tussen de begrippen concreet en abstract",
+            "language": "nl",
+            "lecturers": 2,
+            "level": "WO-B",
+            "literature": "Abstract and Concrete Categories: The Joy of Cats (Dover Books on Mathematics) by Adamek ing Jiri Adamek",
+            "name": "Abstraheren 101",
+            "organisation": "Universiteit van Harderwijk",
+            "requirements": "Een gezond verstand",
+            "schedule": "Maandag-, dinsdag- en donderdagochtend van 8-12.",
+            "url": "",
+            "groups":[
+            ]
+        },
+        "model": "api.course",
+        "pk": 3
+    },
+    {
+        "fields": {
+            "abbr": "CONCR101",
+            "department": "Logica",
+            "description": "Een inleiding in het concreet maken van abstracte begrippen.",
+            "ects": 17,
+            "enrollment": "Via de balie",
+            "exams": "Veldwerk (60%), tentamen (40%)",
+            "format": "Hoorcollege en een veldwerk in Peru van 1 week",
+            "goals": "Na afloop van deze cursus kun je abstracte problemen op een concrete manier uitleggen",
+            "language": "nl",
+            "lecturers": 1,
+            "level": "WO-B",
+            "literature": "E.V. Ilyenkonv, The Dialectics of the Abstract and the Concrete in Marx's Capital ",
+            "name": "Concretiseren 101",
+            "organisation": "Universiteit van Harderwijk",
+            "requirements": "Het is aan te raden eerst ABSTR101 met minimaal een 8 te hebben afgerond",
+            "schedule": "Donderdagmiddag en vrijdag.  Veldwerk in week 17",
+            "url": "",
+            "groups":[
+            ]
+        },
+        "model": "api.course",
+        "pk": 4
+    },
+    {
+        "fields": {
+            "courses": [
+                3,
+                4
+            ],
+            "description": "In deze minor wordt diep ingegaan op het abstraheren van concrete concepten.  Je leert het verschil tussen abstract en concreet en bereidt je voor op een beroep als abstracticeur.",
+            "name": "Abstractiekunde"
+        },
+        "model": "api.minor",
+        "pk": 1
+    },
+    {
+        "fields": {
+            "course": 3,
+            "courseResult": 1,
+            "date": "2013-12-18",
+            "description": "Tweede deeltentamen",
+            "grade": "8",
+            "lastModified": "2013-12-21T13:11:00Z",
+            "passed": null,
+            "result": "",
+            "student": 2,
+            "weight": "0.5"
+        },
+        "model": "api.testresult",
+        "pk": 1
+    },
+    {
+        "fields": {
+            "course": 3,
+            "courseResult": 1,
+            "date": "2013-11-02",
+            "description": "Eerste deeltentamen",
+            "grade": "5",
+            "lastModified": "2013-11-11T15:32:00Z",
+            "passed": null,
+            "result": "",
+            "student": 2,
+            "weight": "0.5"
+        },
+        "model": "api.testresult",
+        "pk": 2
+    },
+    {
+        "fields": {
+            "course": 3,
+            "grade": "6.5",
+            "lastModified": "2013-12-31T10:01:00Z",
+            "passed": true,
+            "result": "",
+            "student": 2
+        },
+        "model": "api.courseresult",
+        "pk": 1
    },
    {
       "fields":{

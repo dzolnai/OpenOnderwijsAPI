@@ -12,7 +12,7 @@ class NewsItem(models.Model):
 	link    = models.URLField()
 	content = models.TextField()
 	feeds   = models.ManyToManyField('NewsFeed',related_name='items')
-        lastUpdated =   models.DateTimeField(auto_now=True, default=timezone.now())
+        lastModified =   models.DateTimeField(auto_now=True, default=timezone.now())
 	class Meta:
 		ordering = ('pubDate',)
 
@@ -55,7 +55,7 @@ class Person(models.Model):
 	office          = models.ForeignKey('Room',blank=True,null=True)
 	employeeID      = models.CharField(blank=True,null=True,max_length=255)  # only for affiliation=employee
 	studentID       = models.CharField(blank=True,null=True,max_length=255)  # only for affiliation=student
-        lastUpdated     = models.DateTimeField(auto_now=True,default=timezone.now())
+        lastModified     = models.DateTimeField(auto_now=True,default=timezone.now())
 	#cluster
 	#education
 	#klas  # LesGroep
@@ -68,7 +68,7 @@ class Group(models.Model):
 	type        = models.CharField(max_length=32,choices=selfzip(GROUP_TYPES))
 	name        = models.CharField(max_length=255)
 	description = models.TextField(blank=True,null=True)
-        lastUpdated = models.DateTimeField(auto_now=True,default=timezone.now())
+        lastModified = models.DateTimeField(auto_now=True,default=timezone.now())
 	#members     = models.ManyToManyField('Person',through='GroupRole')
 
 class GroupRole(models.Model):
@@ -97,7 +97,7 @@ class Building(models.Model):
 	city        = models.CharField(max_length=255)
 	lat         = models.DecimalField(max_digits=9,decimal_places=6)
 	lon         = models.DecimalField(max_digits=9,decimal_places=6)
-        lastUpdated = models.DateTimeField(auto_now=True,default=timezone.now())
+        lastModified = models.DateTimeField(auto_now=True,default=timezone.now())
 
 class Room(models.Model):
 	building            = models.ForeignKey('Building',related_name='rooms')
@@ -107,14 +107,14 @@ class Room(models.Model):
 	totalSeats          = models.PositiveIntegerField(blank=True,null=True)
 	totalWorkspaces     = models.PositiveIntegerField(blank=True,null=True)
 	availableWorkspaces = models.PositiveIntegerField(blank=True,null=True)
-        lastUpdated         = models.DateTimeField(auto_now=True,default=timezone.now())
+        lastModified         = models.DateTimeField(auto_now=True,default=timezone.now())
 	# type              = models.TextField()
 
 class Course(models.Model):
 	LEVELS    = ('HBO-B','HBO-M','WO-B','WO-M','WO-D')
 	LANGUAGES = ('nl','en','de')
 	name         = models.CharField(max_length=255,unique=True)
-	abbr         = models.CharField(max_length=32,primary_key=True)
+	abbr         = models.CharField(max_length=32,unique=True)
 	ects         = models.PositiveIntegerField()
 	description  = models.TextField()
 	goals        = models.TextField(blank=True,null=True)
@@ -131,18 +131,40 @@ class Course(models.Model):
 	department   = models.CharField(max_length=255,blank=True,null=True)
 	lecturers    = models.ForeignKey('Person',related_name='courses')
 	groups       = models.ManyToManyField('Group',related_name='courses')
-        lastUpdated  = models.DateTimeField(auto_now=True,default=timezone.now())
+        lastModified  = models.DateTimeField(auto_now=True,default=timezone.now())
 	
 	#	feeds   = models.ManyToManyField('Minor',related_name='courses')
-	
+
 class Lesson(models.Model):
 	start		= models.DateTimeField()
 	end 		= models.DateTimeField()
 	course		= models.ForeignKey('Course',related_name = 'lessons')
 	room 		= models.ForeignKey('Room', related_name = 'lessons')
 	description	= models.TextField(blank=True)
-	lastUpdated     = models.DateTimeField(auto_now=True,default=timezone.now())
+	lastModified    = models.DateTimeField(auto_now=True,default=timezone.now())
 
 #??
 class Minor(models.Model):
-	name = models.CharField(max_length=244,unique=True)
+	name        = models.CharField(max_length=255,unique=True)
+	description = models.TextField()
+	courses     = models.ManyToManyField('Course',related_name='minors')
+
+class TestResult(models.Model):
+	student       = models.ForeignKey('Person')
+	course        = models.ForeignKey('Course')
+	courseResult  = models.ForeignKey('CourseResult',blank=True,null=True,related_name='testResults')
+	description   = models.CharField(max_length=255)
+	lastModified  = models.DateTimeField(auto_now=True,default=timezone.now())
+	date          = models.DateField()
+	grade         = models.DecimalField(max_digits=3,decimal_places=2,blank=True,null=True)
+	result        = models.CharField(max_length=15,blank=True,null=True)
+	passed        = models.NullBooleanField()
+	weight        = models.DecimalField(max_digits=4,decimal_places=3)
+
+class CourseResult(models.Model):
+	student      = models.ForeignKey('Person')
+	course       = models.ForeignKey('Course')
+	lastModified = models.DateTimeField(auto_now=True,default=timezone.now())
+	grade        = models.DecimalField(max_digits=3,decimal_places=2,blank=True,null=True)
+	result       = models.CharField(blank=True,null=True,max_length=15)
+	passed       = models.NullBooleanField()
