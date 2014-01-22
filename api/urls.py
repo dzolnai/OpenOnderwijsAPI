@@ -44,7 +44,7 @@ person_detail = PersonViewSet.as_view({
 })
 
 person_me = PersonMeViewSet.as_view({
-    'get': 'list',
+    'get': 'retrieve',
 })
 
 person_detail_schedule = PersonScheduleViewSet.as_view({

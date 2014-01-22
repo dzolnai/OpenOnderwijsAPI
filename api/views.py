@@ -89,7 +89,7 @@ class PersonViewSet(viewsets.ModelViewSet):
 class PersonMeViewSet(viewsets.ModelViewSet):
 	model = Person
         serializer_class = PersonSerializer
-        def list(self, request):
+        def retrieve(self, request, pk = None):
             # Use it like this after installing authentication and session middlewares
             #  >>> current_user = request.user
             # You should create a connection between the django.contrib.auth.User object
@@ -100,7 +100,7 @@ class PersonMeViewSet(viewsets.ModelViewSet):
             #  >>> if request.user.is_authenticated():
             # Now we just test with displayName instead of username
             userName = "Dr. Bibber"
-            queryset = Person.objects.filter(displayName=userName) #here you could check to userName
+            queryset = Person.objects.get(displayName = userName) #here you could compare to a userName field
             serializer = PersonSerializer(queryset, context={'request': request})
             return Response(serializer.data)
         
