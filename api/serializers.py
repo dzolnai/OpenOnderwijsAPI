@@ -114,7 +114,7 @@ class CourseSerializer(serializers.HyperlinkedModelSerializer):
 		model = Course
 		#field = ('abbr','name','description','address','postalCode','city','lat','lon')
 
-class MinorSerializer(serializers.HyperlinkedModelSerializer):
+class MinorSerializer(WithPk, serializers.HyperlinkedModelSerializer):
 #	coourses = serializers.HyperlinkedRelatedField(view_name='course-detail')
 	class Meta:
 		model = Minor
@@ -132,13 +132,13 @@ class PaginatedLessonSerializer(CustomPaginationSerializer):
 
 """ Results """
 
-class TestResultSerializer(serializers.HyperlinkedModelSerializer):
+class TestResultSerializer(WithPk, serializers.HyperlinkedModelSerializer):
         student = serializers.HyperlinkedRelatedField(view_name='person-detail')
         course  = serializers.HyperlinkedRelatedField(view_name='course-detail')
         class Meta:
                 model = TestResult
 
-class CourseResultSerializer(serializers.HyperlinkedModelSerializer):
+class CourseResultSerializer(WithPk, serializers.HyperlinkedModelSerializer):
         student     = serializers.HyperlinkedRelatedField(view_name='person-detail')
         course      = serializers.HyperlinkedRelatedField(view_name='course-detail')
         testResults = serializers.HyperlinkedRelatedField(many=True,view_name='testresult-detail')
