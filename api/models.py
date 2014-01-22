@@ -148,6 +148,7 @@ class Minor(models.Model):
 	name        = models.CharField(max_length=255,unique=True)
 	description = models.TextField()
 	courses     = models.ManyToManyField('Course',related_name='minors')
+	lastModified = models.DateTimeField(auto_now=True,default=timezone.now())
 
 class TestResult(models.Model):
 	student       = models.ForeignKey('Person')
