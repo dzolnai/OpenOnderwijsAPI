@@ -15,7 +15,7 @@ from api.models import NewsItem,NewsFeed
 from api.serializers import NewsItemSerializer,NewsFeedSerializer
 
 from api.models import Person, Affiliation
-from api.serializers import PersonSerializer, AffiliationSerializer
+from api.serializers import PersonSerializer, PaginatedPersonSerializer, AffiliationSerializer
 
 from api.models import Group, GroupRole
 from api.serializers import GroupSerializer, GroupRoleSerializer
@@ -25,6 +25,8 @@ from api.serializers import BuildingSerializer, RoomSerializer
 
 from api.models import Lesson, Course
 from api.serializers import LessonSerializer, CourseSerializer, PaginatedLessonSerializer
+
+import search
 
 @api_view(('GET',))
 def api_root(request, format=None):
@@ -61,7 +63,29 @@ class PersonViewSet(viewsets.ModelViewSet):
 	queryset = Person.objects.all()
 	serializer_class = PersonSerializer
 	pagination_serializer_class = CustomPaginationSerializer
-
+        def list(self, request):
+            query_string = ''
+            entries = Person.objects.all()
+            if ('q' in request.GET) and request.GET['q'].strip():
+                query_string = request.GET['q']
+                # you can add additional fields if needed
+                entry_query = search.get_query(query_string, ['givenName', 'surName','displayName','mail','telephoneNumber','employeeID','studentID'])
+                entries = Person.objects.filter(entry_query)
+            # 5 persons / page
+            paginator = Paginator(entries, 5)
+            page = request.QUERY_PARAMS.get('page')
+            try:
+                paged_entries = paginator.page(page)
+            except PageNotAnInteger:
+                # If page is not an integer, deliver first page.
+                paged_entries = paginator.page(1)
+            except EmptyPage:
+                # If page is out of range (e.g. 9999),
+                # deliver last page of results.
+                paged_entries = paginator.page(paginator.num_pages)
+            serializer = PaginatedPersonSerializer(paged_entries, context={'request': request})
+            return Response(serializer.data)
+                
 class PersonScheduleViewSet(viewsets.ModelViewSet):
 	queryset = Lesson.objects.all()
 	serializer_class = LessonSerializer
