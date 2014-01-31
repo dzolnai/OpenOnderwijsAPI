@@ -66,6 +66,7 @@ class GroupSerializer(WithPk, serializers.HyperlinkedModelSerializer):
 		model = Group
 		fields = ('id','url','name','description','type','members','courses')
 
+
 """ Affiliations """
 class AffiliationSerializer(WithPk, serializers.HyperlinkedModelSerializer):
 	persons = serializers.HyperlinkedRelatedField(many=True, view_name='person-detail')
@@ -82,7 +83,11 @@ class PersonSerializer(WithPk, serializers.HyperlinkedModelSerializer):
 		fields = ('id','url','givenName','surName','displayName','affiliations',
 			'mail', 'telephoneNumber','mobileNumber','photo','gender',
 			'organisation','department','title','office','groups')
-                        
+
+class PaginatedPersonSerializer(CustomPaginationSerializer):
+	class Meta:
+            object_serializer_class = PersonSerializer
+            
 """ Buildings """
 class BuildingSerializer(WithPk, serializers.HyperlinkedModelSerializer):
 	class Meta:
@@ -95,7 +100,11 @@ class RoomSerializer(WithPk, serializers.HyperlinkedModelSerializer):
 	class Meta:
 		model = Room
 		depth = 1
-		#field = ('building','abbr','name','description','totalSeats','totalWorkspaces','availableWorkspaces')
+		field = ('building','abbr','name','description','totalSeats','totalWorkspaces','availableWorkspaces')
+                
+class PaginatedRoomSerializer(CustomPaginationSerializer):
+	class Meta:
+            object_serializer_class = RoomSerializer
 
 """ Courses """
 class CourseSerializer(serializers.HyperlinkedModelSerializer):
@@ -105,7 +114,7 @@ class CourseSerializer(serializers.HyperlinkedModelSerializer):
 		model = Course
 		#field = ('abbr','name','description','address','postalCode','city','lat','lon')
 
-class MinorSerializer(serializers.HyperlinkedModelSerializer):
+class MinorSerializer(WithPk, serializers.HyperlinkedModelSerializer):
 #	coourses = serializers.HyperlinkedRelatedField(view_name='course-detail')
 	class Meta:
 		model = Minor
@@ -123,16 +132,15 @@ class PaginatedLessonSerializer(CustomPaginationSerializer):
 
 """ Results """
 
-class TestResultSerializer(serializers.HyperlinkedModelSerializer):
-	student = serializers.HyperlinkedRelatedField(view_name='person-detail')
-	course  = serializers.HyperlinkedRelatedField(view_name='course-detail')
-	class Meta:
-		model = TestResult
+class TestResultSerializer(WithPk, serializers.HyperlinkedModelSerializer):
+        student = serializers.HyperlinkedRelatedField(view_name='person-detail')
+        course  = serializers.HyperlinkedRelatedField(view_name='course-detail')
+        class Meta:
+                model = TestResult
 
-class CourseResultSerializer(serializers.HyperlinkedModelSerializer):
-	student     = serializers.HyperlinkedRelatedField(view_name='person-detail')
-	course      = serializers.HyperlinkedRelatedField(view_name='course-detail')
-	testResults = serializers.HyperlinkedRelatedField(many=True,view_name='testresult-detail')
-	class Meta:
-		model = CourseResult
-
+class CourseResultSerializer(WithPk, serializers.HyperlinkedModelSerializer):
+        student     = serializers.HyperlinkedRelatedField(view_name='person-detail')
+        course      = serializers.HyperlinkedRelatedField(view_name='course-detail')
+        testResults = serializers.HyperlinkedRelatedField(many=True,view_name='testresult-detail')
+        class Meta:
+                model = CourseResult

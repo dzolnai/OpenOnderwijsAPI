@@ -193,6 +193,213 @@
     },
    {
       "fields":{
+         "description":"test 1",
+         "title":"feed 1"
+      },
+      "model":"api.newsfeed",
+      "pk":1
+   },
+   {
+      "fields":{
+         "description":"test 2",
+         "title":"feed 2"
+      },
+      "model":"api.newsfeed",
+      "pk":2
+   },
+   {
+      "fields":{
+         "affiliation":"student"
+      },
+      "model":"api.affiliation",
+      "pk":1
+   },
+   {
+      "fields":{
+         "affiliation":"faculty"
+      },
+      "model":"api.affiliation",
+      "pk":2
+   },
+   {
+      "fields":{
+         "affiliation":"staff"
+      },
+      "model":"api.affiliation",
+      "pk":3
+   },
+   {
+      "fields":{
+         "affiliation":"alum"
+      },
+      "model":"api.affiliation",
+      "pk":4
+   },
+   {
+      "fields":{
+         "affiliation":"member"
+      },
+      "model":"api.affiliation",
+      "pk":5
+   },
+   {
+      "fields":{
+         "affiliation":"affiliate"
+      },
+      "model":"api.affiliation",
+      "pk":6
+   },
+   {
+      "fields":{
+         "affiliation":"employee"
+      },
+      "model":"api.affiliation",
+      "pk":7
+   },
+   {
+      "fields":{
+         "affiliations":[
+            2,
+            5,
+            7
+         ],
+         "department":null,
+         "displayName":"dr. Basje",
+         "employeeID":null,
+         "gender":"M",
+         "givenName":"Bas",
+         "mail":"basje@harderwijk.edu",
+         "mobileNumber":null,
+         "office":null,
+         "organisation":null,
+         "photo":null,
+         "studentID":null,
+         "surName":"Zoetekouw",
+         "telephoneNumber":"+31301234567",
+         "title":null
+      },
+      "model":"api.person",
+      "pk":1
+   },
+   {
+      "fields":{
+         "affiliations":[
+            2,
+            4,
+            6,
+            7
+         ],
+         "department":null,
+         "displayName":"Dr. Bibber",
+         "employeeID":null,
+         "gender":"M",
+         "givenName":"Piet",
+         "mail":"bibber@harderwijk.edu",
+         "mobileNumber":null,
+         "office":null,
+         "organisation":null,
+         "photo":null,
+         "studentID":null,
+         "surName":"Bibber",
+         "telephoneNumber":null,
+         "title":null
+      },
+      "model":"api.person",
+      "pk":2
+   },
+   {
+      "fields":{
+         "description":"hallo een test groep",
+         "name":"test group",
+         "type":"?LesGroep"
+      },
+      "model":"api.group",
+      "pk":1
+   },
+   {
+      "fields":{
+         "description":"Kijk, nog 1",
+         "name":"Nog een andere group",
+         "type":"affiliation"
+      },
+      "model":"api.group",
+      "pk":2
+   },
+   {
+      "fields":{
+         "description":"hallo",
+         "name":"een derde groep",
+         "type":"Generic"
+      },
+      "model":"api.group",
+      "pk":3
+   },
+   {
+      "fields":{
+         "group":1,
+         "person":2,
+         "role":"member"
+      },
+      "model":"api.grouprole",
+      "pk":1
+   },
+   {
+      "fields":{
+         "group":2,
+         "person":2,
+         "role":"member"
+      },
+      "model":"api.grouprole",
+      "pk":2
+   },
+   {
+      "fields":{
+         "group":3,
+         "person":2,
+         "role":"member"
+      },
+      "model":"api.grouprole",
+      "pk":3
+   },
+   {
+      "fields":{
+         "group":3,
+         "person":1,
+         "role":"administrator"
+      },
+      "model":"api.grouprole",
+      "pk":4
+   },
+   {
+      "fields":{
+         "address":"Eiklaan 12",
+         "city":"Harderwijk",
+         "description":"Gebouw genoemd naar Albert Einstein.  Thuisbasis van de faculteit natuurkunde.",
+         "lat":"52.355133",
+         "lon":"5.616567",
+         "name":"Albert-Einsteingebouw",
+         "postalCode":"1114FG"
+      },
+      "model":"api.building",
+      "pk":"AEGB"
+   },
+   {
+      "fields":{
+         "address":"Eiklaan 14",
+         "city":"Harderwijk",
+         "description":"Gebouw genoemd naar George Washington.  Thuisbasis van de faculteit historie.",
+         "lat":"52.356133",
+         "lon":"5.617567",
+         "name":"Washingtongebouw",
+         "postalCode":"1234AB"
+      },
+      "model":"api.building",
+      "pk":"GWGB"
+   },
+   {
+      "fields":{
+         "name":"String theory",
+         "ects":1001,
          "abbr":"STRING413",
          "department":"Physics department",
          "description":"In physics, string theory is a theoretical framework in which the point-like particles of particle physics are replaced by one-dimensional objects called strings.",
@@ -208,7 +415,7 @@
          "organisation":"University of Harderwijk",
          "requirements":"Advanced Mathematics 401, Field Theory 401",
          "schedule":"wednesday mornings",
-         "url": null,
+         "link": null,
          "groups":[
             1
          ]
@@ -234,7 +441,7 @@
          "organisation":"Universiteit van Harderwijk",
          "requirements":"Algemene programmeerkennis, succesvol afgeronde cursus Introductie programmeren, en minimaal een 8 voor CPU architectures",
          "schedule":"maandag- en woensdagmiddag en vrijdag",
-         "url":null,
+         "link":null,
          "groups":[
             2,
             3
@@ -261,7 +468,7 @@
             "organisation": "Universiteit van Harderwijk",
             "requirements": "Een gezond verstand",
             "schedule": "Maandag-, dinsdag- en donderdagochtend van 8-12.",
-            "url": "",
+            "link": "",
             "groups":[
             ]
         },
@@ -286,7 +493,7 @@
             "organisation": "Universiteit van Harderwijk",
             "requirements": "Het is aan te raden eerst ABSTR101 met minimaal een 8 te hebben afgerond",
             "schedule": "Donderdagmiddag en vrijdag.  Veldwerk in week 17",
-            "url": "",
+            "link": "",
             "groups":[
             ]
         },
@@ -372,6 +579,30 @@
       },
       "model":"api.room",
       "pk":2
+   },
+   {
+      "fields":{
+         "name":"Room A12",
+         "building":"GWGB",
+         "description":"Room A12",
+         "totalSeats":48,
+         "totalWorkspaces":2,
+         "availableWorkspaces":2
+      },
+      "model":"api.room",
+      "pk":3
+   },
+   {
+      "fields":{
+         "name":"Room B7",
+         "building":"GWGB",
+         "description":"Room B7",
+         "totalSeats":80,
+         "totalWorkspaces":3,
+         "availableWorkspaces":1
+      },
+      "model":"api.room",
+      "pk":4
    },
    {
       "fields":{
