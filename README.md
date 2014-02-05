@@ -24,6 +24,8 @@ started, follow these steps:
 
     pip install django-rest-swagger
 
+    pip install python-dateutil
+
 * set up the databse
 
     python manage.py syncdb
