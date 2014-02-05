@@ -27,7 +27,7 @@ from api.models import Course, Minor
 from api.serializers import CourseSerializer, MinorSerializer
 
 from api.models import Lesson
-from api.serializers import LessonSerializer, CourseSerializer, PaginatedLessonSerializer
+from api.serializers import LessonSerializer, CourseSerializer, DetailedLessonSerializer, PaginatedDetailedLessonSerializer, PaginatedLessonSerializer
 
 import search
 
@@ -120,7 +120,7 @@ class PersonMeViewSet(viewsets.ModelViewSet):
         
 class PersonScheduleViewSet(viewsets.ModelViewSet):
 	queryset = Lesson.objects.all()
-	serializer_class = LessonSerializer
+	serializer_class = DetailedLessonSerializer
 	pagination_serializer_class = CustomPaginationSerializer
 	# Selects only the lessons which are related to the person with the id person_pk
 	def list(self, request, person_pk):
@@ -152,7 +152,7 @@ class PersonScheduleViewSet(viewsets.ModelViewSet):
                 # If page is out of range (e.g. 9999),
                 # deliver last page of results.
                 lessons = paginator.page(paginator.num_pages)
-            serializer = PaginatedLessonSerializer(lessons, context={'request': request})
+            serializer = PaginatedDetailedLessonSerializer(lessons, context={'request': request})
             return Response(serializer.data)
 	
 class GroupViewSet(viewsets.ModelViewSet):

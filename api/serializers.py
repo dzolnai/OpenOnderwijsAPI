@@ -107,7 +107,7 @@ class PaginatedRoomSerializer(CustomPaginationSerializer):
             object_serializer_class = RoomSerializer
 
 """ Courses """
-class CourseSerializer(serializers.HyperlinkedModelSerializer):
+class CourseSerializer(WithPk, serializers.HyperlinkedModelSerializer):
 	lessons = serializers.HyperlinkedRelatedField(many=True, view_name='lesson-detail')
 	minors  = serializers.HyperlinkedRelatedField(many=True, blank=True, view_name='minor-detail')
 	class Meta:
@@ -123,7 +123,16 @@ class MinorSerializer(WithPk, serializers.HyperlinkedModelSerializer):
 class LessonSerializer(WithPk, serializers.HyperlinkedModelSerializer):
 	class Meta:
 		model = Lesson
-		field = ('id','start','end','course','room','description')		
+                
+class DetailedLessonSerializer(WithPk, serializers.HyperlinkedModelSerializer):
+        course = CourseSerializer(read_only=True)
+        room = RoomSerializer(read_only=True)
+	class Meta:
+		model = Lesson		
+
+class PaginatedDetailedLessonSerializer(CustomPaginationSerializer):
+	class Meta:
+            object_serializer_class = DetailedLessonSerializer
 
 class PaginatedLessonSerializer(CustomPaginationSerializer):
 	class Meta:
