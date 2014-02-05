@@ -337,8 +337,23 @@ class TestResultViewSet(AuthenticatedViewSet):
 	serializer_class = TestResultSerializer
 	pagination_serializer_class = CustomPaginationSerializer
 
+
+class PersonTestResultViewSet(AuthenticatedViewSet):
+	serializer_class = TestResultSerializer
+	pagination_serializer_class = CustomPaginationSerializer
+	def get_queryset(self):
+	        person_pk = self.kwargs['person_pk']
+        	return TestResult.objects.filter(student=person_pk)
+
 class CourseResultViewSet(AuthenticatedViewSet):
+
 	queryset = CourseResult.objects.all()
 	serializer_class = CourseResultSerializer
 	pagination_serializer_class = CustomPaginationSerializer
-	
+
+class PersonCourseResultViewSet(AuthenticatedViewSet):
+	serializer_class = CourseResultSerializer
+	pagination_serializer_class = CustomPaginationSerializer
+	def get_queryset(self):
+	        person_pk = self.kwargs['person_pk']
+        	return CourseResult.objects.filter(student=person_pk)
