@@ -11,6 +11,7 @@ from api.views import CourseViewSet, MinorViewSet
 from api.views import PersonScheduleViewSet, GroupScheduleViewSet, RoomScheduleViewSet
 from api.views import CourseViewSet, LessonViewSet, CourseScheduleViewSet
 from api.views import TestResultViewSet, CourseResultViewSet
+from api.views import PersonTestResultViewSet, PersonCourseResultViewSet
 
 newsfeed_list = NewsFeedViewSet.as_view({
     'get': 'list',
@@ -51,6 +52,14 @@ person_me = PersonMeViewSet.as_view({
 
 person_detail_schedule = PersonScheduleViewSet.as_view({
 	'get': 'list',
+})
+
+person_detail_testresult = PersonTestResultViewSet.as_view({
+    'get': 'list',
+})
+
+person_detail_courseresult = PersonCourseResultViewSet.as_view({
+    'get': 'list',
 })
 
 group_list = GroupViewSet.as_view({
@@ -200,6 +209,8 @@ urlpatterns = patterns('api.views',
     url( r'^persons$',                                  person_list,            name='person-list'),
     url( r'^persons/(?P<pk>[0-9]+)$',                   person_detail,          name='person-detail'),
     url( r'^persons/(?P<person_pk>[0-9]+)/schedule$',	person_detail_schedule, name='person-detail-schedule'),
+    url( r'^persons/(?P<person_pk>[0-9]+)/testresults$',person_detail_testresult, name='person-detail-testresult'),
+    url( r'^persons/(?P<person_pk>[0-9]+)/courseresults$',person_detail_courseresult, name='person-detail-courseresult'),
     url( r'^persons/@me$',                              person_me,              name='person-me'),
     # affiliations should not be exposed """
     url( r'^affiliations$',                             affiliation_list,       name='affiliation-list'),
