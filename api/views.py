@@ -7,6 +7,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
+from rest_framework import permissions
 
 from api.pagination import CustomPaginationSerializer
 
@@ -51,25 +52,32 @@ def api_root(request, format=None):
 		'testresult'  : reverse('testresult-list', request=request, format=format),
 		'courseresult': reverse('courseresult-list', request=request, format=format),
 	})
-
-class NewsItemViewSet(viewsets.ModelViewSet):
+        
+class AuthenticatedViewSet(viewsets.ModelViewSet):
+    # replace the empty braces with the commented line to enable authentication on the whole API
+    permission_classes = [] #[permissions.IsAuthenticated]
+    # when authentication is enabled: 1. request an access token from /oauth2/access_token
+    # 2. include the access token in your request headers: --- Authorization: Bearer YOURTOKEN ---
+    
+class NewsItemViewSet(AuthenticatedViewSet):
 	queryset = NewsItem.objects.all()
 	serializer_class = NewsItemSerializer
 	pagination_serializer_class = CustomPaginationSerializer
 
-class NewsFeedViewSet(viewsets.ModelViewSet):
+class NewsFeedViewSet(AuthenticatedViewSet):
 	queryset = NewsFeed.objects.all()
 	serializer_class = NewsFeedSerializer
 	pagination_serializer_class = CustomPaginationSerializer
 
 
-class AffiliationViewSet(viewsets.ModelViewSet):
+class AffiliationViewSet(AuthenticatedViewSet):
 	queryset = Affiliation.objects.all()
 	serializer_class = AffiliationSerializer
 	pagination_serializer_class = CustomPaginationSerializer
 
-class PersonViewSet(viewsets.ModelViewSet):
+class PersonViewSet(AuthenticatedViewSet):
 	queryset = Person.objects.all()
+
 	serializer_class = PersonSerializer
 	pagination_serializer_class = CustomPaginationSerializer
         def list(self, request):
@@ -100,7 +108,7 @@ class PersonViewSet(viewsets.ModelViewSet):
             serializer = PaginatedPersonSerializer(paged_entries, context={'request': request})
             return Response(serializer.data)
  
-class PersonMeViewSet(viewsets.ModelViewSet):
+class PersonMeViewSet(AuthenticatedViewSet):
 	model = Person
         serializer_class = PersonSerializer
         def retrieve(self, request, pk = None):
@@ -118,7 +126,7 @@ class PersonMeViewSet(viewsets.ModelViewSet):
             serializer = PersonSerializer(queryset, context={'request': request})
             return Response(serializer.data)
         
-class PersonScheduleViewSet(viewsets.ModelViewSet):
+class PersonScheduleViewSet(AuthenticatedViewSet):
 	queryset = Lesson.objects.all()
 	serializer_class = DetailedLessonSerializer
 	pagination_serializer_class = CustomPaginationSerializer
@@ -155,12 +163,12 @@ class PersonScheduleViewSet(viewsets.ModelViewSet):
             serializer = PaginatedDetailedLessonSerializer(lessons, context={'request': request})
             return Response(serializer.data)
 	
-class GroupViewSet(viewsets.ModelViewSet):
+class GroupViewSet(AuthenticatedViewSet):
 	queryset = Group.objects.all()
 	serializer_class = GroupSerializer
 	pagination_serializer_class = CustomPaginationSerializer
 
-class GroupScheduleViewSet(viewsets.ModelViewSet):
+class GroupScheduleViewSet(AuthenticatedViewSet):
 	queryset = Lesson.objects.all()
 	serializer_class = LessonSerializer
 	pagination_serializer_class = CustomPaginationSerializer
@@ -198,22 +206,22 @@ class GroupScheduleViewSet(viewsets.ModelViewSet):
                 serializer = PaginatedLessonSerializer(lessons, context={'request': request})
 		return Response(serializer.data)
 
-class GroupRoleViewSet(viewsets.ModelViewSet):
+class GroupRoleViewSet(AuthenticatedViewSet):
 	queryset = GroupRole.objects.all()
 	serializer_class = GroupRoleSerializer
 	pagination_serializer_class = CustomPaginationSerializer
 
-class BuildingViewSet(viewsets.ModelViewSet):
+class BuildingViewSet(AuthenticatedViewSet):
 	queryset = Building.objects.all()
 	serializer_class = BuildingSerializer
 	pagination_serializer_class = CustomPaginationSerializer
 
-class RoomViewSet(viewsets.ModelViewSet):
+class RoomViewSet(AuthenticatedViewSet):
 	queryset = Room.objects.all()
 	serializer_class = RoomSerializer
 	pagination_serializer_class = CustomPaginationSerializer
 
-class BuildingRoomViewSet(viewsets.ModelViewSet):
+class BuildingRoomViewSet(AuthenticatedViewSet):
 	queryset = Room.objects.all()
 	serializer_class = RoomSerializer
 	pagination_serializer_class = CustomPaginationSerializer
@@ -234,7 +242,7 @@ class BuildingRoomViewSet(viewsets.ModelViewSet):
             serializer = PaginatedRoomSerializer(rooms, context={'request': request})
             return Response(serializer.data)
 
-class RoomScheduleViewSet(viewsets.ModelViewSet):
+class RoomScheduleViewSet(AuthenticatedViewSet):
 	queryset = Lesson.objects.all()
 	serializer_class = LessonSerializer
 	pagination_serializer_class = CustomPaginationSerializer
@@ -272,22 +280,22 @@ class RoomScheduleViewSet(viewsets.ModelViewSet):
 		return Response(serializer.data)
 		
 
-class CourseViewSet(viewsets.ModelViewSet):
+class CourseViewSet(AuthenticatedViewSet):
 	queryset = Course.objects.all()
 	serializer_class = CourseSerializer
 	pagination_serializer_class = CustomPaginationSerializer
 
-class MinorViewSet(viewsets.ModelViewSet):
+class MinorViewSet(AuthenticatedViewSet):
 	queryset = Minor.objects.all()
 	serializer_class = MinorSerializer
 	pagination_serializer_class = CustomPaginationSerializer
 
-class LessonViewSet(viewsets.ModelViewSet):
+class LessonViewSet(AuthenticatedViewSet):
 	queryset = Lesson.objects.all()
 	serializer_class = LessonSerializer
 	pagination_serializer_class = CustomPaginationSerializer
 	
-class CourseScheduleViewSet(viewsets.ModelViewSet):
+class CourseScheduleViewSet(AuthenticatedViewSet):
 	queryset = Lesson.objects.all()
 	serializer_class = LessonSerializer
 	pagination_serializer_class = CustomPaginationSerializer
@@ -324,12 +332,12 @@ class CourseScheduleViewSet(viewsets.ModelViewSet):
                 serializer = PaginatedLessonSerializer(lessons, context={'request': request})
 		return Response(serializer.data)
 		
-class TestResultViewSet(viewsets.ModelViewSet):
+class TestResultViewSet(AuthenticatedViewSet):
 	queryset = TestResult.objects.all()
 	serializer_class = TestResultSerializer
 	pagination_serializer_class = CustomPaginationSerializer
 
-class CourseResultViewSet(viewsets.ModelViewSet):
+class CourseResultViewSet(AuthenticatedViewSet):
 	queryset = CourseResult.objects.all()
 	serializer_class = CourseResultSerializer
 	pagination_serializer_class = CustomPaginationSerializer

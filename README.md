@@ -23,14 +23,26 @@ started, follow these steps:
     pip install djangorestframework
 
     pip install django-rest-swagger
+    
+    pip install django-oauth2-provider
 
 * set up the databse
 
     python manage.py syncdb
+    
+* when the program asks, create a superuser
 
 * start the local server
 
     python manage.py runserver
+    
+If you want OAuth2 authentication:
+
+* go to localhost:8000/admin
+
+* add a new OAuth2 client with the desired data.
+
+* now you can authenticate yourself. 
 
 At that point, you should be able to browse to http://localhost:8000/. This should show an overview of the available APIs.
 A somewhat more extensive API description can be found at http://localhost:8000/docs
