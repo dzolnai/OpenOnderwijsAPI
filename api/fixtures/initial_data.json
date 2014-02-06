@@ -179,19 +179,6 @@
         "pk": 4
     },
     {
-        "fields": {
-            "address": "Eiklaan 12",
-            "city": "Harderwijk",
-            "description": "Gebouw genoemd naar Albert Einstein.  Thuisbasis van de faculteit natuurkunde.",
-            "lat": "52.355133",
-            "lon": "5.616567",
-            "name": "Albert-Einsteingebouw",
-            "postalCode": "1114FG"
-        },
-        "model": "api.building",
-        "pk": "AEGB"
-    },
-   {
       "fields":{
          "description":"test 1",
          "title":"feed 1"
@@ -373,6 +360,7 @@
    {
       "fields":{
          "address":"Eiklaan 12",
+         "abbr": "AEGB",
          "city":"Harderwijk",
          "description":"Gebouw genoemd naar Albert Einstein.  Thuisbasis van de faculteit natuurkunde.",
          "lat":"52.355133",
@@ -381,11 +369,12 @@
          "postalCode":"1114FG"
       },
       "model":"api.building",
-      "pk":"AEGB"
+      "pk":1
    },
    {
       "fields":{
          "address":"Eiklaan 14",
+         "abbr": "GWGB",
          "city":"Harderwijk",
          "description":"Gebouw genoemd naar George Washington.  Thuisbasis van de faculteit historie.",
          "lat":"52.356133",
@@ -394,7 +383,7 @@
          "postalCode":"1234AB"
       },
       "model":"api.building",
-      "pk":"GWGB"
+      "pk":2
    },
    {
       "fields":{
@@ -559,7 +548,8 @@
    {
       "fields":{
          "name":"Room 100",
-         "building":"AEGB",
+         "abbr": "r100",
+         "building":1,
          "description":"Room 100",
          "totalSeats":21,
          "totalWorkspaces":10,
@@ -571,7 +561,8 @@
    {
       "fields":{
          "name":"Room 200",
-         "building":"AEGB",
+         "abbr": "r200",
+         "building":1,
          "description":"Room 200",
          "totalSeats":300,
          "totalWorkspaces":0,
@@ -583,7 +574,8 @@
    {
       "fields":{
          "name":"Room A12",
-         "building":"GWGB",
+         "abbr": "rA12",
+         "building":2,
          "description":"Room A12",
          "totalSeats":48,
          "totalWorkspaces":2,
@@ -595,7 +587,8 @@
    {
       "fields":{
          "name":"Room B7",
-         "building":"GWGB",
+         "abbr": "rB7",
+         "building":2,
          "description":"Room B7",
          "totalSeats":80,
          "totalWorkspaces":3,
