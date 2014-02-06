@@ -149,7 +149,7 @@ class TestResultSerializer(WithPk, serializers.HyperlinkedModelSerializer):
 
 class CourseResultSerializer(WithPk, serializers.HyperlinkedModelSerializer):
         student     = serializers.HyperlinkedRelatedField(view_name='person-detail')
-        course      = serializers.HyperlinkedRelatedField(view_name='course-detail')
+        course      = CourseSerializer(read_only=True)
         testResults = serializers.HyperlinkedRelatedField(many=True,view_name='testresult-detail')
         class Meta:
                 model = CourseResult
