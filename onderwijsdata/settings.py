@@ -123,8 +123,9 @@ INSTALLED_APPS = (
 	'rest_framework',
 	'rest_framework_swagger',
 	'api',
-	# Uncomment the next line to enable the admin:
-	# 'django.contrib.admin',
+        'provider',
+        'provider.oauth2',
+        'django.contrib.admin',
 	# Uncomment the next line to enable admin documentation:
 	# 'django.contrib.admindocs',
 )
@@ -169,7 +170,9 @@ REST_FRAMEWORK  = {
         'rest_framework.renderers.YAMLRenderer',
         'rest_framework.renderers.XMLRenderer',
     ),
-
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.OAuth2Authentication',
+    ),
 }
 
 SWAGGER_SETTINGS = {

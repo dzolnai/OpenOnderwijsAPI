@@ -101,7 +101,12 @@ class RoomSerializer(WithPk, serializers.HyperlinkedModelSerializer):
 		model = Room
 		depth = 1
 		field = ('building','abbr','name','description','totalSeats','totalWorkspaces','availableWorkspaces')
-                
+
+class RoomSummarySerializer(WithPk, serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Room
+        fields = ('id','abbr','name', 'url')
+        
 class PaginatedRoomSerializer(CustomPaginationSerializer):
 	class Meta:
             object_serializer_class = RoomSerializer
@@ -114,6 +119,11 @@ class CourseSerializer(WithPk, serializers.HyperlinkedModelSerializer):
 		model = Course
 		#field = ('abbr','name','description','address','postalCode','city','lat','lon')
 
+class CourseSummarySerializer(WithPk, serializers.HyperlinkedModelSerializer):
+	class Meta:
+		model = Course
+		fields = ('id','abbr','name', 'description', 'url')
+
 class MinorSerializer(WithPk, serializers.HyperlinkedModelSerializer):
 #	coourses = serializers.HyperlinkedRelatedField(view_name='course-detail')
 	class Meta:
@@ -121,9 +131,10 @@ class MinorSerializer(WithPk, serializers.HyperlinkedModelSerializer):
 
 """ Lessons """
 class LessonSerializer(WithPk, serializers.HyperlinkedModelSerializer):
-	class Meta:
+	room = RoomSummarySerializer(read_only=True)
+        course = CourseSummarySerializer(read_only=True)
+        class Meta:
 		model = Lesson
-		field = ('id','start','end','course','room','description')		
 
 class PaginatedLessonSerializer(CustomPaginationSerializer):
 	class Meta:
@@ -140,7 +151,7 @@ class TestResultSerializer(WithPk, serializers.HyperlinkedModelSerializer):
 
 class CourseResultSerializer(WithPk, serializers.HyperlinkedModelSerializer):
         student     = serializers.HyperlinkedRelatedField(view_name='person-detail')
-        course      = serializers.HyperlinkedRelatedField(view_name='course-detail')
+        course      = CourseSerializer(read_only=True)
         testResults = serializers.HyperlinkedRelatedField(many=True,view_name='testresult-detail')
         class Meta:
                 model = CourseResult
