@@ -641,10 +641,10 @@
       "fields":{
          "title":"Welcome",
          "author":"Abraham Lincoln",
-		 "pubDate":"1860-10-11T13:34:12.876Z",
+         "pubDate":"1860-10-11T13:34:12.876Z",
          "link":"http://www.surf.nl/",
          "content":"The problem with quotes on the Internet is that is is hard to verify their authenticity",
-		 "feeds": [ 1, 2]
+         "feeds": [ 1, 2]
       },
       "model":"api.newsitem",
       "pk":1
