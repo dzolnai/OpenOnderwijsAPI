@@ -599,8 +599,8 @@
    },
    {
       "fields":{
-         "start":"1997-07-16T19:30:00.000Z",
-         "end":"1997-07-16T21:30:00.000Z",
+         "start":"2013-02-14T10:30:00.000Z",
+         "end":"2013-02-14T12:30:00.000Z",
          "course":1,
          "room":1
       },
@@ -609,8 +609,8 @@
    },
    {
       "fields":{
-         "start":"1997-07-17T19:30:00.000Z",
-         "end":"1997-07-17T21:30:00.000Z",
+         "start":"2013-02-13T13:30:00.000Z",
+         "end":"2013-02-13T15:30:00.000Z",
          "course":1,
          "room":1
       },
@@ -619,12 +619,34 @@
    },
    {
       "fields":{
-         "start":"1997-07-18T19:30:00.000Z",
-         "end":"1997-07-18T21:30:00.000Z",
+         "start":"2013-02-13T19:30:00.000Z",
+         "end":"2013-02-13T21:30:00.000Z",
          "course":2,
          "room":2
       },
       "model":"api.lesson",
       "pk":3
+   },
+   {
+      "fields":{
+         "start":"2013-02-12T11:30:00.000Z",
+         "end":"2013-02-12T13:30:00.000Z",
+         "course":2,
+         "room":2
+      },
+      "model":"api.lesson",
+      "pk":3
+   },
+   {
+      "fields":{
+         "title":"Welcome",
+         "author":"Abraham Lincoln",
+         "pubDate":"1860-10-11T13:34:12.876Z",
+         "link":"http://www.surf.nl/",
+         "content":"The problem with quotes on the Internet is that is is hard to verify their authenticity",
+         "feeds": [ 1, 2]
+      },
+      "model":"api.newsitem",
+      "pk":1
    }
 ]
