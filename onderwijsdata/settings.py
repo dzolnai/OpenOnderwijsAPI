@@ -98,6 +98,7 @@ MIDDLEWARE_CLASSES = (
 	'django.middleware.csrf.CsrfViewMiddleware',
 	'django.contrib.auth.middleware.AuthenticationMiddleware',
 	'django.contrib.messages.middleware.MessageMiddleware',
+        'middleware.crossdomainxhr.XsSharingMiddleware',
 	# Uncomment the next line for simple clickjacking protection:
 	# 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
@@ -123,6 +124,7 @@ INSTALLED_APPS = (
 	'rest_framework',
 	'rest_framework_swagger',
 	'api',
+        'middleware',
         'provider',
         'provider.oauth2',
         'django.contrib.admin',
@@ -184,3 +186,8 @@ SWAGGER_SETTINGS = {
 	"is_authenticated": False,  # Set to True to enforce user authentication,
 	"is_superuser": False,  # Set to True to enforce admin only access
 }
+
+# Some default settings to allow the demo app to run from localhost and connect to the api.
+XS_SHARING_ALLOWED_ORIGINS = "http://localhost"
+XS_SHARING_ALLOWED_HEADERS = ['Content-Type', 'Authorization', '*']
+XS_SHARING_ALLOWED_METHODS = ['POST','GET','OPTIONS', 'PUT', 'DELETE']
