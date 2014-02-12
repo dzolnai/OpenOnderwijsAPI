@@ -4,6 +4,7 @@ from django.conf import settings
 Put this file in a directory called, eg, 'middleware,' inside your django
 project. Make sure to create an __init__.py file in the directory so it can
 be included as a module.
+This code is derived from: https://gist.github.com/prasanthn/5450772
  
 Set the values for
     XS_SHARING_ALLOWED_ORIGINS
