@@ -9,10 +9,12 @@ For more information, please contact bas.zoetekouw@surfnet.nl
 Getting started
 ---------------
 The API is implemented using Python and the Django REST framework.  To get
-started, follow these steps:
+started, follow these steps to create a self-contained, fully functional reference API:
 
 * install python (2.7) and python-virtualenv
-* set up a python environment: 
+* Clone this repository in e.g. ~/Sites/OpenOnderwijsAPI
+* cd ~/Sites/OpenOnderwijsAPI
+* set up a python environment by running these commands inside your clone: 
 
     virtualenv env
 
