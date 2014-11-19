@@ -1,5 +1,6 @@
 from django.utils import timezone
 from django.db import models
+from haystack.utils.geo import Point
 
 def selfzip(a):
 	return zip(a,a)
@@ -58,6 +59,9 @@ class Person(models.Model):
 	employeeID      = models.CharField(blank=True,null=True,max_length=255)  # only for affiliation=employee
 	studentID       = models.CharField(blank=True,null=True,max_length=255)  # only for affiliation=student
 	lastModified     = models.DateTimeField(auto_now=True,default=timezone.now())
+
+	def get_location(self):
+		return Point(self.lon, self.lat)
 	#cluster
 	#education
 	#klas  # LesGroep
