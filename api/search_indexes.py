@@ -7,6 +7,7 @@ class GeoIndex(indexes.SearchIndex):
 	text = indexes.CharField(document=True, use_template=True)
 	lat = indexes.DecimalField(model_attr='lat')
 	lon = indexes.DecimalField(model_attr='lon')
+	location = indexes.LocationField(model_attr='get_location')
 
 class PersonIndex(GeoIndex, indexes.SearchIndex, indexes.Indexable):
 	gender = indexes.CharField(model_attr='gender',null=True)
