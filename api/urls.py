@@ -37,8 +37,13 @@ newsitem_detail = NewsItemViewSet.as_view({
 
 person_list = PersonViewSet.as_view({
     'get': 'list',
-    'post': 'create'
+    'post': 'create',
 })
+
+person_list_nearby = PersonViewSet.as_view({
+    'get': 'nearby',
+})
+
 person_detail = PersonViewSet.as_view({
     'get': 'retrieve',
     'put': 'update',
@@ -103,6 +108,10 @@ affiliation_detail = AffiliationViewSet.as_view({
 building_list = BuildingViewSet.as_view({
     'get': 'list',
     'post': 'create'
+})
+
+building_list_nearby = BuildingViewSet.as_view({
+    'get': 'nearby',
 })
 
 building_detail = BuildingViewSet.as_view({
@@ -207,6 +216,7 @@ urlpatterns = patterns('api.views',
     url( r'^newsitems$',                                newsitem_list,          name='newsitem-list'),
     url( r'^newsitems/(?P<pk>[0-9]+)$',                 newsitem_detail,        name='newsitem-detail'),
     url( r'^persons$',                                  person_list,            name='person-list'),
+    url( r'^persons/nearby$',                           person_list_nearby,     name='person-list-nearby'),
     url( r'^persons/(?P<pk>[0-9]+)$',                   person_detail,          name='person-detail'),
     url( r'^persons/(?P<person_pk>[0-9]+)/schedule$',	person_detail_schedule, name='person-detail-schedule'),
     url( r'^persons/(?P<person_pk>[0-9]+)/testresults$',person_detail_testresult, name='person-detail-testresult'),
@@ -221,6 +231,7 @@ urlpatterns = patterns('api.views',
     url( r'^grouproles$',                               grouprole_list,         name='grouprole-list'),
     url( r'^grouproles/(?P<pk>[0-9]+)$',                grouprole_detail,       name='grouprole-detail'),
     url( r'^buildings$',                                building_list,          name='building-list'),
+    url( r'^buildings/nearby$',                         building_list_nearby,   name='building-list-nearby'),
     url( r'^buildings/(?P<pk>\w+)$',                    building_detail,        name='building-detail'),
     url( r'^buildings/(?P<building_pk>\w+)/rooms$',     building_detail_rooms,  name='building-detail-rooms'),
     url( r'^rooms$',                                    room_list,              name='room-list'),
