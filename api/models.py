@@ -61,7 +61,7 @@ class Person(models.Model):
 	lastModified     = models.DateTimeField(auto_now=True,default=timezone.now())
 
 	def get_location(self):
-		return Point(self.lon, self.lat)
+		return Point(float(self.lon), float(self.lat))
 	#cluster
 	#education
 	#klas  # LesGroep
@@ -104,6 +104,9 @@ class Building(models.Model):
 	lat         = models.DecimalField(max_digits=9,decimal_places=6)
 	lon         = models.DecimalField(max_digits=9,decimal_places=6)
 	lastModified = models.DateTimeField(auto_now=True,default=timezone.now())
+
+	def get_location(self):
+		return Point(float(self.lon), float(self.lat))
 
 class Room(models.Model):
 	building            = models.ForeignKey('Building',related_name='rooms')
