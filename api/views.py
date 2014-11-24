@@ -47,7 +47,7 @@ def api_root(request, format=None):
 		'newsfeeds' : reverse('newsfeed-list', request=request, format=format),
 		'newsitems' : reverse('newsitem-list', request=request, format=format),
 		'persons'   : reverse('person-list', request=request, format=format),
-        'persons-nearby': reverse('person-list-nearby', request=request, format=format),
+		'persons-nearby': reverse('person-list-nearby', request=request, format=format),
 		'groups'    : reverse('group-list', request=request, format=format),
 		'grouproles': reverse('grouprole-list', request=request, format=format),
 		'affiliations': reverse('affiliation-list', request=request, format=format),
