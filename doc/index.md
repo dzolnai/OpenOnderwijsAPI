@@ -4,7 +4,7 @@ Getting started with Open OnderwijsAPI
 ## Prerequisites
  
  * Python (2.7)
- * python-virtualenv [Install python-virtualenv](doc/installation/python-virtualenv.md)
+ * python-virtualenv [Install python-virtualenv](/doc/installation/python-virtualenv.md)
  * ElasticSearch (optional, only required for search functionality)
 
 ## Installation
@@ -57,5 +57,5 @@ APIs. A somewhat more extensive API description can be found at http://localhost
 
 ## Next Steps
 
-* [Enable OAuth2 Authentication](doc/installation/oauth2.md)
-* [Enable Search](doc/installation/search.md)
+* [Enable OAuth2 Authentication](/doc/installation/oauth2.md)
+* [Enable Search](/doc/installation/search.md)
