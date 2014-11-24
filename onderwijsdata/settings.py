@@ -123,9 +123,8 @@ INSTALLED_APPS = (
 	'django.contrib.staticfiles',
 	'rest_framework',
 	'rest_framework_swagger',
-    # Uncomment the next line to enable ElasticSearch support:
-    #'haystack',
 	'api',
+		'haystack',
         'middleware',
         'provider',
         'provider.oauth2',
