@@ -5,7 +5,7 @@ Getting started with Open OnderwijsAPI
  
  * Python (2.7)
  * python-virtualenv [Install python-virtualenv](doc/installation/python-virtualenv.md)
-
+ * ElasticSearch (optional, only required for search functionality)
 
 ## Installation
 

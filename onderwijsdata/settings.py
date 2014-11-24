@@ -198,7 +198,7 @@ XS_SHARING_ALLOWED_METHODS = ['POST','GET','OPTIONS', 'PUT', 'DELETE']
 HAYSTACK_CONNECTIONS = {
     'default': {
         'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
-        'URL': 'http://127.0.0.1:9200/',
-        'INDEX_NAME': 'onderwijsdata',
+        'URL': 'http://127.0.0.1:9200/', # Set to the address of your ElasticSearch host
+        'INDEX_NAME': 'onderwijsdata', # Set the the name of your index or alias
     },
 }
