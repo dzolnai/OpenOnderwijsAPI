@@ -202,3 +202,5 @@ HAYSTACK_CONNECTIONS = {
         'INDEX_NAME': 'onderwijsdata', # Set the the name of your index or alias
     },
 }
+
+HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
