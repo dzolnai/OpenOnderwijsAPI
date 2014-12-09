@@ -104,6 +104,7 @@ class Building(models.Model):
 	city        = models.CharField(max_length=255)
 	lat         = models.DecimalField(max_digits=9,decimal_places=6)
 	lon         = models.DecimalField(max_digits=9,decimal_places=6)
+	altitude            = models.DecimalField(max_digits=3,decimal_places=2,blank=True,null=True)
 	lastModified = models.DateTimeField(auto_now=True,default=timezone.now())
 
 	def get_location(self):
@@ -119,6 +120,8 @@ class Room(models.Model):
 	availableWorkspaces = models.PositiveIntegerField(blank=True,null=True)
 	lastModified         = models.DateTimeField(auto_now=True,default=timezone.now())
 	# type              = models.TextField()
+	lat             = models.DecimalField(max_digits=9,decimal_places=6)
+	lon             = models.DecimalField(max_digits=9,decimal_places=6)
 	altitude            = models.DecimalField(max_digits=3,decimal_places=2,blank=True,null=True)
 
 class Course(models.Model):
