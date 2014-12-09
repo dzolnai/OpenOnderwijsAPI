@@ -12,6 +12,6 @@ don't have pip installed and you do have easy_install on your system you can ins
 
 ## Install python-virtualenv
 
-    pip install python-virtualenv
+    pip install virtualenv
     
 *Depending on your system you may need to perform this command with ```sudo```*
