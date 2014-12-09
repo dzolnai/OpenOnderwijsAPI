@@ -47,6 +47,7 @@ class Person(models.Model):
 	""" Optional attributes """
 	lat             = models.DecimalField(max_digits=9,decimal_places=6)
 	lon             = models.DecimalField(max_digits=9,decimal_places=6)
+	altitude            = models.DecimalField(max_digits=3,decimal_places=2,blank=True,null=True)
 	mail            = models.EmailField(blank=True,null=True)
 	telephoneNumber = models.CharField(blank=True,null=True,max_length=32)  #models.TelephoneField() IETU E.123 
 	mobileNumber    = models.CharField(blank=True,null=True,max_length=32)  #models.TelephoneField()
@@ -118,6 +119,7 @@ class Room(models.Model):
 	availableWorkspaces = models.PositiveIntegerField(blank=True,null=True)
 	lastModified         = models.DateTimeField(auto_now=True,default=timezone.now())
 	# type              = models.TextField()
+	altitude            = models.DecimalField(max_digits=3,decimal_places=2,blank=True,null=True)
 
 class Course(models.Model):
 	LEVELS    = ('HBO-B','HBO-M','WO-B','WO-M','WO-D')
