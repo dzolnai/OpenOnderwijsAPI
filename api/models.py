@@ -1,5 +1,6 @@
 from django.utils import timezone
 from django.db import models
+from haystack.utils.geo import Point
 
 def selfzip(a):
 	return zip(a,a)
@@ -12,7 +13,7 @@ class NewsItem(models.Model):
 	link    = models.URLField()
 	content = models.TextField()
 	feeds   = models.ManyToManyField('NewsFeed',related_name='items')
-        lastModified =   models.DateTimeField(auto_now=True, default=timezone.now())
+	lastModified =   models.DateTimeField(auto_now=True, default=timezone.now())
 	class Meta:
 		ordering = ('pubDate',)
 
@@ -44,6 +45,9 @@ class Person(models.Model):
 	affiliations    = models.ManyToManyField('Affiliation',related_name='persons')
         
 	""" Optional attributes """
+	lat             = models.DecimalField(max_digits=9,decimal_places=6)
+	lon             = models.DecimalField(max_digits=9,decimal_places=6)
+	altitude            = models.DecimalField(max_digits=3,decimal_places=2,blank=True,null=True)
 	mail            = models.EmailField(blank=True,null=True)
 	telephoneNumber = models.CharField(blank=True,null=True,max_length=32)  #models.TelephoneField() IETU E.123 
 	mobileNumber    = models.CharField(blank=True,null=True,max_length=32)  #models.TelephoneField()
@@ -55,7 +59,10 @@ class Person(models.Model):
 	office          = models.ForeignKey('Room',blank=True,null=True)
 	employeeID      = models.CharField(blank=True,null=True,max_length=255)  # only for affiliation=employee
 	studentID       = models.CharField(blank=True,null=True,max_length=255)  # only for affiliation=student
-        lastModified     = models.DateTimeField(auto_now=True,default=timezone.now())
+	lastModified     = models.DateTimeField(auto_now=True,default=timezone.now())
+
+	def get_location(self):
+		return Point(float(self.lon), float(self.lat))
 	#cluster
 	#education
 	#klas  # LesGroep
@@ -68,7 +75,7 @@ class Group(models.Model):
 	type        = models.CharField(max_length=32,choices=selfzip(GROUP_TYPES))
 	name        = models.CharField(max_length=255)
 	description = models.TextField(blank=True,null=True)
-        lastModified = models.DateTimeField(auto_now=True,default=timezone.now())
+	lastModified = models.DateTimeField(auto_now=True,default=timezone.now())
 	#members     = models.ManyToManyField('Person',through='GroupRole')
 
 class GroupRole(models.Model):
@@ -97,7 +104,11 @@ class Building(models.Model):
 	city        = models.CharField(max_length=255)
 	lat         = models.DecimalField(max_digits=9,decimal_places=6)
 	lon         = models.DecimalField(max_digits=9,decimal_places=6)
-        lastModified = models.DateTimeField(auto_now=True,default=timezone.now())
+	altitude            = models.DecimalField(max_digits=3,decimal_places=2,blank=True,null=True)
+	lastModified = models.DateTimeField(auto_now=True,default=timezone.now())
+
+	def get_location(self):
+		return Point(float(self.lon), float(self.lat))
 
 class Room(models.Model):
 	building            = models.ForeignKey('Building',related_name='rooms')
@@ -107,8 +118,11 @@ class Room(models.Model):
 	totalSeats          = models.PositiveIntegerField(blank=True,null=True)
 	totalWorkspaces     = models.PositiveIntegerField(blank=True,null=True)
 	availableWorkspaces = models.PositiveIntegerField(blank=True,null=True)
-        lastModified         = models.DateTimeField(auto_now=True,default=timezone.now())
+	lastModified         = models.DateTimeField(auto_now=True,default=timezone.now())
 	# type              = models.TextField()
+	lat             = models.DecimalField(max_digits=9,decimal_places=6)
+	lon             = models.DecimalField(max_digits=9,decimal_places=6)
+	altitude            = models.DecimalField(max_digits=3,decimal_places=2,blank=True,null=True)
 
 class Course(models.Model):
 	LEVELS    = ('HBO-B','HBO-M','WO-B','WO-M','WO-D')
@@ -131,7 +145,7 @@ class Course(models.Model):
 	department   = models.CharField(max_length=255,blank=True,null=True)
 	lecturers    = models.ForeignKey('Person',related_name='courses')
 	groups       = models.ManyToManyField('Group',related_name='courses')
-        lastModified  = models.DateTimeField(auto_now=True,default=timezone.now())
+	lastModified  = models.DateTimeField(auto_now=True,default=timezone.now())
 	
 	#	feeds   = models.ManyToManyField('Minor',related_name='courses')
 

@@ -82,7 +82,7 @@ class PersonSerializer(WithPk, serializers.HyperlinkedModelSerializer):
 		model = Person
 		fields = ('id','url','givenName','surName','displayName','affiliations',
 			'mail', 'telephoneNumber','mobileNumber','photo','gender',
-			'organisation','department','title','office','groups')
+			'organisation','department','title','office','groups','lat','lon')
 
 class PaginatedPersonSerializer(CustomPaginationSerializer):
 	class Meta:

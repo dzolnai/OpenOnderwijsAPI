@@ -124,6 +124,7 @@ INSTALLED_APPS = (
 	'rest_framework',
 	'rest_framework_swagger',
 	'api',
+		'haystack',
         'middleware',
         'provider',
         'provider.oauth2',
@@ -191,3 +192,15 @@ SWAGGER_SETTINGS = {
 XS_SHARING_ALLOWED_ORIGINS = "http://localhost"
 XS_SHARING_ALLOWED_HEADERS = ['Content-Type', 'Authorization', '*']
 XS_SHARING_ALLOWED_METHODS = ['POST','GET','OPTIONS', 'PUT', 'DELETE']
+
+
+# Haystack config for ElasticSearch
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
+        'URL': 'http://127.0.0.1:9200/', # Set to the address of your ElasticSearch host
+        'INDEX_NAME': 'onderwijsdata', # Set the the name of your index or alias
+    },
+}
+
+HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'

@@ -84,7 +84,9 @@
             "studentID": null,
             "surName": "Zoetekouw",
             "telephoneNumber": "+31301234567",
-            "title": null
+            "title": null,
+            "lat":"52.355133",
+            "lon":"5.616567"
         },
         "model": "api.person",
         "pk": 1
@@ -110,7 +112,9 @@
             "studentID": null,
             "surName": "Bibber",
             "telephoneNumber": null,
-            "title": null
+            "title": null,
+            "lat":"52.355133",
+            "lon":"5.616567"
         },
         "model": "api.person",
         "pk": 2
@@ -185,65 +189,65 @@
       },
       "model":"api.newsfeed",
       "pk":1
-   },
-   {
+    },
+    {
       "fields":{
          "description":"test 2",
          "title":"feed 2"
       },
       "model":"api.newsfeed",
       "pk":2
-   },
-   {
+    },
+    {
       "fields":{
          "affiliation":"student"
       },
       "model":"api.affiliation",
       "pk":1
-   },
-   {
+    },
+    {
       "fields":{
          "affiliation":"faculty"
       },
       "model":"api.affiliation",
       "pk":2
-   },
-   {
+    },
+    {
       "fields":{
          "affiliation":"staff"
       },
       "model":"api.affiliation",
       "pk":3
-   },
-   {
+    },
+    {
       "fields":{
          "affiliation":"alum"
       },
       "model":"api.affiliation",
       "pk":4
-   },
-   {
+    },
+    {
       "fields":{
          "affiliation":"member"
       },
       "model":"api.affiliation",
       "pk":5
-   },
-   {
+    },
+    {
       "fields":{
          "affiliation":"affiliate"
       },
       "model":"api.affiliation",
       "pk":6
-   },
-   {
+    },
+    {
       "fields":{
          "affiliation":"employee"
       },
       "model":"api.affiliation",
       "pk":7
-   },
-   {
+    },
+    {
       "fields":{
          "affiliations":[
             2,
@@ -263,12 +267,14 @@
          "studentID":null,
          "surName":"Zoetekouw",
          "telephoneNumber":"+31301234567",
-         "title":null
+         "title":null,
+         "lat":"52.355133",
+         "lon":"5.616567"
       },
       "model":"api.person",
       "pk":1
-   },
-   {
+    },
+    {
       "fields":{
          "affiliations":[
             2,
@@ -289,12 +295,14 @@
          "studentID":null,
          "surName":"Bibber",
          "telephoneNumber":null,
-         "title":null
+         "title":null,
+         "lat":"52.355133",
+         "lon":"5.616567"
       },
       "model":"api.person",
       "pk":2
-   },
-   {
+    },
+    {
       "fields":{
          "description":"hallo een test groep",
          "name":"test group",
@@ -302,8 +310,8 @@
       },
       "model":"api.group",
       "pk":1
-   },
-   {
+    },
+    {
       "fields":{
          "description":"Kijk, nog 1",
          "name":"Nog een andere group",
@@ -311,8 +319,8 @@
       },
       "model":"api.group",
       "pk":2
-   },
-   {
+    },
+    {
       "fields":{
          "description":"hallo",
          "name":"een derde groep",
@@ -320,8 +328,8 @@
       },
       "model":"api.group",
       "pk":3
-   },
-   {
+    },
+    {
       "fields":{
          "group":1,
          "person":2,
@@ -329,8 +337,8 @@
       },
       "model":"api.grouprole",
       "pk":1
-   },
-   {
+    },
+    {
       "fields":{
          "group":2,
          "person":2,
@@ -338,8 +346,8 @@
       },
       "model":"api.grouprole",
       "pk":2
-   },
-   {
+    },
+    {
       "fields":{
          "group":3,
          "person":2,
@@ -347,8 +355,8 @@
       },
       "model":"api.grouprole",
       "pk":3
-   },
-   {
+    },
+    {
       "fields":{
          "group":3,
          "person":1,
@@ -356,8 +364,8 @@
       },
       "model":"api.grouprole",
       "pk":4
-   },
-   {
+    },
+    {
       "fields":{
          "address":"Eiklaan 12",
          "abbr": "AEGB",
@@ -370,8 +378,8 @@
       },
       "model":"api.building",
       "pk":1
-   },
-   {
+    },
+    {
       "fields":{
          "address":"Eiklaan 14",
          "abbr": "GWGB",
@@ -384,8 +392,8 @@
       },
       "model":"api.building",
       "pk":2
-   },
-   {
+    },
+    {
       "fields":{
          "name":"String theory",
          "ects":1001,
@@ -411,8 +419,8 @@
       },
       "model":"api.course",
       "pk":1
-   },
-   {
+    },
+    {
       "fields":{
          "abbr":"CSPROGCPU1",
          "department":"CG department",
@@ -438,8 +446,8 @@
       },
       "model":"api.course",
       "pk":2
-   },   
-   {
+    },
+    {
         "fields": {
             "abbr": "ABSTR101",
             "department": "Logica",
@@ -544,8 +552,8 @@
         },
         "model": "api.courseresult",
         "pk": 1
-   },
-   {
+    },
+    {
       "fields":{
          "name":"Room 100",
          "abbr": "r100",
@@ -557,8 +565,8 @@
       },
       "model":"api.room",
       "pk":1
-   },
-   {
+    },
+    {
       "fields":{
          "name":"Room 200",
          "abbr": "r200",
@@ -570,8 +578,8 @@
       },
       "model":"api.room",
       "pk":2
-   },
-   {
+    },
+    {
       "fields":{
          "name":"Room A12",
          "abbr": "rA12",
@@ -583,8 +591,8 @@
       },
       "model":"api.room",
       "pk":3
-   },
-   {
+    },
+    {
       "fields":{
          "name":"Room B7",
          "abbr": "rB7",
@@ -596,8 +604,8 @@
       },
       "model":"api.room",
       "pk":4
-   },
-   {
+    },
+    {
       "fields":{
          "start":"2013-02-14T10:30:00.000Z",
          "end":"2013-02-14T12:30:00.000Z",
@@ -606,8 +614,8 @@
       },
       "model":"api.lesson",
       "pk":1
-   },
-   {
+    },
+    {
       "fields":{
          "start":"2013-02-13T13:30:00.000Z",
          "end":"2013-02-13T15:30:00.000Z",
@@ -616,8 +624,8 @@
       },
       "model":"api.lesson",
       "pk":2
-   },
-   {
+    },
+    {
       "fields":{
          "start":"2013-02-13T19:30:00.000Z",
          "end":"2013-02-13T21:30:00.000Z",
@@ -626,8 +634,8 @@
       },
       "model":"api.lesson",
       "pk":3
-   },
-   {
+    },
+    {
       "fields":{
          "start":"2013-02-12T11:30:00.000Z",
          "end":"2013-02-12T13:30:00.000Z",
@@ -636,8 +644,8 @@
       },
       "model":"api.lesson",
       "pk":3
-   },
-   {
+    },
+    {
       "fields":{
          "title":"Welcome",
          "author":"Abraham Lincoln",
@@ -648,5 +656,5 @@
       },
       "model":"api.newsitem",
       "pk":1
-   }
+    }
 ]

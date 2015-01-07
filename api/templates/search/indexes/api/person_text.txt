@@ -1,0 +1,17 @@
+{{ object.givenName }}
+{{ object.surName }}
+{{ object.displayName }}
+{{ object.lat }}
+{{ object.lon }}
+{{ object.mail }}
+{{ object.telephoneNumber }}
+{{ object.mobileNumber }}
+{{ object.photo }}
+{{ object.gender }}
+{{ object.organisation }}
+{{ object.department }}
+{{ object.title }}
+{{ object.office }}
+{{ object.employeeID }}
+{{ object.studentID }}
+{{ object.lastModified }}

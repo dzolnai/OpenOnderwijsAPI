@@ -5,6 +5,7 @@ import dateutil.tz as tz
 import dateutil.parser as parser
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from rest_framework.decorators import api_view
+from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
 from rest_framework import permissions
@@ -35,16 +36,23 @@ import search
 from api.models import TestResult, CourseResult
 from api.serializers import TestResultSerializer, CourseResultSerializer
 
+from haystack.query import SearchQuerySet
+from haystack.utils.geo import Point, D
+
+import logging
+
 @api_view(('GET',))
 def api_root(request, format=None):
 	return Response({
 		'newsfeeds' : reverse('newsfeed-list', request=request, format=format),
 		'newsitems' : reverse('newsitem-list', request=request, format=format),
 		'persons'   : reverse('person-list', request=request, format=format),
+		'persons-nearby': reverse('person-list-nearby', request=request, format=format),
 		'groups'    : reverse('group-list', request=request, format=format),
 		'grouproles': reverse('grouprole-list', request=request, format=format),
 		'affiliations': reverse('affiliation-list', request=request, format=format),
 		'buildings' : reverse('building-list', request=request, format=format),
+		'buildings-nearby': reverse('building-list-nearby', request=request, format=format),
 		'rooms'     : reverse('room-list', request=request, format=format),
 		'courses'   : reverse('course-list', request=request, format=format),
                 'schedule'  : reverse('lesson-list', request=request, format=format),
@@ -80,6 +88,19 @@ class PersonViewSet(AuthenticatedViewSet):
 
 	serializer_class = PersonSerializer
 	pagination_serializer_class = CustomPaginationSerializer
+        def nearby(self, request):
+            radius = 200
+            if 'll' in request.GET:
+                lat_lon = [float(x) for x in request.GET['ll'].split(',', 2)]
+                location = Point(lat_lon)
+            else:
+                return Response(status=status.HTTP_400_BAD_REQUEST)
+            if 'r' in request.GET:
+                radius = request.GET['r']
+            results = SearchQuerySet().models(Person).dwithin('location', location, D(m=radius))
+            serializer = PersonSerializer([q.object for q in results], many=True, context={'request': request})
+            return Response(serializer.data)
+
         def list(self, request):
             query_string = ''
             entries = Person.objects.all()
@@ -215,6 +236,18 @@ class BuildingViewSet(AuthenticatedViewSet):
 	queryset = Building.objects.all()
 	serializer_class = BuildingSerializer
 	pagination_serializer_class = CustomPaginationSerializer
+        def nearby(self, request):
+            radius = 200
+            if 'll' in request.GET:
+                lat_lon = [float(x) for x in request.GET['ll'].split(',', 2)]
+                location = Point(lat_lon)
+            else:
+                return Response(status=status.HTTP_400_BAD_REQUEST)
+            if 'r' in request.GET:
+                radius = request.GET['r']
+            results = SearchQuerySet().models(Building).dwithin('location', location, D(m=radius))
+            serializer = BuildingSerializer([q.object for q in results], many=True, context={'request': request})
+            return Response(serializer.data)
 
 class RoomViewSet(AuthenticatedViewSet):
 	queryset = Room.objects.all()
