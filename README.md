@@ -1,10 +1,10 @@
 Open OnderwijsAPI
 =================
 
-This project is a reference implementatie of the Open Educational API, which is
+This project is a reference implementation of the Open Educational API, which is
 currently being developed by SURFnet.
 
-For more information, please contact bas.zoetekouw@surfnet.nl
+For more information, please contact frans.ward@surfnet.nl
 
 ## Documentation
 
