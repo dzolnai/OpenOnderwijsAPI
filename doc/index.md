@@ -40,6 +40,10 @@ First ensure your current working directory is the one you just created during t
     
     pip install haystack
     
+If using ElasticSearch you'll also need to install the python lib:
+
+    pip install elasticsearch
+
 ### Step 4: Setup database
 
     python manage.py syncdb
