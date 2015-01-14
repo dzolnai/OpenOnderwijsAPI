@@ -14,7 +14,7 @@ started, follow these steps to create a self-contained, fully functional referen
 
 ### Step 1: Clone repository
 
-    git clone https://github.com/haswalt/OpenOnderwijsAPI.git OpenOnderwijsAPI
+    git clone https://github.com/SURFnet/OpenOnderwijsAPI.git OpenOnderwijsAPI
     
 ### Step 2: Setup python environment 
 
@@ -38,7 +38,7 @@ First ensure your current working directory is the one you just created during t
 
     pip install python-dateutil
     
-    pip install haystack
+    pip install django-haystack
     
 ### Step 4: Setup database
 
