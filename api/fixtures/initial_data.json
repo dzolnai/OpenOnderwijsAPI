@@ -561,7 +561,9 @@
          "description":"Room 100",
          "totalSeats":21,
          "totalWorkspaces":10,
-         "availableWorkspaces":10
+         "availableWorkspaces":10,
+         "lat":"52.355133",
+         "lon":"5.616567"
       },
       "model":"api.room",
       "pk":1
@@ -574,7 +576,9 @@
          "description":"Room 200",
          "totalSeats":300,
          "totalWorkspaces":0,
-         "availableWorkspaces":0
+         "availableWorkspaces":0,
+         "lat":"52.355133",
+         "lon":"5.616567"
       },
       "model":"api.room",
       "pk":2
@@ -587,7 +591,9 @@
          "description":"Room A12",
          "totalSeats":48,
          "totalWorkspaces":2,
-         "availableWorkspaces":2
+         "availableWorkspaces":2,
+         "lat":"52.355133",
+         "lon":"5.616567"
       },
       "model":"api.room",
       "pk":3
@@ -600,7 +606,9 @@
          "description":"Room B7",
          "totalSeats":80,
          "totalWorkspaces":3,
-         "availableWorkspaces":1
+         "availableWorkspaces":1,
+         "lat":"52.355133",
+         "lon":"5.616567"
       },
       "model":"api.room",
       "pk":4
