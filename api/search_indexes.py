@@ -22,7 +22,7 @@ class PersonIndex(GeoIndex, indexes.SearchIndex, indexes.Indexable):
 		return Person
 
 class BuildingIndex(GeoIndex, indexes.SearchIndex, indexes.Indexable):
-	abbr = indexes.CharField(model_attr='abbr')
+	abbr = indexes.CharField(model_attr='abbreviation')
 	name = indexes.CharField(model_attr='name')
 	address = indexes.CharField(model_attr='address')
 	postalCode = indexes.CharField(model_attr='postalCode')

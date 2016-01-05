@@ -22,7 +22,7 @@ class NewsItemSerializer(WithPk, serializers.HyperlinkedModelSerializer):
 	feeds = serializers.HyperlinkedRelatedField(many=True, view_name='newsfeed-detail')
 	class Meta:
 		model = NewsItem
-		fields = ('id','url','feeds','pubDate','title','author','image','link','content')
+		fields = ('newsitemId','url','feeds','pubDate','title','author','image','link','content')
 
 """ News feeds """
 class NewsFeedSerializer(WithPk, serializers.HyperlinkedModelSerializer):
