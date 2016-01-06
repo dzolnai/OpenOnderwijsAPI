@@ -22,7 +22,7 @@ class NewsItemSerializer(WithPk, serializers.HyperlinkedModelSerializer):
 	feeds = serializers.HyperlinkedRelatedField(many=True, view_name='newsfeed-detail')
 	class Meta:
 		model = NewsItem
-		fields = ('newsitemId','url','feeds','pubDate','title','author','image','link','content')
+		fields = ('newsitemId','feeds','publishDate','title','authors','image','link','content')
 
 """ News feeds """
 class NewsFeedSerializer(WithPk, serializers.HyperlinkedModelSerializer):
@@ -31,14 +31,14 @@ class NewsFeedSerializer(WithPk, serializers.HyperlinkedModelSerializer):
 	updated = serializers.Field(source='last_updated')
 	class Meta:
 		model = NewsFeed
-		fields = ('id','url','title','description','updated','items')
+		fields = ('newsfeedId','title','description','updated','items')
 
 
 """ Group roles """
 class GroupRoleSerializer(WithPk, serializers.HyperlinkedModelSerializer):
 	class Meta:
 		model = GroupRole
-		fields = ('id','group','person','role')
+		fields = ('grouproleId','group','person','roles')
 
 class GroupRoleSerializerPerson(WithPk, serializers.HyperlinkedModelSerializer):
 	group     = serializers.HyperlinkedRelatedField(view_name='group-detail',read_only=True)
@@ -46,7 +46,7 @@ class GroupRoleSerializerPerson(WithPk, serializers.HyperlinkedModelSerializer):
 	groupType   = serializers.Field(source='groupType')
 	class Meta:
 		model = GroupRole
-		fields = ('id','group','groupName','groupType','role')
+		fields = ('grouproleId','group','groupName','groupType','roles')
 
 class GroupRoleSerializerGroup(WithPk, serializers.HyperlinkedModelSerializer):
 	person      = serializers.HyperlinkedRelatedField(view_name='person-detail',read_only=True)
@@ -55,7 +55,7 @@ class GroupRoleSerializerGroup(WithPk, serializers.HyperlinkedModelSerializer):
 
 	class Meta:
 		model = GroupRole
-		fields = ('id', 'person','displayName','groupType','role')
+		fields = ('grouproleId', 'person','displayName','groupType','roles')
 
 		
 """ Groups """	
@@ -64,7 +64,7 @@ class GroupSerializer(WithPk, serializers.HyperlinkedModelSerializer):
 	courses = serializers.HyperlinkedRelatedField(many=True, view_name='course-detail')
 	class Meta:
 		model = Group
-		fields = ('id','url','name','description','type','members','courses')
+		fields = ('groupId','name','description','type','members','courses')
 
 
 """ Affiliations """
@@ -80,9 +80,9 @@ class PersonSerializer(WithPk, serializers.HyperlinkedModelSerializer):
 	groups = GroupRoleSerializerPerson(many=True,read_only=True)
 	class Meta:
 		model = Person
-		fields = ('id','url','givenName','surName','displayName','affiliations',
-			'mail', 'telephoneNumber','mobileNumber','photo','gender',
-			'organisation','department','title','office','groups','lat','lon')
+		fields = ('userId','givenname','surname','displayname','affiliations',
+			'mail', 'telephonenumber','mobilenumber','photoSocial','photoOfficial','gender',
+			'organization','department','title','office','groups','lat','lon')
 
 class PaginatedPersonSerializer(CustomPaginationSerializer):
 	class Meta:
@@ -100,12 +100,12 @@ class RoomSerializer(WithPk, serializers.HyperlinkedModelSerializer):
 	class Meta:
 		model = Room
 		depth = 1
-		field = ('building','abbr','name','description','totalSeats','totalWorkspaces','availableWorkspaces')
+		field = ('building','abbreviation','name','description','totalSeats','totalWorkspaces','availableWorkspaces')
 
 class RoomSummarySerializer(WithPk, serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Room
-        fields = ('id','abbr','name', 'url')
+        fields = ('roomId','abbreviation','name')
         
 class PaginatedRoomSerializer(CustomPaginationSerializer):
 	class Meta:
@@ -122,7 +122,7 @@ class CourseSerializer(WithPk, serializers.HyperlinkedModelSerializer):
 class CourseSummarySerializer(WithPk, serializers.HyperlinkedModelSerializer):
 	class Meta:
 		model = Course
-		fields = ('id','abbr','name', 'description', 'url')
+		fields = ('courseId','abbreviation','name', 'description', 'link')
 
 class MinorSerializer(WithPk, serializers.HyperlinkedModelSerializer):
 #	coourses = serializers.HyperlinkedRelatedField(view_name='course-detail')

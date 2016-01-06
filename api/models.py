@@ -174,7 +174,7 @@ class Course(models.Model):
     exams = models.TextField(blank=True, null=True)
     schedule = models.TextField(blank=True, null=True)
     link = models.URLField(blank=True, null=True)
-    organisation = models.CharField(max_length=255, blank=True, null=True)
+    organization = models.CharField(max_length=255, blank=True, null=True)
     department = models.CharField(max_length=255, blank=True, null=True)
     lecturers = models.ForeignKey('Person', related_name='courses')
     groups = models.ManyToManyField('Group', related_name='courses')

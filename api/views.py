@@ -108,7 +108,7 @@ class PersonViewSet(AuthenticatedViewSet):
             if ('q' in request.GET) and request.GET['q'].strip():
                 query_string = request.GET['q']
                 # you can add additional fields if needed
-                entry_query = search.get_query(query_string, ['givenName', 'surName','displayName','mail','telephoneNumber','employeeID','studentID'])
+                entry_query = search.get_query(query_string, ['givenname', 'surname','displayname','mail','telephonenumber'])
                 entries = entries.filter(entry_query)
             # Affiliation filter
             if ('affiliation' in request.GET):
@@ -143,7 +143,7 @@ class PersonMeViewSet(AuthenticatedViewSet):
             #  >>> if request.user.is_authenticated():
             # Now we just test with displayName instead of username
             userName = "Dr. Bibber"
-            queryset = Person.objects.get(displayName = userName) #here you could compare to a userName field
+            queryset = Person.objects.get(displayname = userName) #here you could compare to a userName field
             serializer = PersonSerializer(queryset, context={'request': request})
             return Response(serializer.data)
         

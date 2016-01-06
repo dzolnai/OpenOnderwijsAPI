@@ -1,4 +1,4 @@
-{{ object.abbr }}
+{{ object.abbreviation }}
 {{ object.name }}
 {{ object.description }}
 {{ object.address }}

@@ -72,18 +72,19 @@
                 7
             ],
             "department": null,
-            "displayName": "dr. Basje",
-            "employeeID": null,
+            "displayname": "dr. Basje",
+//            "employeeID": null,
             "gender": "M",
-            "givenName": "Bas",
+            "givenname": "Bas",
             "mail": "basje@harderwijk.edu",
-            "mobileNumber": null,
+            "mobilenumber": null,
             "office": null,
-            "organisation": null,
-            "photo": null,
-            "studentID": null,
-            "surName": "Zoetekouw",
-            "telephoneNumber": "+31301234567",
+            "organization": null,
+            "photoSocial": null,
+            "photoOfficial": null,
+//            "studentID": null,
+            "surname": "Zoetekouw",
+            "telephonenumber": "+31301234567",
             "title": null,
             "lat":"52.355133",
             "lon":"5.616567"
@@ -100,18 +101,19 @@
                 7
             ],
             "department": null,
-            "displayName": "Dr. Bibber",
-            "employeeID": null,
+            "displayname": "Dr. Bibber",
+//            "employeeID": null,
             "gender": "M",
-            "givenName": "Piet",
+            "givenname": "Piet",
             "mail": "bibber@harderwijk.edu",
-            "mobileNumber": null,
+            "mobilenumber": null,
             "office": null,
-            "organisation": null,
-            "photo": null,
-            "studentID": null,
-            "surName": "Bibber",
-            "telephoneNumber": null,
+            "organization": null,
+            "photoSocial": null,
+            "photoOfficial": null,
+//            "studentID": null,
+            "surname": "Bibber",
+            "telephonenumber": null,
             "title": null,
             "lat":"52.355133",
             "lon":"5.616567"
@@ -159,7 +161,7 @@
         "fields": {
             "group": 2,
             "person": 2,
-            "role": "member"
+            "roles": "member"
         },
         "model": "api.grouprole",
         "pk": 2
@@ -168,7 +170,7 @@
         "fields": {
             "group": 3,
             "person": 2,
-            "role": "member"
+            "roles": "member"
         },
         "model": "api.grouprole",
         "pk": 3
@@ -177,7 +179,7 @@
         "fields": {
             "group": 3,
             "person": 1,
-            "role": "administrator"
+            "roles": "administrator"
         },
         "model": "api.grouprole",
         "pk": 4
@@ -255,18 +257,19 @@
             7
          ],
          "department":null,
-         "displayName":"dr. Basje",
-         "employeeID":null,
+         "displayname":"dr. Basje",
+//         "employeeID":null,
          "gender":"M",
-         "givenName":"Bas",
+         "givenname":"Bas",
          "mail":"basje@harderwijk.edu",
-         "mobileNumber":null,
+         "mobilenumber":null,
          "office":null,
-         "organisation":null,
-         "photo":null,
-         "studentID":null,
-         "surName":"Zoetekouw",
-         "telephoneNumber":"+31301234567",
+         "organization":null,
+         "photoSocial": null,
+         "photoOfficial": null,
+//         "studentID":null,
+         "surname":"Zoetekouw",
+         "telephonenumber":"+31301234567",
          "title":null,
          "lat":"52.355133",
          "lon":"5.616567"
@@ -283,18 +286,19 @@
             7
          ],
          "department":null,
-         "displayName":"Dr. Bibber",
-         "employeeID":null,
+         "displayname":"Dr. Bibber",
+//         "employeeID":null,
          "gender":"M",
          "givenName":"Piet",
          "mail":"bibber@harderwijk.edu",
-         "mobileNumber":null,
+         "mobilenumber":null,
          "office":null,
-         "organisation":null,
-         "photo":null,
-         "studentID":null,
-         "surName":"Bibber",
-         "telephoneNumber":null,
+         "organization":null,
+         "photoSocial": null,
+         "photoOfficial": null,
+//         "studentID":null,
+         "surname":"Bibber",
+         "telephonenumber":null,
          "title":null,
          "lat":"52.355133",
          "lon":"5.616567"
@@ -333,7 +337,7 @@
       "fields":{
          "group":1,
          "person":2,
-         "role":"member"
+         "roles":"member"
       },
       "model":"api.grouprole",
       "pk":1
@@ -342,7 +346,7 @@
       "fields":{
          "group":2,
          "person":2,
-         "role":"member"
+         "roles":"member"
       },
       "model":"api.grouprole",
       "pk":2
@@ -351,7 +355,7 @@
       "fields":{
          "group":3,
          "person":2,
-         "role":"member"
+         "roles":"member"
       },
       "model":"api.grouprole",
       "pk":3
@@ -360,7 +364,7 @@
       "fields":{
          "group":3,
          "person":1,
-         "role":"administrator"
+         "roles":"administrator"
       },
       "model":"api.grouprole",
       "pk":4
@@ -368,7 +372,7 @@
     {
       "fields":{
          "address":"Eiklaan 12",
-         "abbr": "AEGB",
+         "abbreviation": "AEGB",
          "city":"Harderwijk",
          "description":"Gebouw genoemd naar Albert Einstein.  Thuisbasis van de faculteit natuurkunde.",
          "lat":"52.355133",
@@ -382,7 +386,7 @@
     {
       "fields":{
          "address":"Eiklaan 14",
-         "abbr": "GWGB",
+         "abbreviation": "GWGB",
          "city":"Harderwijk",
          "description":"Gebouw genoemd naar George Washington.  Thuisbasis van de faculteit historie.",
          "lat":"52.356133",
@@ -397,7 +401,7 @@
       "fields":{
          "name":"String theory",
          "ects":1001,
-         "abbr":"STRING413",
+         "abbreviation":"STRING413",
          "department":"Physics department",
          "description":"In physics, string theory is a theoretical framework in which the point-like particles of particle physics are replaced by one-dimensional objects called strings.",
          "ects":1001,
@@ -405,11 +409,11 @@
          "exams":"One final exam",
          "format":"lectures and homework",
          "goals":"After this course, you'll be able to construct a Theory of Everything",
-         "language":"en",
+         "language":"en-GB",
          "lecturers":2,
          "level":"HBO-B",
          "name":"String theory",
-         "organisation":"University of Harderwijk",
+         "organization":"University of Harderwijk",
          "requirements":"Advanced Mathematics 401, Field Theory 401",
          "schedule":"wednesday mornings",
          "link": null,
@@ -422,7 +426,7 @@
     },
     {
       "fields":{
-         "abbr":"CSPROGCPU1",
+         "abbreviation":"CSPROGCPU1",
          "department":"CG department",
          "description":"General-purpose computing on graphics processing units",
          "ects":1003,
@@ -435,7 +439,7 @@
          "level":"HBO-M",
          "literature":"Sanders &amp; Kandrot: CUDA by Example: An Introduction to General-Purpose GPU Programming, bijvoorbeeld verkrijgbaar <a href=\"http://www.amazon.de/CUDA-Example-Introduction-General-Purpose-Programming/dp/0131387685\">via Amazon</a>",
          "name":"GPU programming",
-         "organisation":"Universiteit van Harderwijk",
+         "organization":"Universiteit van Harderwijk",
          "requirements":"Algemene programmeerkennis, succesvol afgeronde cursus Introductie programmeren, en minimaal een 8 voor CPU architectures",
          "schedule":"maandag- en woensdagmiddag en vrijdag",
          "link":null,
@@ -449,7 +453,7 @@
     },
     {
         "fields": {
-            "abbr": "ABSTR101",
+            "abbreviation": "ABSTR101",
             "department": "Logica",
             "description": "Een inleiding in het abstraheren",
             "ects": 12,
@@ -462,7 +466,7 @@
             "level": "WO-B",
             "literature": "Abstract and Concrete Categories: The Joy of Cats (Dover Books on Mathematics) by Adamek ing Jiri Adamek",
             "name": "Abstraheren 101",
-            "organisation": "Universiteit van Harderwijk",
+            "organization": "Universiteit van Harderwijk",
             "requirements": "Een gezond verstand",
             "schedule": "Maandag-, dinsdag- en donderdagochtend van 8-12.",
             "link": "",
@@ -474,7 +478,7 @@
     },
     {
         "fields": {
-            "abbr": "CONCR101",
+            "abbreviation": "CONCR101",
             "department": "Logica",
             "description": "Een inleiding in het concreet maken van abstracte begrippen.",
             "ects": 17,
@@ -487,7 +491,7 @@
             "level": "WO-B",
             "literature": "E.V. Ilyenkonv, The Dialectics of the Abstract and the Concrete in Marx's Capital ",
             "name": "Concretiseren 101",
-            "organisation": "Universiteit van Harderwijk",
+            "organization": "Universiteit van Harderwijk",
             "requirements": "Het is aan te raden eerst ABSTR101 met minimaal een 8 te hebben afgerond",
             "schedule": "Donderdagmiddag en vrijdag.  Veldwerk in week 17",
             "link": "",
@@ -511,15 +515,15 @@
     },
     {
         "fields": {
-            "course": 3,
+            "courseId": 3,
             "courseResult": 1,
-            "date": "2013-12-18",
+            "testDate": "2013-12-18",
             "description": "Tweede deeltentamen",
             "grade": "8",
             "lastModified": "2013-12-21T13:11:00Z",
             "passed": null,
-            "result": "",
-            "student": 2,
+            "courseResult": "",
+            "userId": 2,
             "weight": "0.5"
         },
         "model": "api.testresult",
@@ -527,15 +531,15 @@
     },
     {
         "fields": {
-            "course": 3,
+            "courseId": 3,
             "courseResult": 1,
-            "date": "2013-11-02",
+            "testDate": "2013-11-02",
             "description": "Eerste deeltentamen",
             "grade": "5",
             "lastModified": "2013-11-11T15:32:00Z",
             "passed": null,
-            "result": "",
-            "student": 2,
+            "courseResult": "",
+            "userId": 2,
             "weight": "0.5"
         },
         "model": "api.testresult",
@@ -556,8 +560,8 @@
     {
       "fields":{
          "name":"Room 100",
-         "abbr": "r100",
-         "building":1,
+         "abbreviation": "r100",
+         "buildingId":1,
          "description":"Room 100",
          "totalSeats":21,
          "totalWorkspaces":10,
@@ -571,8 +575,8 @@
     {
       "fields":{
          "name":"Room 200",
-         "abbr": "r200",
-         "building":1,
+         "abbreviation": "r200",
+         "buildingId":1,
          "description":"Room 200",
          "totalSeats":300,
          "totalWorkspaces":0,
@@ -586,8 +590,8 @@
     {
       "fields":{
          "name":"Room A12",
-         "abbr": "rA12",
-         "building":2,
+         "abbreviation": "rA12",
+         "buildingId":2,
          "description":"Room A12",
          "totalSeats":48,
          "totalWorkspaces":2,
@@ -601,8 +605,8 @@
     {
       "fields":{
          "name":"Room B7",
-         "abbr": "rB7",
-         "building":2,
+         "abbreviation": "rB7",
+         "buildingId":2,
          "description":"Room B7",
          "totalSeats":80,
          "totalWorkspaces":3,
@@ -657,7 +661,7 @@
       "fields":{
          "title":"Welcome",
          "author":"Abraham Lincoln",
-         "pubDate":"1860-10-11T13:34:12.876Z",
+         "publishDate":"1860-10-11T13:34:12.876Z",
          "link":"http://www.surf.nl/",
          "content":"The problem with quotes on the Internet is that is is hard to verify their authenticity",
          "feeds": [ 1, 2]

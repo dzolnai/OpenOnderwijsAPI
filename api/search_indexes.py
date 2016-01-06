@@ -11,11 +11,11 @@ class GeoIndex(indexes.SearchIndex):
 
 class PersonIndex(GeoIndex, indexes.SearchIndex, indexes.Indexable):
 	gender = indexes.CharField(model_attr='gender',null=True)
-	organisation = indexes.CharField(model_attr='organisation',null=True)
+	organisation = indexes.CharField(model_attr='organization',null=True)
 	department = indexes.CharField(model_attr='department',null=True)
 	title = indexes.CharField(model_attr='title',null=True)
-	employeeID = indexes.CharField(model_attr='employeeID',null=True)
-	studentID = indexes.CharField(model_attr='studentID',null=True)
+	# employeeID = indexes.CharField(model_attr='employeeID',null=True)
+	# studentID = indexes.CharField(model_attr='studentID',null=True)
 	lastModified = indexes.DateTimeField(model_attr='lastModified')
 
 	def get_model(self):
