@@ -14,7 +14,7 @@ started, follow these steps to create a self-contained, fully functional referen
 
 ### Step 1: Clone repository
 
-    git clone https://github.com/SURFnet/OpenOnderwijsAPI.git OpenOnderwijsAPI
+    git clone https://github.com/OpenOnderwijsAPI/OpenOnderwijsAPI.git OpenOnderwijsAPI
     
 ### Step 2: Setup python environment 
 
