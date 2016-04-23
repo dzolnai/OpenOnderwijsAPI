@@ -5,7 +5,7 @@ from django.utils import timezone
 from haystack.utils.geo import Point
 
 
-def selfzip(a):
+def self_zip(a):
     return zip(a, a)
 
 
@@ -17,7 +17,7 @@ class NewsItem(models.Model):
     image = models.URLField(blank=True, null=True)
     link = models.URLField(blank=True, null=True)
     content = models.TextField()
-    feeds = models.ManyToManyField('NewsFeed', through='NewsItemFeedRelation', related_name="+")
+    feeds = models.ManyToManyField('NewsFeed', related_name="items")
 
     class Meta:
         ordering = ('publishDate',)
@@ -29,29 +29,19 @@ class NewsFeed(models.Model):
     description = models.TextField(blank=True, null=True)
     groups = models.ManyToManyField('Group', related_name='feeds', blank=True, null=True)
     lastModified = models.DateTimeField(auto_now=True, default=timezone.now())
-    items = models.ManyToManyRel('NewsItem', through='NewsItemFeedRelation', related_name="+")
 
     class Meta:
         ordering = ('lastModified',)
 
     def last_updated(self):
         my_items = NewsItem.objects.filter(feeds=self)
-        if my_items.count() == 0: return None
-        return my_items.order_by('-pubDate')[0].pubDate
-
-
-class NewsItemFeedRelation(models.Model):
-    newsItemFeedRelationId = models.AutoField(primary_key=True)
-    newsFeedId = models.ForeignKey('NewsFeed')
-    newsItemId = models.ForeignKey('NewsItem')
-
-    class Meta:
-        auto_created=True
-
+        if my_items.count() == 0:
+            return None
+        return my_items.order_by('-publishDate')[0].publishDate
 
 class Affiliation(models.Model):
     AFFILIATIONS = ('student', 'faculty', 'staff', 'alum', 'member', 'affiliate', 'employee')
-    affiliation = models.CharField(choices=selfzip(AFFILIATIONS), max_length=9, help_text='as defined in eduPerson')
+    affiliation = models.CharField(choices=self_zip(AFFILIATIONS), max_length=9, help_text='as defined in eduPerson')
 
 
 class Person(models.Model):
@@ -72,7 +62,7 @@ class Person(models.Model):
     mobilenumber = models.CharField(blank=True, null=True, max_length=32)  # models.TelephoneField()
     photoSocial = models.URLField(blank=True, null=True)
     photoOfficial = models.URLField(blank=True, null=True)
-    gender = models.CharField(blank=True, null=True, choices=selfzip(GENDERS), max_length=1)
+    gender = models.CharField(blank=True, null=True, choices=self_zip(GENDERS), max_length=1)
     organization = models.CharField(max_length=255, blank=True, null=True)
     department = models.CharField(max_length=255, blank=True, null=True)
     title = models.CharField(max_length=255, blank=True, null=True, help_text='job title and/or description')
@@ -90,7 +80,7 @@ class Group(models.Model):
     GROUP_TYPES = ('?LesGroep', '?LeerGroep', 'ou', 'affiliation', 'Generic')
 
     groupId = models.AutoField(primary_key=True)
-    type = models.CharField(max_length=32, choices=selfzip(GROUP_TYPES))
+    type = models.CharField(max_length=32, choices=self_zip(GROUP_TYPES))
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True)
     lastModified = models.DateTimeField(auto_now=True, default=timezone.now())
@@ -103,7 +93,7 @@ class GroupRole(models.Model):
     person = models.ForeignKey('Person', related_name='person')
     group = models.ForeignKey('Group', related_name='group')
     lastModified = models.DateTimeField(auto_now=True, default=timezone.now())
-    roles = ListField(choices=selfzip(ROLES), null=False, blank=False)
+    roles = ListField(choices=self_zip(ROLES), null=False, blank=False)
 
     class Meta:
         unique_together = ('person', 'group')
@@ -159,9 +149,9 @@ class Course(models.Model):
     description = models.TextField()
     goals = models.TextField(blank=True, null=True)
     requirements = models.TextField(blank=True, null=True)
-    level = models.CharField(choices=selfzip(LEVELS), max_length=8)
+    level = models.CharField(choices=self_zip(LEVELS), max_length=8)
     format = models.TextField(blank=True, null=True)
-    language = models.CharField(choices=selfzip(LANGUAGES), max_length=2)
+    language = models.CharField(choices=self_zip(LANGUAGES), max_length=2)
     enrollment = models.TextField(blank=True, null=True)
     literature = models.TextField(blank=True, null=True)
     exams = models.TextField(blank=True, null=True)
@@ -197,7 +187,7 @@ class Minor(models.Model):
 class TestResult(models.Model):
     testResultId = models.AutoField(primary_key=True)
     courseId = models.ForeignKey('Course')
-    courseResult = models.ForeignKey('CourseResult', blank=True, null=True, related_name='courseResult')
+    courseResult = models.ForeignKey('CourseResult', blank=True, null=True, related_name='testResults')
     userId = models.ForeignKey('Person')
     description = models.CharField(max_length=255)
     lastModified = models.DateTimeField(auto_now=True, default=timezone.now())
@@ -235,6 +225,3 @@ class CourseScheduling(models.Model):
     courseSchedulingId = models.AutoField(primary_key=True)
     course = models.ForeignKey('Course')
     schedule = models.ForeignKey('Schedule')
-
-    class Meta:
-        auto_created = True
