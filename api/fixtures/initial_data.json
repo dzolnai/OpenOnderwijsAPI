@@ -148,7 +148,7 @@
         "fields": {
             "group": 1,
             "person": 2,
-            "role": "member"
+            "roles": ["member"]
         },
         "model": "api.grouprole",
         "pk": 1
@@ -157,7 +157,7 @@
         "fields": {
             "group": 2,
             "person": 2,
-            "roles": "member"
+            "roles": ["member", "administrator"]
         },
         "model": "api.grouprole",
         "pk": 2
@@ -166,7 +166,7 @@
         "fields": {
             "group": 3,
             "person": 2,
-            "roles": "member"
+            "roles": ["member"]
         },
         "model": "api.grouprole",
         "pk": 3
@@ -175,7 +175,7 @@
         "fields": {
             "group": 3,
             "person": 1,
-            "roles": "administrator"
+            "roles": ["administrator"]
         },
         "model": "api.grouprole",
         "pk": 4
@@ -282,7 +282,7 @@
          "department":null,
          "displayname":"Dr. Bibber",
          "gender":"M",
-         "givenName":"Piet",
+         "givenname":"Piet",
          "mail":"bibber@harderwijk.edu",
          "mobilenumber":null,
          "office":null,
@@ -329,7 +329,7 @@
       "fields":{
          "group":1,
          "person":2,
-         "roles":"member"
+         "roles":["member"]
       },
       "model":"api.grouprole",
       "pk":1
@@ -338,7 +338,7 @@
       "fields":{
          "group":2,
          "person":2,
-         "roles":"member"
+         "roles":["member"]
       },
       "model":"api.grouprole",
       "pk":2
@@ -347,7 +347,7 @@
       "fields":{
          "group":3,
          "person":2,
-         "roles":"member"
+         "roles":["member"]
       },
       "model":"api.grouprole",
       "pk":3
@@ -513,7 +513,7 @@
             "lastModified": "2013-12-21T13:11:00Z",
             "passed": null,
             "userId": 2,
-            "weight": "0.5"
+            "weight": 10
         },
         "model": "api.testresult",
         "pk": 1
@@ -528,7 +528,7 @@
             "lastModified": "2013-11-11T15:32:00Z",
             "passed": null,
             "userId": 2,
-            "weight": "0.5"
+            "weight": 25
         },
         "model": "api.testresult",
         "pk": 2
@@ -648,7 +648,7 @@
     {
       "fields":{
          "title":"Welcome",
-         "author":"Abraham Lincoln",
+         "authors":["Abraham Lincoln"],
          "publishDate":"1860-10-11T13:34:12.876Z",
          "link":"http://www.surf.nl/",
          "content":"The problem with quotes on the Internet is that is is hard to verify their authenticity",

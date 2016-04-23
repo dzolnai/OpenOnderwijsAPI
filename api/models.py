@@ -1,3 +1,4 @@
+from api.custom_fields import ListField
 from django.core.validators import MaxValueValidator
 from django.db import models
 from django.utils import timezone
@@ -12,10 +13,11 @@ class NewsItem(models.Model):
     newsitemId = models.AutoField(primary_key=True)
     publishDate = models.DateTimeField(auto_now_add=True)
     title = models.CharField(max_length=255)
-    authors = models.CharField(max_length=255, blank=True, null=True)
+    authors = ListField(blank=True, null=True)
     image = models.URLField(blank=True, null=True)
     link = models.URLField(blank=True, null=True)
     content = models.TextField()
+    feeds = models.ManyToManyField('NewsFeed', through='NewsItemFeedRelation', related_name="+")
 
     class Meta:
         ordering = ('publishDate',)
@@ -25,8 +27,9 @@ class NewsFeed(models.Model):
     newsfeedId = models.AutoField(primary_key=True)
     title = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True)
-    groups = models.ManyToManyField('NewsItem', related_name='feeds', blank=True, null=True)
+    groups = models.ManyToManyField('Group', related_name='feeds', blank=True, null=True)
     lastModified = models.DateTimeField(auto_now=True, default=timezone.now())
+    items = models.ManyToManyRel('NewsItem', through='NewsItemFeedRelation', related_name="+")
 
     class Meta:
         ordering = ('lastModified',)
@@ -35,6 +38,15 @@ class NewsFeed(models.Model):
         my_items = NewsItem.objects.filter(feeds=self)
         if my_items.count() == 0: return None
         return my_items.order_by('-pubDate')[0].pubDate
+
+
+class NewsItemFeedRelation(models.Model):
+    newsItemFeedRelationId = models.AutoField(primary_key=True)
+    newsFeedId = models.ForeignKey('NewsFeed')
+    newsItemId = models.ForeignKey('NewsItem')
+
+    class Meta:
+        auto_created=True
 
 
 class Affiliation(models.Model):
@@ -73,14 +85,6 @@ class Person(models.Model):
     def get_location(self):
         return Point(float(self.lon), float(self.lat))
 
-        # cluster
-        # education
-        # klas  # LesGroep
-        # groups          = models.ManyToManyField('Group',through='GroupRole')
-        # altitude        = models.DecimalField(max_digits=3,decimal_places=2,blank=True,null=True)
-        # employeeID      = models.CharField(blank=True,null=True,max_length=255)  # only for affiliation=employee
-        # studentID       = models.CharField(blank=True,null=True,max_length=255)  # only for affiliation=student
-
 
 class Group(models.Model):
     GROUP_TYPES = ('?LesGroep', '?LeerGroep', 'ou', 'affiliation', 'Generic')
@@ -91,28 +95,26 @@ class Group(models.Model):
     description = models.TextField(blank=True, null=True)
     lastModified = models.DateTimeField(auto_now=True, default=timezone.now())
     members = models.ManyToManyField('Person', through='GroupRole', blank=True, null=True)
-    courses = models.ForeignKey('Course', related_name='courses')
 
 
 class GroupRole(models.Model):
     ROLES = ('member', 'manager', 'administrator')
-
     grouproleId = models.AutoField(primary_key=True)
     person = models.ForeignKey('Person', related_name='person')
     group = models.ForeignKey('Group', related_name='group')
-    roles = models.CharField(choices=selfzip(ROLES), max_length=32)
     lastModified = models.DateTimeField(auto_now=True, default=timezone.now())
+    roles = ListField(choices=selfzip(ROLES), null=False, blank=False)
 
     class Meta:
         unique_together = ('person', 'group')
 
-    def groupName(self):
+    def group_name(self):
         return self.group.name
 
-    def groupType(self):
+    def group_type(self):
         return self.group.type
 
-    def displayName(self):
+    def display_name(self):
         return self.person.displayname
 
 
@@ -128,8 +130,6 @@ class Building(models.Model):
     lon = models.DecimalField(blank=True, null=True, max_digits=9, decimal_places=6)
     altitude = models.DecimalField(max_digits=3, decimal_places=2, blank=True, null=True)
 
-    # lastModified = models.DateTimeField(auto_now=True,default=timezone.now())
-
     def get_location(self):
         return Point(float(self.lon), float(self.lat))
 
@@ -144,7 +144,6 @@ class Room(models.Model):
     totalWorkspaces = models.PositiveIntegerField(blank=True, null=True)
     availableWorkspaces = models.PositiveIntegerField(blank=True, null=True)
     lastModified = models.DateTimeField(auto_now=True, default=timezone.now())
-    # type              = models.TextField()
     lat = models.DecimalField(max_digits=9, decimal_places=6, blank=True, null=True)
     lon = models.DecimalField(max_digits=9, decimal_places=6, blank=True, null=True)
     altitude = models.DecimalField(max_digits=3, decimal_places=2, blank=True, null=True)
@@ -153,7 +152,7 @@ class Room(models.Model):
 class Course(models.Model):
     LEVELS = ('HBO-B', 'HBO-M', 'WO-B', 'WO-M', 'WO-D')
     LANGUAGES = ('nl-NL', 'en-GB', 'de-DE')
-    schedules = models.ForeignKey('Schedule', related_name='schedules')
+    schedules = models.ManyToManyField('Schedule', through='CourseScheduling', related_name='+', blank=True, null=True)
     name = models.CharField(max_length=255, unique=True)
     abbreviation = models.CharField(max_length=32, unique=True, blank=True, null=True)
     ects = models.PositiveIntegerField(blank=True, null=True)
@@ -170,8 +169,8 @@ class Course(models.Model):
     link = models.URLField(blank=True, null=True)
     organization = models.CharField(max_length=255, blank=True, null=True)
     department = models.CharField(max_length=255, blank=True, null=True)
-    lecturers = models.ForeignKey('Person', related_name='lecturers')
-    groups = models.ManyToManyField('Group', related_name='groups')
+    lecturers = models.ForeignKey('Person', related_name='courses', blank=True, null=True)
+    groups = models.ManyToManyField('Group', related_name='courses', blank=True, null=True)
     lastModified = models.DateTimeField(auto_now=True, default=timezone.now())
 
 
@@ -197,17 +196,14 @@ class Minor(models.Model):
 
 class TestResult(models.Model):
     testResultId = models.AutoField(primary_key=True)
-    # student       = models.ForeignKey('Person')
     courseId = models.ForeignKey('Course')
     courseResult = models.ForeignKey('CourseResult', blank=True, null=True, related_name='courseResult')
     userId = models.ForeignKey('Person')
     description = models.CharField(max_length=255)
     lastModified = models.DateTimeField(auto_now=True, default=timezone.now())
     testDate = models.DateField()
-    # grade         = models.DecimalField(max_digits=3,decimal_places=2,blank=True,null=True)
     grade = models.CharField(max_length=255)
     comment = models.TextField()
-    # result        = models.CharField(max_length=15,blank=True,null=True)
     passed = models.NullBooleanField()
     weight = models.PositiveIntegerField(validators=[MaxValueValidator(100), ], blank=True, null=True)
 
@@ -226,10 +222,19 @@ class Schedule(models.Model):
     userId = models.ForeignKey('Person', related_name='schedule_user', blank=True, null=True, )
     roomId = models.ForeignKey('Room', related_name='schedule_room', blank=True, null=True, )
     buildingId = models.ForeignKey('Building', related_name='schedule_building_id', blank=True, null=True)
-    courseId = models.ForeignKey('Course', related_name='schedule_course_id', blank=True, null=True)
+    courseId = models.ManyToManyField('Course', through='CourseScheduling', related_name='+', blank=True, null=True)
     startDateTime = models.DateTimeField(blank=True, null=True)
     endDateTime = models.DateTimeField(blank=True, null=True)
     groupId = models.ForeignKey('Group', related_name='schedule_group_id', blank=True, null=True)
     lecturers = models.ForeignKey('Person', related_name='schedule_lecturer_id', blank=True, null=True)
     description = models.TextField(blank=True, null=True)
     lastModified = models.DateTimeField(auto_now=True, default=timezone.now())
+
+
+class CourseScheduling(models.Model):
+    courseSchedulingId = models.AutoField(primary_key=True)
+    course = models.ForeignKey('Course')
+    schedule = models.ForeignKey('Schedule')
+
+    class Meta:
+        auto_created = True
