@@ -25,19 +25,13 @@ class NewsItem(models.Model):
 
 class NewsFeed(models.Model):
     newsfeedId = models.AutoField(primary_key=True)
-    title = models.CharField(max_length=255)
+    title = models.CharField(max_length=255, blank=False, null=False)
     description = models.TextField(blank=True, null=True)
     groups = models.ManyToManyField('Group', related_name='feeds', blank=True, null=True)
     lastModified = models.DateTimeField(auto_now=True, default=timezone.now())
 
     class Meta:
         ordering = ('lastModified',)
-
-    def last_updated(self):
-        my_items = NewsItem.objects.filter(feeds=self)
-        if my_items.count() == 0:
-            return None
-        return my_items.order_by('-publishDate')[0].publishDate
 
 class Affiliation(models.Model):
     AFFILIATIONS = ('student', 'faculty', 'staff', 'alum', 'member', 'affiliate', 'employee')

@@ -1,660 +1,687 @@
 [
-    {
-        "fields": {
-            "description": "test 1",
-            "title": "feed 1"
-        },
-        "model": "api.newsfeed",
-        "pk": 1
+  {
+    "fields": {
+      "description": "test 1",
+      "title": "feed 1"
     },
-    {
-        "fields": {
-            "description": "test 2",
-            "title": "feed 2"
-        },
-        "model": "api.newsfeed",
-        "pk": 2
+    "model": "api.newsfeed",
+    "pk": 1
+  },
+  {
+    "fields": {
+      "description": "test 2",
+      "title": "feed 2"
     },
-    {
-        "fields": {
-            "affiliation": "student"
-        },
-        "model": "api.affiliation",
-        "pk": 1
+    "model": "api.newsfeed",
+    "pk": 2
+  },
+  {
+    "fields": {
+      "affiliation": "student"
     },
-    {
-        "fields": {
-            "affiliation": "faculty"
-        },
-        "model": "api.affiliation",
-        "pk": 2
+    "model": "api.affiliation",
+    "pk": 1
+  },
+  {
+    "fields": {
+      "affiliation": "faculty"
     },
-    {
-        "fields": {
-            "affiliation": "staff"
-        },
-        "model": "api.affiliation",
-        "pk": 3
+    "model": "api.affiliation",
+    "pk": 2
+  },
+  {
+    "fields": {
+      "affiliation": "staff"
     },
-    {
-        "fields": {
-            "affiliation": "alum"
-        },
-        "model": "api.affiliation",
-        "pk": 4
+    "model": "api.affiliation",
+    "pk": 3
+  },
+  {
+    "fields": {
+      "affiliation": "alum"
     },
-    {
-        "fields": {
-            "affiliation": "member"
-        },
-        "model": "api.affiliation",
-        "pk": 5
+    "model": "api.affiliation",
+    "pk": 4
+  },
+  {
+    "fields": {
+      "affiliation": "member"
     },
-    {
-        "fields": {
-            "affiliation": "affiliate"
-        },
-        "model": "api.affiliation",
-        "pk": 6
+    "model": "api.affiliation",
+    "pk": 5
+  },
+  {
+    "fields": {
+      "affiliation": "affiliate"
     },
-    {
-        "fields": {
-            "affiliation": "employee"
-        },
-        "model": "api.affiliation",
-        "pk": 7
+    "model": "api.affiliation",
+    "pk": 6
+  },
+  {
+    "fields": {
+      "affiliation": "employee"
     },
-    {
-        "fields": {
-            "affiliations": [
-                2,
-                5,
-                7
-            ],
-            "department": null,
-            "displayname": "dr. Basje",
-            "gender": "M",
-            "givenname": "Bas",
-            "mail": "basje@harderwijk.edu",
-            "mobilenumber": null,
-            "office": null,
-            "organization": null,
-            "photoSocial": null,
-            "photoOfficial": null,
-            "surname": "Zoetekouw",
-            "telephonenumber": "+31301234567",
-            "title": null,
-            "lat":"52.355133",
-            "lon":"5.616567"
-        },
-        "model": "api.person",
-        "pk": 1
+    "model": "api.affiliation",
+    "pk": 7
+  },
+  {
+    "fields": {
+      "affiliations": [
+        2,
+        5,
+        7
+      ],
+      "department": null,
+      "displayname": "dr. Basje",
+      "gender": "M",
+      "givenname": "Bas",
+      "mail": "basje@harderwijk.edu",
+      "mobilenumber": null,
+      "office": null,
+      "organization": null,
+      "photoSocial": null,
+      "photoOfficial": null,
+      "surname": "Zoetekouw",
+      "telephonenumber": "+31301234567",
+      "title": null,
+      "lat": "52.355133",
+      "lon": "5.616567"
     },
-    {
-        "fields": {
-            "affiliations": [
-                2,
-                4,
-                6,
-                7
-            ],
-            "department": null,
-            "displayname": "Dr. Bibber",
-            "gender": "M",
-            "givenname": "Piet",
-            "mail": "bibber@harderwijk.edu",
-            "mobilenumber": null,
-            "office": null,
-            "organization": null,
-            "photoSocial": null,
-            "photoOfficial": null,
-            "surname": "Bibber",
-            "telephonenumber": null,
-            "title": null,
-            "lat":"52.355133",
-            "lon":"5.616567"
-        },
-        "model": "api.person",
-        "pk": 2
+    "model": "api.person",
+    "pk": 1
+  },
+  {
+    "fields": {
+      "affiliations": [
+        2,
+        4,
+        6,
+        7
+      ],
+      "department": null,
+      "displayname": "Dr. Bibber",
+      "gender": "M",
+      "givenname": "Piet",
+      "mail": "bibber@harderwijk.edu",
+      "mobilenumber": null,
+      "office": null,
+      "organization": null,
+      "photoSocial": null,
+      "photoOfficial": null,
+      "surname": "Bibber",
+      "telephonenumber": null,
+      "title": null,
+      "lat": "52.355133",
+      "lon": "5.616567"
     },
-    {
-        "fields": {
-            "description": "hallo een test groep",
-            "name": "test group",
-            "type": "?LesGroep"
-        },
-        "model": "api.group",
-        "pk": 1
+    "model": "api.person",
+    "pk": 2
+  },
+  {
+    "fields": {
+      "description": "hallo een test groep",
+      "name": "test group",
+      "type": "?LesGroep"
     },
-    {
-        "fields": {
-            "description": "Kijk, nog 1",
-            "name": "Nog een andere group",
-            "type": "affiliation"
-        },
-        "model": "api.group",
-        "pk": 2
+    "model": "api.group",
+    "pk": 1
+  },
+  {
+    "fields": {
+      "description": "Kijk, nog 1",
+      "name": "Nog een andere group",
+      "type": "affiliation"
     },
-    {
-        "fields": {
-            "description": "hallo",
-            "name": "een derde groep",
-            "type": "Generic"
-        },
-        "model": "api.group",
-        "pk": 3
+    "model": "api.group",
+    "pk": 2
+  },
+  {
+    "fields": {
+      "description": "hallo",
+      "name": "een derde groep",
+      "type": "Generic"
     },
-    {
-        "fields": {
-            "group": 1,
-            "person": 2,
-            "roles": ["member"]
-        },
-        "model": "api.grouprole",
-        "pk": 1
+    "model": "api.group",
+    "pk": 3
+  },
+  {
+    "fields": {
+      "group": 1,
+      "person": 2,
+      "roles": [
+        "member"
+      ]
     },
-    {
-        "fields": {
-            "group": 2,
-            "person": 2,
-            "roles": ["member", "administrator"]
-        },
-        "model": "api.grouprole",
-        "pk": 2
+    "model": "api.grouprole",
+    "pk": 1
+  },
+  {
+    "fields": {
+      "group": 2,
+      "person": 2,
+      "roles": [
+        "member",
+        "administrator"
+      ]
     },
-    {
-        "fields": {
-            "group": 3,
-            "person": 2,
-            "roles": ["member"]
-        },
-        "model": "api.grouprole",
-        "pk": 3
+    "model": "api.grouprole",
+    "pk": 2
+  },
+  {
+    "fields": {
+      "group": 3,
+      "person": 2,
+      "roles": [
+        "member"
+      ]
     },
-    {
-        "fields": {
-            "group": 3,
-            "person": 1,
-            "roles": ["administrator"]
-        },
-        "model": "api.grouprole",
-        "pk": 4
+    "model": "api.grouprole",
+    "pk": 3
+  },
+  {
+    "fields": {
+      "group": 3,
+      "person": 1,
+      "roles": [
+        "administrator"
+      ]
     },
-    {
-      "fields":{
-         "description":"test 1",
-         "title":"feed 1"
-      },
-      "model":"api.newsfeed",
-      "pk":1
+    "model": "api.grouprole",
+    "pk": 4
+  },
+  {
+    "fields": {
+      "description": "test 1",
+      "title": "feed 1",
+      "groups": [
+        1,
+        2
+      ]
     },
-    {
-      "fields":{
-         "description":"test 2",
-         "title":"feed 2"
-      },
-      "model":"api.newsfeed",
-      "pk":2
+    "model": "api.newsfeed",
+    "pk": 1
+  },
+  {
+    "fields": {
+      "description": "test 2",
+      "title": "feed 2",
+      "groups": [
+        3
+      ]
     },
-    {
-      "fields":{
-         "affiliation":"student"
-      },
-      "model":"api.affiliation",
-      "pk":1
+    "model": "api.newsfeed",
+    "pk": 2
+  },
+  {
+    "fields": {
+      "affiliation": "student"
     },
-    {
-      "fields":{
-         "affiliation":"faculty"
-      },
-      "model":"api.affiliation",
-      "pk":2
+    "model": "api.affiliation",
+    "pk": 1
+  },
+  {
+    "fields": {
+      "affiliation": "faculty"
     },
-    {
-      "fields":{
-         "affiliation":"staff"
-      },
-      "model":"api.affiliation",
-      "pk":3
+    "model": "api.affiliation",
+    "pk": 2
+  },
+  {
+    "fields": {
+      "affiliation": "staff"
     },
-    {
-      "fields":{
-         "affiliation":"alum"
-      },
-      "model":"api.affiliation",
-      "pk":4
+    "model": "api.affiliation",
+    "pk": 3
+  },
+  {
+    "fields": {
+      "affiliation": "alum"
     },
-    {
-      "fields":{
-         "affiliation":"member"
-      },
-      "model":"api.affiliation",
-      "pk":5
+    "model": "api.affiliation",
+    "pk": 4
+  },
+  {
+    "fields": {
+      "affiliation": "member"
     },
-    {
-      "fields":{
-         "affiliation":"affiliate"
-      },
-      "model":"api.affiliation",
-      "pk":6
+    "model": "api.affiliation",
+    "pk": 5
+  },
+  {
+    "fields": {
+      "affiliation": "affiliate"
     },
-    {
-      "fields":{
-         "affiliation":"employee"
-      },
-      "model":"api.affiliation",
-      "pk":7
+    "model": "api.affiliation",
+    "pk": 6
+  },
+  {
+    "fields": {
+      "affiliation": "employee"
     },
-    {
-      "fields":{
-         "affiliations":[
-            2,
-            5,
-            7
-         ],
-         "department":null,
-         "displayname":"dr. Basje",
-         "gender":"M",
-         "givenname":"Bas",
-         "mail":"basje@harderwijk.edu",
-         "mobilenumber":null,
-         "office":null,
-         "organization":null,
-         "photoSocial": null,
-         "photoOfficial": null,
-         "surname":"Zoetekouw",
-         "telephonenumber":"+31301234567",
-         "title":null,
-         "lat":"52.355133",
-         "lon":"5.616567"
-      },
-      "model":"api.person",
-      "pk":1
+    "model": "api.affiliation",
+    "pk": 7
+  },
+  {
+    "fields": {
+      "affiliations": [
+        2,
+        5,
+        7
+      ],
+      "department": null,
+      "displayname": "dr. Basje",
+      "gender": "M",
+      "givenname": "Bas",
+      "mail": "basje@harderwijk.edu",
+      "mobilenumber": null,
+      "office": null,
+      "organization": null,
+      "photoSocial": null,
+      "photoOfficial": null,
+      "surname": "Zoetekouw",
+      "telephonenumber": "+31301234567",
+      "title": null,
+      "lat": "52.355133",
+      "lon": "5.616567"
     },
-    {
-      "fields":{
-         "affiliations":[
-            2,
-            4,
-            6,
-            7
-         ],
-         "department":null,
-         "displayname":"Dr. Bibber",
-         "gender":"M",
-         "givenname":"Piet",
-         "mail":"bibber@harderwijk.edu",
-         "mobilenumber":null,
-         "office":null,
-         "organization":null,
-         "photoSocial": null,
-         "photoOfficial": null,
-         "surname":"Bibber",
-         "telephonenumber":null,
-         "title":null,
-         "lat":"52.355133",
-         "lon":"5.616567"
-      },
-      "model":"api.person",
-      "pk":2
+    "model": "api.person",
+    "pk": 1
+  },
+  {
+    "fields": {
+      "affiliations": [
+        2,
+        4,
+        6,
+        7
+      ],
+      "department": null,
+      "displayname": "Dr. Bibber",
+      "gender": "M",
+      "givenname": "Piet",
+      "mail": "bibber@harderwijk.edu",
+      "mobilenumber": null,
+      "office": null,
+      "organization": null,
+      "photoSocial": null,
+      "photoOfficial": null,
+      "surname": "Bibber",
+      "telephonenumber": null,
+      "title": null,
+      "lat": "52.355133",
+      "lon": "5.616567"
     },
-    {
-      "fields":{
-         "description":"hallo een test groep",
-         "name":"test group",
-         "type":"?LesGroep"
-      },
-      "model":"api.group",
-      "pk":1
+    "model": "api.person",
+    "pk": 2
+  },
+  {
+    "fields": {
+      "description": "hallo een test groep",
+      "name": "test group",
+      "type": "?LesGroep"
     },
-    {
-      "fields":{
-         "description":"Kijk, nog 1",
-         "name":"Nog een andere group",
-         "type":"affiliation"
-      },
-      "model":"api.group",
-      "pk":2
+    "model": "api.group",
+    "pk": 1
+  },
+  {
+    "fields": {
+      "description": "Kijk, nog 1",
+      "name": "Nog een andere group",
+      "type": "affiliation"
     },
-    {
-      "fields":{
-         "description":"hallo",
-         "name":"een derde groep",
-         "type":"Generic"
-      },
-      "model":"api.group",
-      "pk":3
+    "model": "api.group",
+    "pk": 2
+  },
+  {
+    "fields": {
+      "description": "hallo",
+      "name": "een derde groep",
+      "type": "Generic"
     },
-    {
-      "fields":{
-         "group":1,
-         "person":2,
-         "roles":["member"]
-      },
-      "model":"api.grouprole",
-      "pk":1
+    "model": "api.group",
+    "pk": 3
+  },
+  {
+    "fields": {
+      "group": 1,
+      "person": 2,
+      "roles": [
+        "member"
+      ]
     },
-    {
-      "fields":{
-         "group":2,
-         "person":2,
-         "roles":["member"]
-      },
-      "model":"api.grouprole",
-      "pk":2
+    "model": "api.grouprole",
+    "pk": 1
+  },
+  {
+    "fields": {
+      "group": 2,
+      "person": 2,
+      "roles": [
+        "member"
+      ]
     },
-    {
-      "fields":{
-         "group":3,
-         "person":2,
-         "roles":["member"]
-      },
-      "model":"api.grouprole",
-      "pk":3
+    "model": "api.grouprole",
+    "pk": 2
+  },
+  {
+    "fields": {
+      "group": 3,
+      "person": 2,
+      "roles": [
+        "member"
+      ]
     },
-    {
-      "fields":{
-         "group":3,
-         "person":1,
-         "roles":"administrator"
-      },
-      "model":"api.grouprole",
-      "pk":4
+    "model": "api.grouprole",
+    "pk": 3
+  },
+  {
+    "fields": {
+      "group": 3,
+      "person": 1,
+      "roles": "administrator"
     },
-    {
-      "fields":{
-         "address":"Eiklaan 12",
-         "abbreviation": "AEGB",
-         "city":"Harderwijk",
-         "description":"Gebouw genoemd naar Albert Einstein.  Thuisbasis van de faculteit natuurkunde.",
-         "lat":"52.355133",
-         "lon":"5.616567",
-         "name":"Albert-Einsteingebouw",
-         "postalCode":"1114FG"
-      },
-      "model":"api.building",
-      "pk":1
+    "model": "api.grouprole",
+    "pk": 4
+  },
+  {
+    "fields": {
+      "address": "Eiklaan 12",
+      "abbreviation": "AEGB",
+      "city": "Harderwijk",
+      "description": "Gebouw genoemd naar Albert Einstein.  Thuisbasis van de faculteit natuurkunde.",
+      "lat": "52.355133",
+      "lon": "5.616567",
+      "name": "Albert-Einsteingebouw",
+      "postalCode": "1114FG"
     },
-    {
-      "fields":{
-         "address":"Eiklaan 14",
-         "abbreviation": "GWGB",
-         "city":"Harderwijk",
-         "description":"Gebouw genoemd naar George Washington.  Thuisbasis van de faculteit historie.",
-         "lat":"52.356133",
-         "lon":"5.617567",
-         "name":"Washingtongebouw",
-         "postalCode":"1234AB"
-      },
-      "model":"api.building",
-      "pk":2
+    "model": "api.building",
+    "pk": 1
+  },
+  {
+    "fields": {
+      "address": "Eiklaan 14",
+      "abbreviation": "GWGB",
+      "city": "Harderwijk",
+      "description": "Gebouw genoemd naar George Washington.  Thuisbasis van de faculteit historie.",
+      "lat": "52.356133",
+      "lon": "5.617567",
+      "name": "Washingtongebouw",
+      "postalCode": "1234AB"
     },
-    {
-      "fields":{
-         "abbreviation":"STRING413",
-         "department":"Physics department",
-         "description":"In physics, string theory is a theoretical framework in which the point-like particles of particle physics are replaced by one-dimensional objects called strings.",
-         "ects":1001,
-         "enrollment":"online",
-         "exams":"One final exam",
-         "format":"lectures and homework",
-         "goals":"After this course, you'll be able to construct a Theory of Everything",
-         "language":"en-GB",
-         "lecturers":2,
-         "level":"HBO-B",
-         "name":"String theory",
-         "organization":"University of Harderwijk",
-         "requirements":"Advanced Mathematics 401, Field Theory 401",
-         "schedule":"wednesday mornings",
-         "link": null,
-         "groups":[
-            1
-         ]
-      },
-      "model":"api.course",
-      "pk":1
+    "model": "api.building",
+    "pk": 2
+  },
+  {
+    "fields": {
+      "abbreviation": "STRING413",
+      "department": "Physics department",
+      "description": "In physics, string theory is a theoretical framework in which the point-like particles of particle physics are replaced by one-dimensional objects called strings.",
+      "ects": 1001,
+      "enrollment": "online",
+      "exams": "One final exam",
+      "format": "lectures and homework",
+      "goals": "After this course, you'll be able to construct a Theory of Everything",
+      "language": "en-GB",
+      "lecturers": 2,
+      "level": "HBO-B",
+      "name": "String theory",
+      "organization": "University of Harderwijk",
+      "requirements": "Advanced Mathematics 401, Field Theory 401",
+      "schedule": "wednesday mornings",
+      "link": null,
+      "groups": [
+        1
+      ]
     },
-    {
-      "fields":{
-         "abbreviation":"CSPROGCPU1",
-         "department":"CG department",
-         "description":"General-purpose computing on graphics processing units",
-         "ects":1003,
-         "enrollment":"Inschrijven via studieadviseur",
-         "exams":"tentamen, programmeeropdracht",
-         "format":"hoorcolleges, werkcolleges",
-         "goals":"In deze cursus leer je een standaard GPU te programmeren en er bitcoins mee te minen",
-         "language":"nl",
-         "lecturers":1,
-         "level":"HBO-M",
-         "literature":"Sanders &amp; Kandrot: CUDA by Example: An Introduction to General-Purpose GPU Programming, bijvoorbeeld verkrijgbaar <a href=\"http://www.amazon.de/CUDA-Example-Introduction-General-Purpose-Programming/dp/0131387685\">via Amazon</a>",
-         "name":"GPU programming",
-         "organization":"Universiteit van Harderwijk",
-         "requirements":"Algemene programmeerkennis, succesvol afgeronde cursus Introductie programmeren, en minimaal een 8 voor CPU architectures",
-         "schedule":"maandag- en woensdagmiddag en vrijdag",
-         "link":null,
-         "groups":[
-            2,
-            3
-         ]
-      },
-      "model":"api.course",
-      "pk":2
+    "model": "api.course",
+    "pk": 1
+  },
+  {
+    "fields": {
+      "abbreviation": "CSPROGCPU1",
+      "department": "CG department",
+      "description": "General-purpose computing on graphics processing units",
+      "ects": 1003,
+      "enrollment": "Inschrijven via studieadviseur",
+      "exams": "tentamen, programmeeropdracht",
+      "format": "hoorcolleges, werkcolleges",
+      "goals": "In deze cursus leer je een standaard GPU te programmeren en er bitcoins mee te minen",
+      "language": "nl",
+      "lecturers": 1,
+      "level": "HBO-M",
+      "literature": "Sanders &amp; Kandrot: CUDA by Example: An Introduction to General-Purpose GPU Programming, bijvoorbeeld verkrijgbaar <a href=\"http://www.amazon.de/CUDA-Example-Introduction-General-Purpose-Programming/dp/0131387685\">via Amazon</a>",
+      "name": "GPU programming",
+      "organization": "Universiteit van Harderwijk",
+      "requirements": "Algemene programmeerkennis, succesvol afgeronde cursus Introductie programmeren, en minimaal een 8 voor CPU architectures",
+      "schedule": "maandag- en woensdagmiddag en vrijdag",
+      "link": null,
+      "groups": [
+        2,
+        3
+      ]
     },
-    {
-        "fields": {
-            "abbreviation": "ABSTR101",
-            "department": "Logica",
-            "description": "Een inleiding in het abstraheren",
-            "ects": 12,
-            "enrollment": "Inschrijven via de balie",
-            "exams": "Twee deeltentamens (ieder 40%) en practicum concretiseren (20%)",
-            "format": "Hoorcolleges en practica",
-            "goals": "Je leert van abstraheren is, en het verschil tussen de begrippen concreet en abstract",
-            "language": "nl",
-            "lecturers": 2,
-            "level": "WO-B",
-            "literature": "Abstract and Concrete Categories: The Joy of Cats (Dover Books on Mathematics) by Adamek ing Jiri Adamek",
-            "name": "Abstraheren 101",
-            "organization": "Universiteit van Harderwijk",
-            "requirements": "Een gezond verstand",
-            "schedule": "Maandag-, dinsdag- en donderdagochtend van 8-12.",
-            "link": "",
-            "groups":[
-            ]
-        },
-        "model": "api.course",
-        "pk": 3
+    "model": "api.course",
+    "pk": 2
+  },
+  {
+    "fields": {
+      "abbreviation": "ABSTR101",
+      "department": "Logica",
+      "description": "Een inleiding in het abstraheren",
+      "ects": 12,
+      "enrollment": "Inschrijven via de balie",
+      "exams": "Twee deeltentamens (ieder 40%) en practicum concretiseren (20%)",
+      "format": "Hoorcolleges en practica",
+      "goals": "Je leert van abstraheren is, en het verschil tussen de begrippen concreet en abstract",
+      "language": "nl",
+      "lecturers": 2,
+      "level": "WO-B",
+      "literature": "Abstract and Concrete Categories: The Joy of Cats (Dover Books on Mathematics) by Adamek ing Jiri Adamek",
+      "name": "Abstraheren 101",
+      "organization": "Universiteit van Harderwijk",
+      "requirements": "Een gezond verstand",
+      "schedule": "Maandag-, dinsdag- en donderdagochtend van 8-12.",
+      "link": "",
+      "groups": [
+      ]
     },
-    {
-        "fields": {
-            "abbreviation": "CONCR101",
-            "department": "Logica",
-            "description": "Een inleiding in het concreet maken van abstracte begrippen.",
-            "ects": 17,
-            "enrollment": "Via de balie",
-            "exams": "Veldwerk (60%), tentamen (40%)",
-            "format": "Hoorcollege en een veldwerk in Peru van 1 week",
-            "goals": "Na afloop van deze cursus kun je abstracte problemen op een concrete manier uitleggen",
-            "language": "nl",
-            "lecturers": 1,
-            "level": "WO-B",
-            "literature": "E.V. Ilyenkonv, The Dialectics of the Abstract and the Concrete in Marx's Capital ",
-            "name": "Concretiseren 101",
-            "organization": "Universiteit van Harderwijk",
-            "requirements": "Het is aan te raden eerst ABSTR101 met minimaal een 8 te hebben afgerond",
-            "schedule": "Donderdagmiddag en vrijdag.  Veldwerk in week 17",
-            "link": "",
-            "groups":[
-            ]
-        },
-        "model": "api.course",
-        "pk": 4
+    "model": "api.course",
+    "pk": 3
+  },
+  {
+    "fields": {
+      "abbreviation": "CONCR101",
+      "department": "Logica",
+      "description": "Een inleiding in het concreet maken van abstracte begrippen.",
+      "ects": 17,
+      "enrollment": "Via de balie",
+      "exams": "Veldwerk (60%), tentamen (40%)",
+      "format": "Hoorcollege en een veldwerk in Peru van 1 week",
+      "goals": "Na afloop van deze cursus kun je abstracte problemen op een concrete manier uitleggen",
+      "language": "nl",
+      "lecturers": 1,
+      "level": "WO-B",
+      "literature": "E.V. Ilyenkonv, The Dialectics of the Abstract and the Concrete in Marx's Capital ",
+      "name": "Concretiseren 101",
+      "organization": "Universiteit van Harderwijk",
+      "requirements": "Het is aan te raden eerst ABSTR101 met minimaal een 8 te hebben afgerond",
+      "schedule": "Donderdagmiddag en vrijdag.  Veldwerk in week 17",
+      "link": "",
+      "groups": [
+      ]
     },
-    {
-        "fields": {
-            "courses": [
-                3,
-                4
-            ],
-            "description": "In deze minor wordt diep ingegaan op het abstraheren van concrete concepten.  Je leert het verschil tussen abstract en concreet en bereidt je voor op een beroep als abstracticeur.",
-            "name": "Abstractiekunde"
-        },
-        "model": "api.minor",
-        "pk": 1
+    "model": "api.course",
+    "pk": 4
+  },
+  {
+    "fields": {
+      "courses": [
+        3,
+        4
+      ],
+      "description": "In deze minor wordt diep ingegaan op het abstraheren van concrete concepten.  Je leert het verschil tussen abstract en concreet en bereidt je voor op een beroep als abstracticeur.",
+      "name": "Abstractiekunde"
     },
-    {
-        "fields": {
-            "courseId": 3,
-            "courseResult": 1,
-            "testDate": "2013-12-18",
-            "description": "Tweede deeltentamen",
-            "grade": "8",
-            "lastModified": "2013-12-21T13:11:00Z",
-            "passed": null,
-            "userId": 2,
-            "weight": 10
-        },
-        "model": "api.testresult",
-        "pk": 1
+    "model": "api.minor",
+    "pk": 1
+  },
+  {
+    "fields": {
+      "courseId": 3,
+      "courseResult": 1,
+      "testDate": "2013-12-18",
+      "description": "Tweede deeltentamen",
+      "grade": "8",
+      "lastModified": "2013-12-21T13:11:00Z",
+      "passed": null,
+      "userId": 2,
+      "weight": 10
     },
-    {
-        "fields": {
-            "courseId": 3,
-            "courseResult": 1,
-            "testDate": "2013-11-02",
-            "description": "Eerste deeltentamen",
-            "grade": "5",
-            "lastModified": "2013-11-11T15:32:00Z",
-            "passed": null,
-            "userId": 2,
-            "weight": 25
-        },
-        "model": "api.testresult",
-        "pk": 2
+    "model": "api.testresult",
+    "pk": 1
+  },
+  {
+    "fields": {
+      "courseId": 3,
+      "courseResult": 1,
+      "testDate": "2013-11-02",
+      "description": "Eerste deeltentamen",
+      "grade": "5",
+      "lastModified": "2013-11-11T15:32:00Z",
+      "passed": null,
+      "userId": 2,
+      "weight": 25
     },
-    {
-        "fields": {
-            "course": 3,
-            "grade": "6.5",
-            "lastModified": "2013-12-31T10:01:00Z",
-            "passed": true,
-            "result": "",
-            "student": 2
-        },
-        "model": "api.courseresult",
-        "pk": 1
+    "model": "api.testresult",
+    "pk": 2
+  },
+  {
+    "fields": {
+      "course": 3,
+      "grade": "6.5",
+      "lastModified": "2013-12-31T10:01:00Z",
+      "passed": true,
+      "result": "",
+      "student": 2
     },
-    {
-      "fields":{
-         "name":"Room 100",
-         "abbreviation": "r100",
-         "buildingId":1,
-         "description":"Room 100",
-         "totalSeats":21,
-         "totalWorkspaces":10,
-         "availableWorkspaces":10,
-         "lat":"52.355133",
-         "lon":"5.616567"
-      },
-      "model":"api.room",
-      "pk":1
+    "model": "api.courseresult",
+    "pk": 1
+  },
+  {
+    "fields": {
+      "name": "Room 100",
+      "abbreviation": "r100",
+      "buildingId": 1,
+      "description": "Room 100",
+      "totalSeats": 21,
+      "totalWorkspaces": 10,
+      "availableWorkspaces": 10,
+      "lat": "52.355133",
+      "lon": "5.616567"
     },
-    {
-      "fields":{
-         "name":"Room 200",
-         "abbreviation": "r200",
-         "buildingId":1,
-         "description":"Room 200",
-         "totalSeats":300,
-         "totalWorkspaces":0,
-         "availableWorkspaces":0,
-         "lat":"52.355133",
-         "lon":"5.616567"
-      },
-      "model":"api.room",
-      "pk":2
+    "model": "api.room",
+    "pk": 1
+  },
+  {
+    "fields": {
+      "name": "Room 200",
+      "abbreviation": "r200",
+      "buildingId": 1,
+      "description": "Room 200",
+      "totalSeats": 300,
+      "totalWorkspaces": 0,
+      "availableWorkspaces": 0,
+      "lat": "52.355133",
+      "lon": "5.616567"
     },
-    {
-      "fields":{
-         "name":"Room A12",
-         "abbreviation": "rA12",
-         "buildingId":2,
-         "description":"Room A12",
-         "totalSeats":48,
-         "totalWorkspaces":2,
-         "availableWorkspaces":2,
-         "lat":"52.355133",
-         "lon":"5.616567"
-      },
-      "model":"api.room",
-      "pk":3
+    "model": "api.room",
+    "pk": 2
+  },
+  {
+    "fields": {
+      "name": "Room A12",
+      "abbreviation": "rA12",
+      "buildingId": 2,
+      "description": "Room A12",
+      "totalSeats": 48,
+      "totalWorkspaces": 2,
+      "availableWorkspaces": 2,
+      "lat": "52.355133",
+      "lon": "5.616567"
     },
-    {
-      "fields":{
-         "name":"Room B7",
-         "abbreviation": "rB7",
-         "buildingId":2,
-         "description":"Room B7",
-         "totalSeats":80,
-         "totalWorkspaces":3,
-         "availableWorkspaces":1,
-         "lat":"52.355133",
-         "lon":"5.616567"
-      },
-      "model":"api.room",
-      "pk":4
+    "model": "api.room",
+    "pk": 3
+  },
+  {
+    "fields": {
+      "name": "Room B7",
+      "abbreviation": "rB7",
+      "buildingId": 2,
+      "description": "Room B7",
+      "totalSeats": 80,
+      "totalWorkspaces": 3,
+      "availableWorkspaces": 1,
+      "lat": "52.355133",
+      "lon": "5.616567"
     },
-    {
-      "fields":{
-         "start":"2013-02-14T10:30:00.000Z",
-         "end":"2013-02-14T12:30:00.000Z",
-         "course":1,
-         "room":1
-      },
-      "model":"api.lesson",
-      "pk":1
+    "model": "api.room",
+    "pk": 4
+  },
+  {
+    "fields": {
+      "start": "2013-02-14T10:30:00.000Z",
+      "end": "2013-02-14T12:30:00.000Z",
+      "course": 1,
+      "room": 1
     },
-    {
-      "fields":{
-         "start":"2013-02-13T13:30:00.000Z",
-         "end":"2013-02-13T15:30:00.000Z",
-         "course":1,
-         "room":1
-      },
-      "model":"api.lesson",
-      "pk":2
+    "model": "api.lesson",
+    "pk": 1
+  },
+  {
+    "fields": {
+      "start": "2013-02-13T13:30:00.000Z",
+      "end": "2013-02-13T15:30:00.000Z",
+      "course": 1,
+      "room": 1
     },
-    {
-      "fields":{
-         "start":"2013-02-13T19:30:00.000Z",
-         "end":"2013-02-13T21:30:00.000Z",
-         "course":2,
-         "room":2
-      },
-      "model":"api.lesson",
-      "pk":3
+    "model": "api.lesson",
+    "pk": 2
+  },
+  {
+    "fields": {
+      "start": "2013-02-13T19:30:00.000Z",
+      "end": "2013-02-13T21:30:00.000Z",
+      "course": 2,
+      "room": 2
     },
-    {
-      "fields":{
-         "start":"2013-02-12T11:30:00.000Z",
-         "end":"2013-02-12T13:30:00.000Z",
-         "course":2,
-         "room":2
-      },
-      "model":"api.lesson",
-      "pk":3
+    "model": "api.lesson",
+    "pk": 3
+  },
+  {
+    "fields": {
+      "start": "2013-02-12T11:30:00.000Z",
+      "end": "2013-02-12T13:30:00.000Z",
+      "course": 2,
+      "room": 2
     },
-    {
-      "fields":{
-         "title":"Welcome",
-         "authors":["Abraham Lincoln"],
-         "publishDate":"1860-10-11T13:34:12.876Z",
-         "link":"http://www.surf.nl/",
-         "content":"The problem with quotes on the Internet is that is is hard to verify their authenticity",
-         "feeds": [ 1, 2]
-      },
-      "model":"api.newsitem",
-      "pk":1
-    }
+    "model": "api.lesson",
+    "pk": 3
+  },
+  {
+    "fields": {
+      "title": "Welcome",
+      "authors": [
+        "Abraham Lincoln"
+      ],
+      "publishDate": "1860-10-11T13:34:12.876Z",
+      "link": "http://www.surf.nl/",
+      "content": "The problem with quotes on the Internet is that is is hard to verify their authenticity",
+      "feeds": [
+        1,
+        2
+      ]
+    },
+    "model": "api.newsitem",
+    "pk": 1
+  }
 ]
