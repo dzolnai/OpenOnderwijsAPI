@@ -204,3 +204,5 @@ HAYSTACK_CONNECTIONS = {
 }
 
 HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
+
+TEST_RUNNER = 'django.test.runner.DiscoverRunner'

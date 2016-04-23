@@ -1,8 +1,7 @@
+from django.core.validators import MaxValueValidator
 from django.db import models
 from django.utils import timezone
-from django.db import models
 from haystack.utils.geo import Point
-from django.core.validators import MaxValueValidator
 
 
 def selfzip(a):
@@ -17,25 +16,20 @@ class NewsItem(models.Model):
     image = models.URLField(blank=True, null=True)
     link = models.URLField(blank=True, null=True)
     content = models.TextField()
-    feeds = models.ManyToManyField('NewsFeed', related_name='items',blank=True, null=True)
-    #lastModified = models.DateTimeField(auto_now=True, default=timezone.now())
 
     class Meta:
-        ordering = ('pubDate',)
+        ordering = ('publishDate',)
 
 
 class NewsFeed(models.Model):
-    newsfeedId  = models.AutoField(primary_key=True)
-    title       = models.CharField(max_length=255)
+    newsfeedId = models.AutoField(primary_key=True)
+    title = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True)
-    items = models.ForeignKey('NewsItem')
-    groups = models.ManyToManyField('NewsItem', related_name='newsfeeds',blank=True, null=True)
+    groups = models.ManyToManyField('NewsItem', related_name='feeds', blank=True, null=True)
     lastModified = models.DateTimeField(auto_now=True, default=timezone.now())
 
-    # updated = models.DateTimeField(auto_now=True)
-
     class Meta:
-        ordering = ('title',)
+        ordering = ('lastModified',)
 
     def last_updated(self):
         my_items = NewsItem.objects.filter(feeds=self)
@@ -91,23 +85,23 @@ class Person(models.Model):
 class Group(models.Model):
     GROUP_TYPES = ('?LesGroep', '?LeerGroep', 'ou', 'affiliation', 'Generic')
 
-    groupId       = models.AutoField(primary_key=True)
-    type          = models.CharField(max_length=32, choices=selfzip(GROUP_TYPES))
-    name          = models.CharField(max_length=255)
-    description   = models.TextField(blank=True, null=True)
-    lastModified  = models.DateTimeField(auto_now=True, default=timezone.now())
-    members       = models.ManyToManyField('Person', through='GroupRole', blank=True, null=True)
-    courses       = models.ForeignKey('Course', related_name='groups')
-    lastModified  = models.DateTimeField(auto_now=True,default=timezone.now())
+    groupId = models.AutoField(primary_key=True)
+    type = models.CharField(max_length=32, choices=selfzip(GROUP_TYPES))
+    name = models.CharField(max_length=255)
+    description = models.TextField(blank=True, null=True)
+    lastModified = models.DateTimeField(auto_now=True, default=timezone.now())
+    members = models.ManyToManyField('Person', through='GroupRole', blank=True, null=True)
+    courses = models.ForeignKey('Course', related_name='courses')
+
 
 class GroupRole(models.Model):
     ROLES = ('member', 'manager', 'administrator')
 
-    grouproleId   = models.AutoField(primary_key=True)
-    person        = models.ForeignKey('Person', related_name='groups')
-    group         = models.ForeignKey('Group', related_name='members')
-    roles         = models.CharField(choices=selfzip(ROLES), max_length=32)
-    lastModified  = models.DateTimeField(auto_now=True,default=timezone.now())
+    grouproleId = models.AutoField(primary_key=True)
+    person = models.ForeignKey('Person', related_name='person')
+    group = models.ForeignKey('Group', related_name='group')
+    roles = models.CharField(choices=selfzip(ROLES), max_length=32)
+    lastModified = models.DateTimeField(auto_now=True, default=timezone.now())
 
     class Meta:
         unique_together = ('person', 'group')
@@ -142,7 +136,7 @@ class Building(models.Model):
 
 class Room(models.Model):
     roomId = models.AutoField(primary_key=True)
-    buildingId = models.ForeignKey('Building', related_name='rooms')
+    buildingId = models.ForeignKey('Building', related_name='room_building_id')
     abbreviation = models.CharField(max_length=32)
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True)
@@ -176,8 +170,8 @@ class Course(models.Model):
     link = models.URLField(blank=True, null=True)
     organization = models.CharField(max_length=255, blank=True, null=True)
     department = models.CharField(max_length=255, blank=True, null=True)
-    lecturers = models.ForeignKey('Person', related_name='courses')
-    groups = models.ManyToManyField('Group', related_name='courses')
+    lecturers = models.ForeignKey('Person', related_name='lecturers')
+    groups = models.ManyToManyField('Group', related_name='groups')
     lastModified = models.DateTimeField(auto_now=True, default=timezone.now())
 
 
@@ -187,8 +181,8 @@ class Course(models.Model):
 class Lesson(models.Model):
     start = models.DateTimeField()
     end = models.DateTimeField()
-    course = models.ForeignKey('Course', related_name='lessons')
-    room = models.ForeignKey('Room', related_name='lessons')
+    course = models.ForeignKey('Course', related_name='course')
+    room = models.ForeignKey('Room', related_name='room')
     description = models.TextField(blank=True)
     lastModified = models.DateTimeField(auto_now=True, default=timezone.now())
 
@@ -205,7 +199,7 @@ class TestResult(models.Model):
     testResultId = models.AutoField(primary_key=True)
     # student       = models.ForeignKey('Person')
     courseId = models.ForeignKey('Course')
-    courseResult = models.ForeignKey('CourseResult', blank=True, null=True, related_name='testResults')
+    courseResult = models.ForeignKey('CourseResult', blank=True, null=True, related_name='courseResult')
     userId = models.ForeignKey('Person')
     description = models.CharField(max_length=255)
     lastModified = models.DateTimeField(auto_now=True, default=timezone.now())
@@ -215,7 +209,7 @@ class TestResult(models.Model):
     comment = models.TextField()
     # result        = models.CharField(max_length=15,blank=True,null=True)
     passed = models.NullBooleanField()
-    weight = models.PositiveIntegerField(min_value=0, validators=[MaxValueValidator(100), ], blank=True, null=True)
+    weight = models.PositiveIntegerField(validators=[MaxValueValidator(100), ], blank=True, null=True)
 
 
 class CourseResult(models.Model):
@@ -229,13 +223,13 @@ class CourseResult(models.Model):
 
 class Schedule(models.Model):
     scheduleId = models.AutoField(primary_key=True)
-    userId = models.ForeignKey('Person', related_name='schedules', blank=True, null=True, )
-    roomId = models.ForeignKey('Room', related_name='schedules', blank=True, null=True, )
-    buildingId = models.ForeignKey('Building', related_name='schedules', blank=True, null=True)
-    courseId = models.ForeignKey('Course', related_name='schedules', blank=True, null=True)
+    userId = models.ForeignKey('Person', related_name='schedule_user', blank=True, null=True, )
+    roomId = models.ForeignKey('Room', related_name='schedule_room', blank=True, null=True, )
+    buildingId = models.ForeignKey('Building', related_name='schedule_building_id', blank=True, null=True)
+    courseId = models.ForeignKey('Course', related_name='schedule_course_id', blank=True, null=True)
     startDateTime = models.DateTimeField(blank=True, null=True)
     endDateTime = models.DateTimeField(blank=True, null=True)
-    groupId = models.ForeignKey('Group', related_name='groups', blank=True, null=True)
-    lecturers = models.ForeignKey('Person', related_name='lecturer', blank=True, null=True)
+    groupId = models.ForeignKey('Group', related_name='schedule_group_id', blank=True, null=True)
+    lecturers = models.ForeignKey('Person', related_name='schedule_lecturer_id', blank=True, null=True)
     description = models.TextField(blank=True, null=True)
     lastModified = models.DateTimeField(auto_now=True, default=timezone.now())
