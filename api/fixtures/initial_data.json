@@ -694,6 +694,7 @@
       "publishDate": "2016-04-25T13:45:12.876Z",
       "link": "http://www.surf.nl/",
       "content": "Testing the API.",
+      "image": "https://placehold.it/350x150",
       "feeds": [
         1,
         2
