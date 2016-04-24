@@ -20,7 +20,7 @@ class WithPk(object):
         return self.get_field(model_field)
 
 
-""" News items"""
+# News items
 
 
 class NewsItemSerializer(WithPk, serializers.HyperlinkedModelSerializer):
@@ -31,19 +31,17 @@ class NewsItemSerializer(WithPk, serializers.HyperlinkedModelSerializer):
         fields = ('newsitemId', 'feeds', 'publishDate', 'title', 'authors', 'image', 'link', 'content')
 
 
-""" News feeds """
+# News feeds
 
 
 class NewsFeedSerializer(WithPk, serializers.HyperlinkedModelSerializer):
-    # items = serializers.HyperlinkedRelatedField(many=True, read_only=True, view_name='newsitem-detail')
     items = NewsItemSerializer(many=True, read_only=True)
 
     class Meta:
         model = NewsFeed
         fields = ('newsfeedId', 'title', 'description', 'items', 'groups', 'lastModified')
 
-
-""" Group roles """
+# Group roles
 
 
 class GroupRoleSerializer(WithPk, serializers.HyperlinkedModelSerializer):
@@ -72,7 +70,7 @@ class GroupRoleSerializerGroup(WithPk, serializers.HyperlinkedModelSerializer):
         fields = ('grouproleId', 'person', 'displayName', 'groupType', 'roles')
 
 
-""" Groups """
+# Groups
 
 
 class GroupSerializer(WithPk, serializers.HyperlinkedModelSerializer):
@@ -84,7 +82,7 @@ class GroupSerializer(WithPk, serializers.HyperlinkedModelSerializer):
         fields = ('groupId', 'name', 'description', 'type', 'members', 'courses')
 
 
-""" Affiliations """
+# Affiliations
 
 
 class AffiliationSerializer(WithPk, serializers.HyperlinkedModelSerializer):
@@ -95,13 +93,11 @@ class AffiliationSerializer(WithPk, serializers.HyperlinkedModelSerializer):
         fields = ('id', 'affiliation', 'persons')
 
 
-""" Persons """
+# Persons
 
 
 class PersonSerializer(WithPk, serializers.HyperlinkedModelSerializer):
     affiliations = serializers.SlugRelatedField(many=True, read_only=False, slug_field='affiliation')
-    groups = GroupRoleSerializerPerson(many=True, read_only=True)
-
     class Meta:
         model = Person
         fields = ('userId', 'givenname', 'surname', 'displayname', 'affiliations',
@@ -114,7 +110,7 @@ class PaginatedPersonSerializer(CustomPaginationSerializer):
         object_serializer_class = PersonSerializer
 
 
-""" Buildings """
+# Buildings
 
 
 class BuildingSerializer(WithPk, serializers.HyperlinkedModelSerializer):
@@ -123,7 +119,7 @@ class BuildingSerializer(WithPk, serializers.HyperlinkedModelSerializer):
         field = ('abbr', 'name', 'description', 'address', 'postalCode', 'city', 'lat', 'lon')
 
 
-""" Rooms """
+# Rooms
 
 
 class RoomSerializer(WithPk, serializers.HyperlinkedModelSerializer):
@@ -147,7 +143,7 @@ class PaginatedRoomSerializer(CustomPaginationSerializer):
         object_serializer_class = RoomSerializer
 
 
-""" Courses """
+# Courses
 
 
 class CourseSerializer(WithPk, serializers.HyperlinkedModelSerializer):
@@ -171,7 +167,7 @@ class MinorSerializer(WithPk, serializers.HyperlinkedModelSerializer):
         model = Minor
 
 
-""" Lessons """
+# Lessons
 
 
 class LessonSerializer(WithPk, serializers.HyperlinkedModelSerializer):
@@ -187,7 +183,7 @@ class PaginatedLessonSerializer(CustomPaginationSerializer):
         object_serializer_class = LessonSerializer
 
 
-""" Results """
+# Results
 
 
 class TestResultSerializer(WithPk, serializers.HyperlinkedModelSerializer):

@@ -61,7 +61,6 @@ class Person(models.Model):
     department = models.CharField(max_length=255, blank=True, null=True)
     title = models.CharField(max_length=255, blank=True, null=True, help_text='job title and/or description')
     office = models.ForeignKey('Room', blank=True, null=True)
-    groups = models.ManyToManyField('Group', through='GroupRole')
     lat = models.DecimalField(max_digits=9, decimal_places=6)
     lon = models.DecimalField(max_digits=9, decimal_places=6)
     lastModified = models.DateTimeField(auto_now=True, default=timezone.now())
@@ -78,7 +77,7 @@ class Group(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True)
     lastModified = models.DateTimeField(auto_now=True, default=timezone.now())
-    members = models.ManyToManyField('Person', through='GroupRole', blank=True, null=True)
+    members = models.ManyToManyField('Person', through='GroupRole', related_name="groups", blank=True, null=True)
 
 
 class GroupRole(models.Model):
