@@ -2,7 +2,7 @@ from django.core.exceptions import ValidationError
 from django.db import models
 
 
-class ListField(models.Field):
+class ListField(models.TextField):
     SEPARATOR = "||"
     ALLOWED_CHOICES = None
 
@@ -29,9 +29,6 @@ class ListField(models.Field):
             self.blank = kwargs['blank']
         if 'null' in kwargs:
             self.null = kwargs['null']
-
-    def db_type(self, connection):
-        return 'varchar(200)'
 
     def to_python(self, value):
         if value in (None, ''):

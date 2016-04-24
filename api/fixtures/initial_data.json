@@ -683,5 +683,23 @@
     },
     "model": "api.newsitem",
     "pk": 1
+  },
+  {
+    "fields": {
+      "title": "Public Service Announcement",
+      "authors": [
+        "Management",
+        "Administrators"
+      ],
+      "publishDate": "2016-04-25T13:45:12.876Z",
+      "link": "http://www.surf.nl/",
+      "content": "Testing the API.",
+      "feeds": [
+        1,
+        2
+      ]
+    },
+    "model": "api.newsitem",
+    "pk": 2
   }
 ]
