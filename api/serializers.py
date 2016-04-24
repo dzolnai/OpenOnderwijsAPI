@@ -100,9 +100,9 @@ class PersonSerializer(WithPk, serializers.HyperlinkedModelSerializer):
     affiliations = serializers.SlugRelatedField(many=True, read_only=False, slug_field='affiliation')
     class Meta:
         model = Person
-        fields = ('userId', 'givenname', 'surname', 'displayname', 'affiliations',
+        fields = ('userId', 'givenname', 'surname', 'displayname', 'commonname', 'nickname', 'affiliations',
                   'mail', 'telephonenumber', 'mobilenumber', 'photoSocial', 'photoOfficial', 'gender',
-                  'organization', 'department', 'title', 'office', 'groups', 'lat', 'lon')
+                  'organization', 'department', 'title', 'office', 'groups', 'lat', 'lon', 'lastModified')
 
 
 class PaginatedPersonSerializer(CustomPaginationSerializer):
