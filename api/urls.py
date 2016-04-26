@@ -1,9 +1,8 @@
 from api.views import BuildingViewSet, RoomViewSet, BuildingRoomViewSet
-from api.views import CourseViewSet, LessonViewSet, CourseScheduleViewSet
+from api.views import CourseViewSet, ScheduleViewSet
 from api.views import GroupViewSet, GroupRoleViewSet
 from api.views import MinorViewSet
 from api.views import NewsFeedViewSet, NewsItemViewSet
-from api.views import PersonScheduleViewSet, GroupScheduleViewSet, RoomScheduleViewSet
 from api.views import PersonTestResultViewSet, PersonCourseResultViewSet
 from api.views import PersonViewSet, PersonMeViewSet, AffiliationViewSet
 from api.views import TestResultViewSet, CourseResultViewSet
@@ -52,10 +51,6 @@ person_me = PersonMeViewSet.as_view({
     'get': 'retrieve',
 })
 
-person_detail_schedule = PersonScheduleViewSet.as_view({
-    'get': 'list',
-})
-
 person_detail_testresult = PersonTestResultViewSet.as_view({
     'get': 'list',
 })
@@ -73,10 +68,6 @@ group_detail = GroupViewSet.as_view({
     'put': 'update',
     'patch': 'partial_update',
     'delete': 'destroy'
-})
-group_detail_schedule = GroupScheduleViewSet.as_view({
-    'get': 'list',
-    'post': 'create'
 })
 
 grouprole_list = GroupRoleViewSet.as_view({
@@ -135,11 +126,6 @@ room_detail = RoomViewSet.as_view({
     'delete': 'destroy'
 })
 
-room_detail_schedule = RoomScheduleViewSet.as_view({
-    'get': 'list',
-    'post': 'create'
-})
-
 course_list = CourseViewSet.as_view({
     'get': 'list',
     'post': 'create'
@@ -150,11 +136,6 @@ course_detail = CourseViewSet.as_view({
     'put': 'update',
     'patch': 'partial_update',
     'delete': 'destroy'
-})
-
-course_detail_schedule = CourseScheduleViewSet.as_view({
-    'get': 'list',
-    'post': 'create'
 })
 
 minor_list = MinorViewSet.as_view({
@@ -168,12 +149,12 @@ minor_detail = MinorViewSet.as_view({
     'delete': 'destroy'
 })
 
-lesson_list = LessonViewSet.as_view({
+schedule_list = ScheduleViewSet.as_view({
     'get': 'list',
     'post': 'create'
 })
 
-lesson_detail = LessonViewSet.as_view({
+schedule_detail = ScheduleViewSet.as_view({
     'get': 'retrieve',
     'put': 'update',
     'patch': 'partial_update',
@@ -212,8 +193,6 @@ urlpatterns = patterns('api.views',
                        url(r'^v1/persons$', person_list, name='person-list'),
                        url(r'^v1/persons/nearests$', person_list_nearests, name='person-list-nearests'),
                        url(r'^v1/persons/(?P<pk>[0-9]+)$', person_detail, name='person-detail'),
-                       url(r'^v1/persons/(?P<person_pk>[0-9]+)/schedule$', person_detail_schedule,
-                           name='person-detail-schedule'),
                        url(r'^v1/persons/(?P<person_pk>[0-9]+)/testresults$', person_detail_testresult,
                            name='person-detail-testresult'),
                        url(r'^v1/persons/(?P<person_pk>[0-9]+)/courseresults$', person_detail_courseresult,
@@ -224,8 +203,6 @@ urlpatterns = patterns('api.views',
                        url(r'^v1/affiliations/(?P<pk>[0-9]+)$', affiliation_detail, name='affiliation-detail'),
                        url(r'^v1/groups$', group_list, name='group-list'),
                        url(r'^v1/groups/(?P<pk>[0-9]+)$', group_detail, name='group-detail'),
-                       url(r'^v1/groups/(?P<group_pk>[0-9]+)/schedule$', group_detail_schedule,
-                           name='group-detail-schedule'),
                        url(r'^v1/grouproles$', grouprole_list, name='grouprole-list'),
                        url(r'^v1/grouproles/(?P<pk>[0-9]+)$', grouprole_detail, name='grouprole-detail'),
                        url(r'^v1/buildings$', building_list, name='building-list'),
@@ -235,13 +212,10 @@ urlpatterns = patterns('api.views',
                            name='building-detail-rooms'),
                        url(r'^v1/rooms$', room_list, name='room-list'),
                        url(r'^v1/rooms/(?P<pk>\w+)$', room_detail, name='room-detail'),
-                       url(r'^v1/rooms/(?P<room_pk>\w+)/schedule$', room_detail_schedule, name='room-detail-schedule'),
                        url(r'^v1/courses$', course_list, name='course-list'),
-                       url(r'^v1/courses/(?P<pk>[0-9]+)$', course_detail, name='course-detail'),
-                       url(r'^v1/courses/(?P<course_pk>[0-9]+)/schedule$', course_detail_schedule,
-                           name='course-detail-schedule'),
-                       url(r'^v1/schedule$', lesson_list, name='lesson-list'),
-                       url(r'^v1/schedule/(?P<pk>[0-9]+)', lesson_detail, name='lesson-detail'),
+                       url(r'^v1/courses/(?P<pk>\w+)$', course_detail, name='course-detail'),
+                       url(r'^v1/schedule$', schedule_list, name='schedule-list'),
+                       url(r'^v1/schedule/(?P<pk>[0-9]+)', schedule_detail, name='schedule-detail'),
                        url(r'^v1/minors$', minor_list, name='minor-list'),
                        url(r'^v1/minors/(?P<pk>\w+)$', minor_detail, name='minor-detail'),
                        url(r'^v1/testresults$', testresult_list, name='testresult-list'),

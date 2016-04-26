@@ -1,20 +1,15 @@
 from rest_framework import serializers
 
-from api.models import NewsFeed, NewsItem
+from api.models import NewsFeed, NewsItem, Schedule
 from api.models import Person, Affiliation
 from api.models import Group, GroupRole
 from api.models import Building, Room
 from api.models import Course, Minor
-from api.models import Lesson
 from api.models import TestResult, CourseResult
 
 from api.pagination import CustomPaginationSerializer
 
-import logging
-
 """ This mixin adds the primary key always to the result """
-
-
 class WithPk(object):
     def get_pk_field(self, model_field):
         return self.get_field(model_field)
@@ -144,11 +139,9 @@ class PaginatedRoomSerializer(CustomPaginationSerializer):
 
 
 # Courses
-
-
 class CourseSerializer(WithPk, serializers.HyperlinkedModelSerializer):
-    lessons = serializers.HyperlinkedRelatedField(many=True, view_name='lesson-detail')
-    minors = serializers.HyperlinkedRelatedField(many=True, blank=True, view_name='minor-detail')
+    #lessons = serializers.HyperlinkedRelatedField(many=True, view_name='lesson-detail')
+    #minors = serializers.HyperlinkedRelatedField(many=True, blank=True, view_name='minor-detail')
 
     class Meta:
         model = Course
@@ -170,17 +163,22 @@ class MinorSerializer(WithPk, serializers.HyperlinkedModelSerializer):
 # Lessons
 
 
-class LessonSerializer(WithPk, serializers.HyperlinkedModelSerializer):
-    room = RoomSummarySerializer(read_only=True)
-    course = CourseSummarySerializer(read_only=True)
+class ScheduleSerializer(WithPk, serializers.HyperlinkedModelSerializer):
+    roomId = serializers.SlugRelatedField(many=True, read_only=False, slug_field='roomId')
+    courseId = serializers.SlugRelatedField(many=True, read_only=False, slug_field='courseId')
+    userId = serializers.SlugRelatedField(many=True, read_only=False, slug_field='userId')
+    groupId = serializers.SlugRelatedField(many=True, read_only=False, slug_field='groupId')
+    lecturers = serializers.SlugRelatedField(many=True, read_only=False, slug_field='pk')
+
 
     class Meta:
-        model = Lesson
+        model = Schedule
+        exclude = ['url']
 
 
-class PaginatedLessonSerializer(CustomPaginationSerializer):
+class PaginatedScheduleSerializer(CustomPaginationSerializer):
     class Meta:
-        object_serializer_class = LessonSerializer
+        object_serializer_class = ScheduleSerializer
 
 
 # Results

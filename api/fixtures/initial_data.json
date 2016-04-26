@@ -413,6 +413,7 @@
   },
   {
     "fields": {
+      "courseId": "PHY-STRING-413",
       "abbreviation": "STRING413",
       "department": "Physics department",
       "description": "In physics, string theory is a theoretical framework in which the point-like particles of particle physics are replaced by one-dimensional objects called strings.",
@@ -433,11 +434,11 @@
         1
       ]
     },
-    "model": "api.course",
-    "pk": 1
+    "model": "api.course"
   },
   {
     "fields": {
+      "courseId": "CG-CS-PROGCPU1",
       "abbreviation": "CSPROGCPU1",
       "department": "CG department",
       "description": "General-purpose computing on graphics processing units",
@@ -460,11 +461,11 @@
         3
       ]
     },
-    "model": "api.course",
-    "pk": 2
+    "model": "api.course"
   },
   {
     "fields": {
+      "courseId": "LO-ABSTR-101",
       "abbreviation": "ABSTR101",
       "department": "Logica",
       "description": "Een inleiding in het abstraheren",
@@ -485,11 +486,11 @@
       "groups": [
       ]
     },
-    "model": "api.course",
-    "pk": 3
+    "model": "api.course"
   },
   {
     "fields": {
+      "courseId": "LO-CONCR-101",
       "abbreviation": "CONCR101",
       "department": "Logica",
       "description": "Een inleiding in het concreet maken van abstracte begrippen.",
@@ -510,8 +511,7 @@
       "groups": [
       ]
     },
-    "model": "api.course",
-    "pk": 4
+    "model": "api.course"
   },
   {
     "fields": {
@@ -527,7 +527,6 @@
   },
   {
     "fields": {
-      "courseId": 3,
       "courseResult": 1,
       "testDate": "2013-12-18",
       "description": "Tweede deeltentamen",
@@ -542,7 +541,6 @@
   },
   {
     "fields": {
-      "courseId": 3,
       "courseResult": 1,
       "testDate": "2013-11-02",
       "description": "Eerste deeltentamen",
@@ -557,7 +555,7 @@
   },
   {
     "fields": {
-      "course": 3,
+      "course": "LO-CONCR-101",
       "grade": "6.5",
       "lastModified": "2013-12-31T10:01:00Z",
       "passed": true,
@@ -629,43 +627,17 @@
   },
   {
     "fields": {
-      "start": "2013-02-14T10:30:00.000Z",
-      "end": "2013-02-14T12:30:00.000Z",
-      "course": 1,
-      "room": 1
+      "userId": [1, 2],
+      "roomId": [1],
+      "startDateTime": "2013-02-13T15:30:00.000Z",
+      "endDateTime": "2013-02-13T19:30:00.000Z",
+      "courseId": ["LO-CONCR-101"],
+      "groupId": [1, 2],
+      "lecturers": [1],
+      "description": "I don't know"
     },
-    "model": "api.lesson",
+    "model": "api.schedule",
     "pk": 1
-  },
-  {
-    "fields": {
-      "start": "2013-02-13T13:30:00.000Z",
-      "end": "2013-02-13T15:30:00.000Z",
-      "course": 1,
-      "room": 1
-    },
-    "model": "api.lesson",
-    "pk": 2
-  },
-  {
-    "fields": {
-      "start": "2013-02-13T19:30:00.000Z",
-      "end": "2013-02-13T21:30:00.000Z",
-      "course": 2,
-      "room": 2
-    },
-    "model": "api.lesson",
-    "pk": 3
-  },
-  {
-    "fields": {
-      "start": "2013-02-12T11:30:00.000Z",
-      "end": "2013-02-12T13:30:00.000Z",
-      "course": 2,
-      "room": 2
-    },
-    "model": "api.lesson",
-    "pk": 3
   },
   {
     "fields": {

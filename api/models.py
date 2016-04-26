@@ -135,7 +135,7 @@ class Room(models.Model):
 class Course(models.Model):
     LEVELS = ('HBO-B', 'HBO-M', 'WO-B', 'WO-M', 'WO-D')
     LANGUAGES = ('nl-NL', 'en-GB', 'de-DE')
-    schedules = models.ManyToManyField('Schedule', through='CourseScheduling', related_name='+', blank=True, null=True)
+    courseId = models.TextField(blank=False, null=False, primary_key=True)
     name = models.CharField(max_length=255, unique=True)
     abbreviation = models.CharField(max_length=32, unique=True, blank=True, null=True)
     ects = models.PositiveIntegerField(blank=True, null=True)
@@ -156,18 +156,8 @@ class Course(models.Model):
     groups = models.ManyToManyField('Group', related_name='courses', blank=True, null=True)
     lastModified = models.DateTimeField(auto_now=True, default=timezone.now())
 
-
-# feeds   = models.ManyToManyField('Minor',related_name='courses')
-
-
-class Lesson(models.Model):
-    start = models.DateTimeField()
-    end = models.DateTimeField()
-    course = models.ForeignKey('Course', related_name='course')
-    room = models.ForeignKey('Room', related_name='room')
-    description = models.TextField(blank=True)
-    lastModified = models.DateTimeField(auto_now=True, default=timezone.now())
-
+    class Meta:
+        ordering = ('lastModified',)
 
 # ??
 class Minor(models.Model):
@@ -179,7 +169,6 @@ class Minor(models.Model):
 
 class TestResult(models.Model):
     testResultId = models.AutoField(primary_key=True)
-    courseId = models.ForeignKey('Course')
     courseResult = models.ForeignKey('CourseResult', blank=True, null=True, related_name='testResults')
     userId = models.ForeignKey('Person')
     description = models.CharField(max_length=255)
@@ -202,19 +191,15 @@ class CourseResult(models.Model):
 
 class Schedule(models.Model):
     scheduleId = models.AutoField(primary_key=True)
-    userId = models.ForeignKey('Person', related_name='schedule_user', blank=True, null=True, )
-    roomId = models.ForeignKey('Room', related_name='schedule_room', blank=True, null=True, )
-    buildingId = models.ForeignKey('Building', related_name='schedule_building_id', blank=True, null=True)
-    courseId = models.ManyToManyField('Course', through='CourseScheduling', related_name='+', blank=True, null=True)
+    userId = models.ManyToManyField('Person', related_name="+", null=True)
+    roomId = models.ManyToManyField('Room', related_name='+', null=True)
+    courseId = models.ManyToManyField('Course', related_name='schedules', null=True)
     startDateTime = models.DateTimeField(blank=True, null=True)
     endDateTime = models.DateTimeField(blank=True, null=True)
-    groupId = models.ForeignKey('Group', related_name='schedule_group_id', blank=True, null=True)
-    lecturers = models.ForeignKey('Person', related_name='schedule_lecturer_id', blank=True, null=True)
+    groupId = models.ManyToManyField('Group', related_name="+", null=True)
+    lecturers = models.ManyToManyField('Person', related_name="+", null=True)
     description = models.TextField(blank=True, null=True)
     lastModified = models.DateTimeField(auto_now=True, default=timezone.now())
 
-
-class CourseScheduling(models.Model):
-    courseSchedulingId = models.AutoField(primary_key=True)
-    course = models.ForeignKey('Course')
-    schedule = models.ForeignKey('Schedule')
+    def buildingId(self):
+        return self.roomId.buildingId
