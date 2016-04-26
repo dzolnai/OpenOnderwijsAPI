@@ -5,9 +5,11 @@ If you want geo-location support:
 
 ## Step 1: Install ElasticSearch
 
-* install ElasticSearch - http://www.elasticsearch.org/download
+* Install ElasticSearch - NOTE: this version of the API is only compatible with ElasticSearch 1.x!
 
-* setup ElasticSearch - http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/setup.html#setup-installation
+ Tested version: [1.7.5](https://www.elastic.co/downloads/past-releases/elasticsearch-1-7-5)
+
+* Setup ElasticSearch - http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/setup.html#setup-installation
 
 ## Step 2: Configure Haystack
 
