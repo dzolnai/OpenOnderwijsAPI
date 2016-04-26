@@ -94,9 +94,10 @@ class PersonViewSet(AuthenticatedViewSet):
 
     def nearests(self, request):
         radius = 200
-        if ['lat', 'lon'] in request.GET:
-            lat_lon = [float(request.GET['lat']), float(request.GET['lon'])]
-            location = Point(lat_lon)
+        if 'lat' in request.GET and 'lon' in request.GET:
+            # Order should be lon - lat!
+            lon_lat = [float(request.GET['lon']), float(request.GET['lat'])]
+            location = Point(lon_lat)
         else:
             return Response(status=status.HTTP_400_BAD_REQUEST)
         if 'r' in request.GET:
@@ -256,8 +257,9 @@ class BuildingViewSet(AuthenticatedViewSet):
     def nearests(self, request):
         radius = 200
         if 'lat' in request.GET and 'lon' in request.GET:
-            lat_lon = [float(request.GET['lat']), float(request.GET['lon'])]
-            location = Point(lat_lon)
+            # Order should be lon - lat!
+            lon_lat = [float(request.GET['lon']), float(request.GET['lat'])]
+            location = Point(lon_lat)
         else:
             return Response(status=status.HTTP_400_BAD_REQUEST)
         if 'r' in request.GET:

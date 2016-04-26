@@ -13,7 +13,7 @@ class NewsItem(models.Model):
     newsitemId = models.AutoField(primary_key=True)
     publishDate = models.DateTimeField(auto_now_add=True)
     title = models.CharField(max_length=255)
-    authors = ListField(blank=True, null=True)
+    authors = ListField(blank=True, null=True, max_length=255)
     image = models.URLField(blank=True, null=True)
     link = models.URLField(blank=True, null=True)
     content = models.TextField()
@@ -86,7 +86,7 @@ class GroupRole(models.Model):
     person = models.ForeignKey('Person', related_name='person')
     group = models.ForeignKey('Group', related_name='group')
     lastModified = models.DateTimeField(auto_now=True, default=timezone.now())
-    roles = ListField(choices=self_zip(ROLES), null=False, blank=False)
+    roles = ListField(choices=self_zip(ROLES), null=False, blank=False, max_length=255)
 
     class Meta:
         unique_together = ('person', 'group')
