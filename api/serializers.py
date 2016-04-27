@@ -19,6 +19,7 @@ class WithPk(object):
 
 class NewsItemSerializer(WithPk, serializers.HyperlinkedModelSerializer):
     feeds = serializers.SlugRelatedField(many=True, read_only=True, slug_field='pk')
+    authors = serializers.ListField(child=serializers.CharField())
 
     class Meta:
         model = NewsItem
@@ -39,37 +40,17 @@ class NewsFeedSerializer(WithPk, serializers.HyperlinkedModelSerializer):
 
 
 class GroupRoleSerializer(WithPk, serializers.HyperlinkedModelSerializer):
+    roles = serializers.ListField(child=serializers.CharField())
     class Meta:
         model = GroupRole
         fields = ('grouproleId', 'group', 'person', 'roles')
-
-
-class GroupRoleSerializerPerson(WithPk, serializers.HyperlinkedModelSerializer):
-    group = serializers.HyperlinkedRelatedField(view_name='group-detail', read_only=True)
-    groupName = serializers.Field(source='groupName')
-    groupType = serializers.Field(source='groupType')
-
-    class Meta:
-        model = GroupRole
-        fields = ('grouproleId', 'group', 'groupName', 'groupType', 'roles')
-
-
-class GroupRoleSerializerGroup(WithPk, serializers.HyperlinkedModelSerializer):
-    person = serializers.HyperlinkedRelatedField(view_name='person-detail', read_only=True)
-    displayName = serializers.Field(source='displayName')
-    groupType = serializers.Field(source='groupType')
-
-    class Meta:
-        model = GroupRole
-        fields = ('grouproleId', 'person', 'displayName', 'groupType', 'roles')
-
 
 # Groups
 
 
 class GroupSerializer(WithPk, serializers.HyperlinkedModelSerializer):
-    members = GroupRoleSerializerGroup(many=True, read_only=True)
-    courses = serializers.HyperlinkedRelatedField(many=True, view_name='course-detail')
+    #members = GroupRoleSerializerGroup(many=True, read_only=True)
+    courses = serializers.HyperlinkedRelatedField(many=True, read_only=True, view_name='course-detail')
 
     class Meta:
         model = Group
@@ -80,7 +61,7 @@ class GroupSerializer(WithPk, serializers.HyperlinkedModelSerializer):
 
 
 class AffiliationSerializer(WithPk, serializers.HyperlinkedModelSerializer):
-    persons = serializers.HyperlinkedRelatedField(many=True, view_name='person-detail')
+    persons = serializers.HyperlinkedRelatedField(many=True, read_only=True, view_name='person-detail')
 
     class Meta:
         model = Affiliation
@@ -91,7 +72,7 @@ class AffiliationSerializer(WithPk, serializers.HyperlinkedModelSerializer):
 
 
 class PersonSerializer(WithPk, serializers.HyperlinkedModelSerializer):
-    affiliations = serializers.SlugRelatedField(many=True, read_only=False, slug_field='affiliation')
+    affiliations = serializers.SlugRelatedField(many=True, read_only=True, slug_field='affiliation')
     class Meta:
         model = Person
         fields = ('userId', 'givenname', 'surname', 'displayname', 'commonname', 'nickname', 'affiliations',
@@ -110,14 +91,15 @@ class PaginatedPersonSerializer(CustomPaginationSerializer):
 class BuildingSerializer(WithPk, serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Building
-        field = ('abbr', 'name', 'description', 'address', 'postalCode', 'city', 'lat', 'lon')
+        fields = ('buildingId', 'abbreviation', 'name', 'description', 'address',
+                  'postalCode', 'city', 'lat', 'lon', 'altitude', 'lastModified')
 
 
 # Rooms
 
 
 class RoomSerializer(WithPk, serializers.HyperlinkedModelSerializer):
-    building = serializers.HyperlinkedRelatedField(view_name='building-detail')
+    building = serializers.HyperlinkedRelatedField(read_only=True, view_name='building-detail')
 
     class Meta:
         model = Room
@@ -163,11 +145,11 @@ class MinorSerializer(WithPk, serializers.HyperlinkedModelSerializer):
 
 
 class ScheduleSerializer(WithPk, serializers.HyperlinkedModelSerializer):
-    roomId = serializers.SlugRelatedField(many=True, read_only=False, slug_field='roomId')
-    courseId = serializers.SlugRelatedField(many=True, read_only=False, slug_field='courseId')
-    userId = serializers.SlugRelatedField(many=True, read_only=False, slug_field='userId')
-    groupId = serializers.SlugRelatedField(many=True, read_only=False, slug_field='groupId')
-    lecturers = serializers.SlugRelatedField(many=True, read_only=False, slug_field='pk')
+    roomId = serializers.SlugRelatedField(many=True, read_only=True, slug_field='roomId')
+    courseId = serializers.SlugRelatedField(many=True, read_only=True, slug_field='courseId')
+    userId = serializers.SlugRelatedField(many=True, read_only=True, slug_field='userId')
+    groupId = serializers.SlugRelatedField(many=True, read_only=True, slug_field='groupId')
+    lecturers = serializers.SlugRelatedField(many=True, read_only=True, slug_field='pk')
 
 
     class Meta:
@@ -184,17 +166,17 @@ class PaginatedScheduleSerializer(CustomPaginationSerializer):
 
 
 class TestResultSerializer(WithPk, serializers.HyperlinkedModelSerializer):
-    student = serializers.HyperlinkedRelatedField(view_name='person-detail')
-    course = serializers.HyperlinkedRelatedField(view_name='course-detail')
+    student = serializers.HyperlinkedRelatedField(read_only=True, view_name='person-detail')
+    course = serializers.HyperlinkedRelatedField(read_only=True, view_name='course-detail')
 
     class Meta:
         model = TestResult
 
 
 class CourseResultSerializer(WithPk, serializers.HyperlinkedModelSerializer):
-    student = serializers.HyperlinkedRelatedField(view_name='person-detail')
+    student = serializers.HyperlinkedRelatedField(read_only=True, view_name='person-detail')
     course = CourseSerializer(read_only=True)
-    testResults = serializers.HyperlinkedRelatedField(many=True, view_name='testresult-detail')
+    testResults = serializers.HyperlinkedRelatedField(many=True, read_only=True, view_name='testresult-detail')
 
     class Meta:
         model = CourseResult

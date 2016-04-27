@@ -146,51 +146,6 @@
   },
   {
     "fields": {
-      "group": 1,
-      "person": 2,
-      "roles": [
-        "member"
-      ]
-    },
-    "model": "api.grouprole",
-    "pk": 1
-  },
-  {
-    "fields": {
-      "group": 2,
-      "person": 2,
-      "roles": [
-        "member",
-        "administrator"
-      ]
-    },
-    "model": "api.grouprole",
-    "pk": 2
-  },
-  {
-    "fields": {
-      "group": 3,
-      "person": 2,
-      "roles": [
-        "member"
-      ]
-    },
-    "model": "api.grouprole",
-    "pk": 3
-  },
-  {
-    "fields": {
-      "group": 3,
-      "person": 1,
-      "roles": [
-        "administrator"
-      ]
-    },
-    "model": "api.grouprole",
-    "pk": 4
-  },
-  {
-    "fields": {
       "description": "test 1",
       "title": "feed 1",
       "groups": [
@@ -346,6 +301,7 @@
       "group": 1,
       "person": 2,
       "roles": [
+        "administrator",
         "member"
       ]
     },
@@ -355,8 +311,9 @@
   {
     "fields": {
       "group": 2,
-      "person": 2,
+      "person": 1,
       "roles": [
+        "manager",
         "member"
       ]
     },
@@ -366,22 +323,14 @@
   {
     "fields": {
       "group": 3,
-      "person": 2,
+      "person": 1,
       "roles": [
-        "member"
+        "administrator",
+        "manager"
       ]
     },
     "model": "api.grouprole",
     "pk": 3
-  },
-  {
-    "fields": {
-      "group": 3,
-      "person": 1,
-      "roles": "administrator"
-    },
-    "model": "api.grouprole",
-    "pk": 4
   },
   {
     "fields": {

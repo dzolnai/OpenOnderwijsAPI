@@ -3,8 +3,8 @@ from rest_framework import serializers
 
 
 class MetaSerializer(serializers.Serializer):
-    next = pagination.NextPageField(source='*')
-    prev = pagination.PreviousPageField(source='*')
+    #next = pagination.NextPageField(source='*')
+    #prev = pagination.PreviousPageField(source='*')
     totalPages = serializers.Field(source='paginator.num_pages')
     thisPage = serializers.Field(source='number')
     totalItems = serializers.Field(source='paginator.count')
@@ -13,6 +13,6 @@ class MetaSerializer(serializers.Serializer):
     version = serializers.Field(source='version')
 
 
-class CustomPaginationSerializer(pagination.BasePaginationSerializer):
+class CustomPaginationSerializer(pagination.LimitOffsetPagination):
     meta = MetaSerializer(source='*')
     results_field = 'data'

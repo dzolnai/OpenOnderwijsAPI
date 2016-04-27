@@ -12,10 +12,6 @@ class ListField(models.TextField):
         super(ListField, self).__init__(*args, **kwargs)
         if 'choices' in kwargs:
             self.ALLOWED_CHOICES = map(lambda choice: choice[0], kwargs['choices'])
-        if 'blank' in kwargs:
-            self.blank = kwargs['blank']
-        if 'null' in kwargs:
-            self.null = kwargs['null']
 
     def to_python(self, value):
         if value in (None, ''):

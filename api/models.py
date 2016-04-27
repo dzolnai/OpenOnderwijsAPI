@@ -111,7 +111,8 @@ class Building(models.Model):
     city = models.CharField(max_length=255)
     lat = models.DecimalField(blank=True, null=True, max_digits=9, decimal_places=6)
     lon = models.DecimalField(blank=True, null=True, max_digits=9, decimal_places=6)
-    altitude = models.DecimalField(max_digits=3, decimal_places=2, blank=True, null=True)
+    altitude = models.DecimalField(max_digits=4, decimal_places=2, blank=True, null=True)
+    lastModified = models.DateTimeField(auto_now=True, default=timezone.now())
 
     def get_location(self):
         return Point(float(self.lon), float(self.lat))

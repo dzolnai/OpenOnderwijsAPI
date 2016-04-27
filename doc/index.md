@@ -29,15 +29,12 @@ First ensure your current working directory is the one you just created during t
 ### Step 3: Install python modules
 
     pip install django==1.7.11
-
-    pip install djangorestframework==2.4.4
-
+    pip install djangorestframework==3.3.3
+    pip install djangorestframework-xml
+    pip install djangorestframework-yaml
     pip install django-rest-swagger
-    
     pip install django-oauth2-provider
-
     pip install python-dateutil
-    
     pip install django-haystack
 
 If using ElasticSearch you'll also need to install the python lib:
