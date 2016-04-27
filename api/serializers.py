@@ -17,9 +17,8 @@ class WithPk(object):
 
 # News items
 
-
 class NewsItemSerializer(WithPk, serializers.HyperlinkedModelSerializer):
-    feeds = serializers.HyperlinkedRelatedField(many=True, view_name='newsfeed-detail')
+    feeds = serializers.SlugRelatedField(many=True, read_only=True, slug_field='pk')
 
     class Meta:
         model = NewsItem
@@ -28,9 +27,9 @@ class NewsItemSerializer(WithPk, serializers.HyperlinkedModelSerializer):
 
 # News feeds
 
-
 class NewsFeedSerializer(WithPk, serializers.HyperlinkedModelSerializer):
-    items = NewsItemSerializer(many=True, read_only=True)
+    items = serializers.SlugRelatedField(many=True, read_only=True, slug_field='pk')
+    groups = serializers.SlugRelatedField(many=True, read_only=True, slug_field='pk')
 
     class Meta:
         model = NewsFeed
