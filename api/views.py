@@ -81,7 +81,7 @@ class PersonViewSet(AuthenticatedViewSet):
             lon_lat = [float(request.GET['lon']), float(request.GET['lat'])]
             location = Point(lon_lat)
         else:
-            return Response(status=status.HTTP_400_BAD_REQUEST)
+            return Response(status=status.HTTP_400_BAD_REQUEST, data="Missing 'lat' and/or 'lon' parameters!")
         if 'r' in request.GET:
             radius = request.GET['r']
         results = SearchQuerySet().models(Person).dwithin('location', location, D(m=radius))
@@ -162,7 +162,7 @@ class BuildingViewSet(AuthenticatedViewSet):
             lon_lat = [float(request.GET['lon']), float(request.GET['lat'])]
             location = Point(lon_lat)
         else:
-            return Response(status=status.HTTP_400_BAD_REQUEST)
+            return Response(status=status.HTTP_400_BAD_REQUEST, data="Missing 'lat' and/or 'lon' parameters!")
         if 'r' in request.GET:
             radius = request.GET['r']
         results = SearchQuerySet().models(Building).dwithin('location', location, D(m=radius))
