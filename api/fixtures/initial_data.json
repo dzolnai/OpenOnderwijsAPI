@@ -341,7 +341,8 @@
       "lat": "52.355133",
       "lon": "5.616567",
       "name": "Albert-Einsteingebouw",
-      "postalCode": "1114FG"
+      "postalCode": "1114FG",
+      "altitude": 115.12
     },
     "model": "api.building",
     "pk": 1
@@ -355,7 +356,8 @@
       "lat": "52.356133",
       "lon": "5.617567",
       "name": "Washingtongebouw",
-      "postalCode": "1234AB"
+      "postalCode": "1234AB",
+      "altitude": 139.77
     },
     "model": "api.building",
     "pk": 2
