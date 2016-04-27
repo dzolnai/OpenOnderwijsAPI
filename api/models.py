@@ -160,7 +160,8 @@ class Course(models.Model):
     class Meta:
         ordering = ('lastModified',)
 
-# ??
+
+# Not included in v1 API spec - do not remove, might be used in the future
 class Minor(models.Model):
     name = models.CharField(max_length=255, unique=True)
     description = models.TextField()

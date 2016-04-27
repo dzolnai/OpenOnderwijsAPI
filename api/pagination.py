@@ -1,18 +1,27 @@
+from onderwijsdata.settings import API_VERSION
 from rest_framework import pagination
-from rest_framework import serializers
+from rest_framework.response import Response
+from rest_framework.utils.urls import replace_query_param
 
 
-class MetaSerializer(serializers.Serializer):
-    #next = pagination.NextPageField(source='*')
-    #prev = pagination.PreviousPageField(source='*')
-    totalPages = serializers.Field(source='paginator.num_pages')
-    thisPage = serializers.Field(source='number')
-    totalItems = serializers.Field(source='paginator.count')
-    firstItem = serializers.Field(source='start_index')
-    lastItem = serializers.Field(source='end_index')
-    version = serializers.Field(source='version')
+class MetadataPagination(pagination.PageNumberPagination):
+    def get_paginated_response(self, data):
+        return Response(
+            {'metadata': {
+                'count': self.page.paginator.count,
+                'next': self.get_next_link(),
+                'previous': self.get_previous_link(),
+                'version': API_VERSION
+            }, 'data': data})
 
+    def get_next_link(self):
+        if not self.page.has_next():
+            return None
+        page_number = self.page.next_page_number()
+        return replace_query_param('', self.page_query_param, page_number)
 
-class CustomPaginationSerializer(pagination.LimitOffsetPagination):
-    meta = MetaSerializer(source='*')
-    results_field = 'data'
+    def get_previous_link(self):
+        if not self.page.has_previous():
+            return None
+        page_number = self.page.previous_page_number()
+        return replace_query_param('', self.page_query_param, page_number)

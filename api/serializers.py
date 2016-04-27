@@ -1,13 +1,10 @@
-from rest_framework import serializers
-
-from api.models import NewsFeed, NewsItem, Schedule
-from api.models import Person, Affiliation
-from api.models import Group, GroupRole
 from api.models import Building, Room
 from api.models import Course, Minor
+from api.models import Group, GroupRole
+from api.models import NewsFeed, NewsItem, Schedule
+from api.models import Person, Affiliation
 from api.models import TestResult, CourseResult
-
-from api.pagination import CustomPaginationSerializer
+from rest_framework import serializers
 
 """ This mixin adds the primary key always to the result """
 class WithPk(object):
@@ -80,10 +77,6 @@ class PersonSerializer(WithPk, serializers.HyperlinkedModelSerializer):
                   'organization', 'department', 'title', 'office', 'groups', 'lat', 'lon', 'lastModified')
 
 
-class PaginatedPersonSerializer(CustomPaginationSerializer):
-    class Meta:
-        object_serializer_class = PersonSerializer
-
 
 # Buildings
 
@@ -112,11 +105,6 @@ class RoomSummarySerializer(WithPk, serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Room
         fields = ('roomId', 'abbreviation', 'name')
-
-
-class PaginatedRoomSerializer(CustomPaginationSerializer):
-    class Meta:
-        object_serializer_class = RoomSerializer
 
 
 # Courses
@@ -155,13 +143,6 @@ class ScheduleSerializer(WithPk, serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Schedule
         exclude = ['url']
-
-
-class PaginatedScheduleSerializer(CustomPaginationSerializer):
-    class Meta:
-        object_serializer_class = ScheduleSerializer
-
-
 # Results
 
 

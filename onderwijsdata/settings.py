@@ -166,8 +166,8 @@ LOGGING = {
 }
 
 REST_FRAMEWORK = {
-    'DEFAULT_PAGINATION_SERIALIZER_CLASS': 'api.pagination.CustomPaginationSerializer',
-    'PAGINATE_BY': 2,
+    'DEFAULT_PAGINATION_CLASS': 'api.pagination.MetadataPagination',
+    'PAGE_SIZE': 20,
     'COERCE_DECIMAL_TO_STRING': False,
     'DEFAULT_PARSER_CLASSES': (
         'rest_framework_xml.parsers.XMLParser',
