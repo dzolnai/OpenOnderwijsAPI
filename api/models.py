@@ -181,14 +181,21 @@ class TestResult(models.Model):
     passed = models.NullBooleanField()
     weight = models.PositiveIntegerField(validators=[MaxValueValidator(100), ], blank=True, null=True)
 
+    @property
+    def course(self):
+        return self.courseResult.course.courseId
 
 class CourseResult(models.Model):
+    courseResultId = models.AutoField(primary_key=True)
     student = models.ForeignKey('Person')
-    course = models.ForeignKey('Course')
+    course = models.ForeignKey('Course', blank=False, null=False)
     lastModified = models.DateTimeField(auto_now=True, default=timezone.now())
     grade = models.DecimalField(max_digits=3, decimal_places=2, blank=True, null=True)
     result = models.CharField(blank=True, null=True, max_length=15)
     passed = models.NullBooleanField()
+
+    def course_lastModified(self):
+        return self.course.lastModified
 
 
 class Schedule(models.Model):

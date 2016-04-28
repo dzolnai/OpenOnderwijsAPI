@@ -6,13 +6,13 @@ from api.models import NewsItem, NewsFeed
 from api.models import Person, Affiliation
 from api.models import TestResult, CourseResult
 from api.pagination import MetadataPagination
-from api.serializers import BuildingSerializer, RoomSerializer
+from api.serializers import BuildingSerializer, RoomSerializer, CourseResultListSerializer
 from api.serializers import GroupSerializer, GroupRoleSerializer
 from api.serializers import MinorSerializer
 from api.serializers import NewsItemSerializer, NewsFeedSerializer
 from api.serializers import PersonSerializer, AffiliationSerializer
 from api.serializers import ScheduleSerializer, CourseSerializer
-from api.serializers import TestResultSerializer, CourseResultSerializer
+from api.serializers import TestResultsSerializer, CourseResultSerializer
 from haystack.query import SearchQuerySet
 from haystack.utils.geo import Point, D
 from rest_framework import status
@@ -38,9 +38,9 @@ def api_root(request, format=None):
         'courses': reverse('course-list', request=request, format=format),
         'schedule': reverse('schedule-list', request=request, format=format),
         'minors': reverse('minor-list', request=request, format=format),
-        'testresult': reverse('testresult-list', request=request, format=format),
         'courseresult': reverse('courseresult-list', request=request, format=format),
     })
+
 
 class AuthenticatedViewSet(viewsets.ModelViewSet):
     # replace the empty braces with the commented line to enable authentication on the whole API
@@ -52,25 +52,25 @@ class AuthenticatedViewSet(viewsets.ModelViewSet):
 class NewsItemViewSet(AuthenticatedViewSet):
     queryset = NewsItem.objects.all()
     serializer_class = NewsItemSerializer
-    pagination_class = MetadataPagination 
+    pagination_class = MetadataPagination
 
 
 class NewsFeedViewSet(AuthenticatedViewSet):
     queryset = NewsFeed.objects.all()
     serializer_class = NewsFeedSerializer
-    pagination_class = MetadataPagination 
+    pagination_class = MetadataPagination
 
 
 class AffiliationViewSet(AuthenticatedViewSet):
     queryset = Affiliation.objects.all()
     serializer_class = AffiliationSerializer
-    pagination_class = MetadataPagination 
+    pagination_class = MetadataPagination
 
 
 class PersonViewSet(AuthenticatedViewSet):
     queryset = Person.objects.all()
     serializer_class = PersonSerializer
-    pagination_class = MetadataPagination 
+    pagination_class = MetadataPagination
 
     def nearests(self, request):
         radius = 200
@@ -125,13 +125,13 @@ class PersonMeViewSet(AuthenticatedViewSet):
 class GroupViewSet(AuthenticatedViewSet):
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
-    pagination_class = MetadataPagination 
+    pagination_class = MetadataPagination
 
 
 class GroupRoleViewSet(AuthenticatedViewSet):
     queryset = GroupRole.objects.all()
     serializer_class = GroupRoleSerializer
-    pagination_class = MetadataPagination 
+    pagination_class = MetadataPagination
 
 
 class BuildingViewSet(AuthenticatedViewSet):
@@ -157,57 +157,73 @@ class BuildingViewSet(AuthenticatedViewSet):
 class RoomViewSet(AuthenticatedViewSet):
     queryset = Room.objects.all()
     serializer_class = RoomSerializer
-    pagination_class = MetadataPagination 
+    pagination_class = MetadataPagination
 
 
 class BuildingRoomViewSet(AuthenticatedViewSet):
     queryset = Room.objects.all()
     serializer_class = RoomSerializer
-    pagination_class = MetadataPagination 
+    pagination_class = MetadataPagination
 
 
 class CourseViewSet(AuthenticatedViewSet):
     queryset = Course.objects.all()
     serializer_class = CourseSerializer
-    pagination_class = MetadataPagination 
+    pagination_class = MetadataPagination
 
 
 class MinorViewSet(AuthenticatedViewSet):
     queryset = Minor.objects.all()
     serializer_class = MinorSerializer
-    pagination_class = MetadataPagination 
+    pagination_class = MetadataPagination
 
 
 class ScheduleViewSet(AuthenticatedViewSet):
     queryset = Schedule.objects.all()
     serializer_class = ScheduleSerializer
-    pagination_class = MetadataPagination 
+    pagination_class = MetadataPagination
+
+
+class UserTestResultsViewSet(AuthenticatedViewSet):
+
+    def get_queryset(self):
+        return TestResult.objects.filter(userId=self.kwargs['pk']).order_by('lastModified')
+
+    def retrieve(self, request, *args, **kwargs):
+        queryset = self.get_queryset()
+        lastModified = None
+        courses = []
+        if queryset != None and len(queryset) > 0:
+            lastModified = queryset[0].lastModified
+            for testResult in queryset:
+                courses.append(testResult.course)
+        return Response({"testResult.lastModified": lastModified,
+                         "courseId": courses})
+
 
 
 class TestResultViewSet(AuthenticatedViewSet):
-    queryset = TestResult.objects.all()
-    serializer_class = TestResultSerializer
-    pagination_class = MetadataPagination 
-
-
-class PersonTestResultViewSet(AuthenticatedViewSet):
-    serializer_class = TestResultSerializer
-    pagination_class = MetadataPagination 
+    serializer_class = TestResultsSerializer
+    pagination_class = MetadataPagination
 
     def get_queryset(self):
-        person_pk = self.kwargs['person_pk']
-        return TestResult.objects.filter(student=person_pk)
+        return TestResult.objects.filter(userId=self.kwargs['user_pk'], testResultId=self.kwargs['pk'])
+
 
 
 class CourseResultViewSet(AuthenticatedViewSet):
     queryset = CourseResult.objects.all()
     serializer_class = CourseResultSerializer
-    pagination_class = MetadataPagination 
+    pagination_class = MetadataPagination
+
+    def list(self, request, *args, **kwargs):
+        self.serializer_class = CourseResultListSerializer
+        return super(AuthenticatedViewSet, self).list(self, request, **kwargs)
 
 
 class PersonCourseResultViewSet(AuthenticatedViewSet):
     serializer_class = CourseResultSerializer
-    pagination_class = MetadataPagination 
+    pagination_class = MetadataPagination
 
     def get_queryset(self):
         person_pk = self.kwargs['person_pk']

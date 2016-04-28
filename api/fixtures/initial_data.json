@@ -482,7 +482,6 @@
       "testDate": "2013-12-18",
       "description": "Tweede deeltentamen",
       "grade": "8",
-      "lastModified": "2013-12-21T13:11:00Z",
       "passed": null,
       "userId": 2,
       "weight": 10
@@ -496,7 +495,6 @@
       "testDate": "2013-11-02",
       "description": "Eerste deeltentamen",
       "grade": "5",
-      "lastModified": "2013-11-11T15:32:00Z",
       "passed": null,
       "userId": 2,
       "weight": 25
@@ -506,8 +504,8 @@
   },
   {
     "fields": {
-      "course": "LO-CONCR-101",
-      "grade": "6.5",
+      "course": "CG-CS-PROGCPU1",
+      "grade": 6.5,
       "lastModified": "2013-12-31T10:01:00Z",
       "passed": true,
       "result": "",

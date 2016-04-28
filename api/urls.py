@@ -1,9 +1,9 @@
-from api.views import BuildingViewSet, RoomViewSet, BuildingRoomViewSet
+from api.views import BuildingViewSet, RoomViewSet, BuildingRoomViewSet, UserTestResultsViewSet
 from api.views import CourseViewSet, ScheduleViewSet
 from api.views import GroupViewSet, GroupRoleViewSet
 from api.views import MinorViewSet
 from api.views import NewsFeedViewSet, NewsItemViewSet
-from api.views import PersonTestResultViewSet, PersonCourseResultViewSet
+from api.views import PersonCourseResultViewSet
 from api.views import PersonViewSet, PersonMeViewSet, AffiliationViewSet
 from api.views import TestResultViewSet, CourseResultViewSet
 from django.conf.urls import patterns, url, include
@@ -49,10 +49,6 @@ person_detail = PersonViewSet.as_view({
 
 person_me = PersonMeViewSet.as_view({
     'get': 'retrieve',
-})
-
-person_detail_testresult = PersonTestResultViewSet.as_view({
-    'get': 'list',
 })
 
 person_detail_courseresult = PersonCourseResultViewSet.as_view({
@@ -161,9 +157,8 @@ schedule_detail = ScheduleViewSet.as_view({
     'delete': 'destroy'
 })
 
-testresult_list = TestResultViewSet.as_view({
-    'get': 'list',
-    'post': 'create'
+testresult_list_by_user = UserTestResultsViewSet.as_view({
+    'get': 'retrieve'
 })
 testresult_detail = TestResultViewSet.as_view({
     'get': 'retrieve',
@@ -193,10 +188,6 @@ urlpatterns = patterns('api.views',
                        url(r'^v1/persons$', person_list, name='person-list'),
                        url(r'^v1/persons/nearests$', person_list_nearests, name='person-list-nearests'),
                        url(r'^v1/persons/(?P<pk>[0-9]+)$', person_detail, name='person-detail'),
-                       url(r'^v1/persons/(?P<person_pk>[0-9]+)/testresults$', person_detail_testresult,
-                           name='person-detail-testresult'),
-                       url(r'^v1/persons/(?P<person_pk>[0-9]+)/courseresults$', person_detail_courseresult,
-                           name='person-detail-courseresult'),
                        url(r'^v1/persons/@me$', person_me, name='person-me'),
                        # affiliations should not be exposed """
                        url(r'^v1/affiliations$', affiliation_list, name='affiliation-list'),
@@ -213,13 +204,13 @@ urlpatterns = patterns('api.views',
                        url(r'^v1/rooms$', room_list, name='room-list'),
                        url(r'^v1/rooms/(?P<pk>\w+)$', room_detail, name='room-detail'),
                        url(r'^v1/courses$', course_list, name='course-list'),
-                       url(r'^v1/courses/(?P<pk>\w+)$', course_detail, name='course-detail'),
+                       url(r'^v1/courses/(?P<pk>[\w\-]+)$', course_detail, name='course-detail'),
                        url(r'^v1/schedule$', schedule_list, name='schedule-list'),
                        url(r'^v1/schedule/(?P<pk>[0-9]+)', schedule_detail, name='schedule-detail'),
                        url(r'^v1/minors$', minor_list, name='minor-list'),
                        url(r'^v1/minors/(?P<pk>\w+)$', minor_detail, name='minor-detail'),
-                       url(r'^v1/testresults$', testresult_list, name='testresult-list'),
-                       url(r'^v1/testresults/(?P<pk>\w+)$', testresult_detail, name='testresult-detail'),
+                       url(r'^v1/testresults/(?P<pk>[0-9]+)$', testresult_list_by_user, name='testresult-list-by-user'),
+                       url(r'^v1/testresults/(?P<user_pk>[0-9]+)/(?P<pk>\w+)$', testresult_detail, name='testresult-detail'),
                        url(r'^v1/courseresults$', courseresult_list, name='courseresult-list'),
                        url(r'^v1/courseresults/(?P<pk>\w+)$', courseresult_detail, name='courseresult-detail'),
                        )
