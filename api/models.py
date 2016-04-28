@@ -172,18 +172,20 @@ class Minor(models.Model):
 class TestResult(models.Model):
     testResultId = models.AutoField(primary_key=True)
     courseResult = models.ForeignKey('CourseResult', blank=True, null=True, related_name='testResults')
-    userId = models.ForeignKey('Person')
+    userId = models.ManyToManyField('Person', related_name="testResults", blank=True, null=True)
     description = models.CharField(max_length=255)
     lastModified = models.DateTimeField(auto_now=True, default=timezone.now())
     testDate = models.DateField()
+    assessmentType = models.CharField(max_length=255)
     grade = models.CharField(max_length=255)
     comment = models.TextField()
     passed = models.NullBooleanField()
     weight = models.PositiveIntegerField(validators=[MaxValueValidator(100), ], blank=True, null=True)
 
     @property
-    def course(self):
+    def courseId(self):
         return self.courseResult.course.courseId
+
 
 class CourseResult(models.Model):
     courseResultId = models.AutoField(primary_key=True)

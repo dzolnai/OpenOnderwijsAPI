@@ -130,11 +130,11 @@ class MinorSerializer(WithPk, serializers.HyperlinkedModelSerializer):
 
 
 class ScheduleSerializer(WithPk, serializers.HyperlinkedModelSerializer):
-    roomId = serializers.SlugRelatedField(many=True, read_only=True, slug_field='roomId')
-    courseId = serializers.SlugRelatedField(many=True, read_only=True, slug_field='courseId')
-    userId = serializers.SlugRelatedField(many=True, read_only=True, slug_field='userId')
-    groupId = serializers.SlugRelatedField(many=True, read_only=True, slug_field='groupId')
-    lecturers = serializers.SlugRelatedField(many=True, read_only=True, slug_field='pk')
+    roomId = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+    courseId = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+    userId = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+    groupId = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+    lecturers = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
 
 
     class Meta:
@@ -143,17 +143,18 @@ class ScheduleSerializer(WithPk, serializers.HyperlinkedModelSerializer):
 
 
 class TestResultsSerializer(WithPk, serializers.HyperlinkedModelSerializer):
-    userId = serializers.SlugRelatedField(read_only=True, slug_field='pk')
+    userId = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+    courseResult = serializers.PrimaryKeyRelatedField(many=False, read_only=True)
 
     class Meta:
         model = TestResult
-        fields = ['userId', 'course']
+        fields = ['userId', 'courseId', 'courseResult']
 
 
 class CourseResultSerializer(WithPk, serializers.HyperlinkedModelSerializer):
-    student = serializers.SlugRelatedField(many=False, read_only=True, slug_field='pk')
+    student = serializers.SlugRelatedField(many=False, read_only=True, slug_field='userId')
     course = serializers.SlugRelatedField(many=False, read_only=True, slug_field='courseId')
-    testResults = serializers.SlugRelatedField(many=True, read_only=True, slug_field='testresultId')
+    #testResults = serializers.SlugRelatedField(many=True, read_only=True, slug_field='testResultId')
 
     class Meta:
         model = CourseResult
@@ -162,8 +163,8 @@ class CourseResultSerializer(WithPk, serializers.HyperlinkedModelSerializer):
 
 
 class CourseResultListSerializer(WithPk, serializers.HyperlinkedModelSerializer):
-    student = serializers.SlugRelatedField(many=False, read_only=True, slug_field='pk')
-    course = serializers.SlugRelatedField(many=False, read_only=True, slug_field='courseId')
+    student = serializers.PrimaryKeyRelatedField(many=False, read_only=True)
+    course = serializers.PrimaryKeyRelatedField(many=False, read_only=True)
 
     class Meta:
         model = CourseResult

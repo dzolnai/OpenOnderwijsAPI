@@ -191,15 +191,14 @@ class UserTestResultsViewSet(AuthenticatedViewSet):
 
     def retrieve(self, request, *args, **kwargs):
         queryset = self.get_queryset()
-        lastModified = None
+        last_modified = None
         courses = []
         if queryset != None and len(queryset) > 0:
-            lastModified = queryset[0].lastModified
+            last_modified = queryset[0].lastModified
             for testResult in queryset:
-                courses.append(testResult.course)
-        return Response({"testResult.lastModified": lastModified,
+                courses.append(testResult.courseId)
+        return Response({"testResult.lastModified": last_modified,
                          "courseId": courses})
-
 
 
 class TestResultViewSet(AuthenticatedViewSet):
@@ -207,7 +206,9 @@ class TestResultViewSet(AuthenticatedViewSet):
     pagination_class = MetadataPagination
 
     def get_queryset(self):
-        return TestResult.objects.filter(userId=self.kwargs['user_pk'], testResultId=self.kwargs['pk'])
+        result = TestResult.objects.filter(userId=self.kwargs['user_pk'], pk=self.kwargs['pk'])
+        #print(result[0].testResultId)
+        return result
 
 
 
