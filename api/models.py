@@ -210,6 +210,3 @@ class CourseResult(models.Model):
 
     class Meta:
         unique_together = ("student", "course")
-
-    def course_lastModified(self):
-        return self.course.lastModified

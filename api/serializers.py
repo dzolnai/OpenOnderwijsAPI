@@ -1,10 +1,11 @@
-from api.models import Building, Room
+from api.models import Building, Room, CourseResult
 from api.models import Course, Minor
 from api.models import Group, GroupRole
 from api.models import NewsFeed, NewsItem, Schedule
 from api.models import Person, Affiliation
 from api.models import TestResult
 from rest_framework import serializers
+from rest_framework.serializers import ModelSerializer
 
 """ This mixin adds the primary key always to the result """
 class WithPk(object):
@@ -142,9 +143,12 @@ class ScheduleSerializer(WithPk, serializers.HyperlinkedModelSerializer):
         exclude = ['url']
 
 
-class TestResultsSerializer(WithPk, serializers.HyperlinkedModelSerializer):
+class TestResultsSerializer(WithPk, ModelSerializer):
     userId = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
-    courseResult = serializers.PrimaryKeyRelatedField(many=False, read_only=True)
+    courseResult = serializers.PrimaryKeyRelatedField(many=True, read_only=True, source='_courseResult')
+
+    def _courseResult(self, obj):
+        return self.context['courseResult']
 
     class Meta:
         model = TestResult

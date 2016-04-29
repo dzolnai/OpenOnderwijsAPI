@@ -185,26 +185,31 @@ class ScheduleViewSet(AuthenticatedViewSet):
 
 class UserTestResultsViewSet(AuthenticatedViewSet):
     def get_queryset(self):
-        return TestResult.objects.filter(userId=self.kwargs['pk']).order_by('lastModified')
+        return TestResult.objects.filter(userId=self.kwargs['user_id']).order_by('lastModified')
 
     def retrieve(self, request, *args, **kwargs):
         queryset = self.get_queryset()
         last_modified = None
-        courses = []
-        if queryset != None and len(queryset) > 0:
+        courses = Course.objects.filter(testResults=queryset)
+        if queryset is not None and len(queryset) > 0:
             last_modified = queryset[0].lastModified
-            for testResult in queryset:
-                courses.append(testResult.courseId)
         return Response({"testResult.lastModified": last_modified,
-                         "courseId": courses})
+                         "courseId": map(lambda course: course.courseId, courses)})
 
 
 class TestResultViewSet(AuthenticatedViewSet):
     serializer_class = TestResultsSerializer
     pagination_class = MetadataPagination
+    lookup_url_kwarg = 'test_id'
 
     def get_queryset(self):
-        return TestResult.objects.filter(userId=self.kwargs['user_id'], pk=self.kwargs['pk'])
+        return TestResult.objects.filter(userId=self.kwargs['user_id'], pk=self.kwargs['test_id'])
+
+    def get_serializer_context(self):
+        test_results = self.get_queryset()
+        courses = Course.objects.filter(testResults=test_results)
+        course_results = CourseResult.objects.filter(student=self.kwargs['user_id'], course=courses)
+        return {'courseResult': course_results, 'request': self.request}
 
 
 class UserCourseResultsViewSet(AuthenticatedViewSet):
@@ -234,31 +239,39 @@ class CourseResultsViewSet(AuthenticatedViewSet):
 
     def get_queryset(self):
         queryset = TestResult.objects.filter(userId=self.kwargs['user_id'], courseId=self.kwargs['course_id'])
-        course_result = CourseResult.objects.filter(userId=self.kwargs['user_id'], courseId=self.kwargs['course_id'])
-        if course_result:
-            self.kwargs['pk'] = course_result.pk
+        course_result = CourseResult.objects.filter(student=self.kwargs['user_id'], course=self.kwargs['course_id'])
+        if course_result and len(course_result) == 1:
+            self.kwargs['pk'] = course_result[0].pk
         else:
             self.kwargs['pk'] = None
         return queryset
 
     def retrieve(self, request, *args, **kwargs):
         queryset = self.get_queryset()
-        course_result = CourseResult.objects.filter(userId=self.kwargs['user_id'], courseId=self.kwargs['course_id'])
+        course_result = CourseResult.objects.filter(student=self.kwargs['user_id'], course=self.kwargs['course_id'])
+        if len(course_result) != 1:
+            return super(AuthenticatedViewSet, self).retrieve(self, request, args, kwargs)
+        course_result = course_result[0]
         last_modified = None
         if queryset is not None and len(queryset) > 0:
             last_modified = queryset[0].lastModified
+
         last_modified = max(last_modified, course_result.lastModified)
         grade_sum = 0
         grade_count = 0
         for test_result in queryset:
             if test_result.grade is not None:
-                grade_sum += test_result.grade
+                if test_result.weight is not None:
+                    weighted_grade = float(test_result.weight) / 100.0 * float(test_result.grade)
+                else:
+                    weighted_grade = test_result.grade
+                grade_sum += weighted_grade
                 grade_count += 1
         grade = None if grade_count is 0 else grade_sum / float(grade_count)
         return Response({
             "course": kwargs['course_id'],
             "lastModified": last_modified,
-            "testResults": map(lambda test_result: test_result.testResultId, queryset),
+            "testResults": map(lambda test_result_for_user: test_result_for_user.testResultId, queryset),
             "grade": grade,
             "comment": course_result.comment,
             "passed": course_result.passed

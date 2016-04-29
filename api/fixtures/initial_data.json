@@ -504,6 +504,30 @@
   },
   {
     "fields": {
+      "courseId": ["CG-CS-PROGCPU1", "LO-CONCR-101"],
+      "testDate": "2013-11-02",
+      "description": "Eerste deeltentamen",
+      "grade": 7,
+      "passed": null,
+      "userId": [2],
+      "weight": 75
+    },
+    "model": "api.testresult",
+    "pk": 2
+  },
+  {
+    "fields": {
+      "course": "CG-CS-PROGCPU1",
+      "lastModified": "2013-12-31T10:01:00Z",
+      "passed": true,
+      "comment": "Good job",
+      "student": 2
+    },
+    "model": "api.courseresult",
+    "pk": 1
+  },
+  {
+    "fields": {
       "name": "Room 100",
       "abbreviation": "r100",
       "buildingId": 1,

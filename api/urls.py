@@ -203,10 +203,10 @@ urlpatterns = patterns('api.views',
                        url(r'^v1/schedule/(?P<pk>[0-9]+)', schedule_detail, name='schedule-detail'),
                        url(r'^v1/minors$', minor_list, name='minor-list'),
                        url(r'^v1/minors/(?P<pk>\w+)$', minor_detail, name='minor-detail'),
-                       url(r'^v1/testresults/(?P<pk>[0-9]+)$', testresult_list_by_user, name='testresult-list-by-user'),
-                       url(r'^v1/testresults/(?P<user_id>[0-9]+)/(?P<id>\w+)$', testresult_detail, name='testresult-detail'),
+                       url(r'^v1/testresults/(?P<user_id>[0-9]+)$', testresult_list_by_user, name='testresult-list-by-user'),
+                       url(r'^v1/testresults/(?P<user_id>[0-9]+)/(?P<test_id>\w+)$', testresult_detail, name='testresult-detail'),
                        url(r'^v1/courseresults/(?P<user_id>[0-9]+)$', courseresult_list_by_user, name='courseresult-list-by-user'),
-                       url(r'^v1/courseresults/(?P<user_id>[0-9]+)/(?P<course_id>\w+)$', courseresult_detail, name='courseresult-detail'),
+                       url(r'^v1/courseresults/(?P<user_id>[0-9]+)/(?P<course_id>[\w\-]+)$', courseresult_detail, name='courseresult-detail'),
                        )
 
 urlpatterns = format_suffix_patterns(urlpatterns)
