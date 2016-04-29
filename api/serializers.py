@@ -3,7 +3,7 @@ from api.models import Course, Minor
 from api.models import Group, GroupRole
 from api.models import NewsFeed, NewsItem, Schedule
 from api.models import Person, Affiliation
-from api.models import TestResult, CourseResult
+from api.models import TestResult
 from rest_framework import serializers
 
 """ This mixin adds the primary key always to the result """
@@ -149,24 +149,3 @@ class TestResultsSerializer(WithPk, serializers.HyperlinkedModelSerializer):
     class Meta:
         model = TestResult
         fields = ['userId', 'courseId', 'courseResult']
-
-
-class CourseResultSerializer(WithPk, serializers.HyperlinkedModelSerializer):
-    student = serializers.SlugRelatedField(many=False, read_only=True, slug_field='userId')
-    course = serializers.SlugRelatedField(many=False, read_only=True, slug_field='courseId')
-    #testResults = serializers.SlugRelatedField(many=True, read_only=True, slug_field='testResultId')
-
-    class Meta:
-        model = CourseResult
-        fields = ['courseResultId', 'student', 'course', 'course_lastModified',
-                  'testResults']
-
-
-class CourseResultListSerializer(WithPk, serializers.HyperlinkedModelSerializer):
-    student = serializers.PrimaryKeyRelatedField(many=False, read_only=True)
-    course = serializers.PrimaryKeyRelatedField(many=False, read_only=True)
-
-    class Meta:
-        model = CourseResult
-        fields = ['courseResultId', 'student', 'course', 'course_lastModified']
-

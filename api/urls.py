@@ -3,9 +3,8 @@ from api.views import CourseViewSet, ScheduleViewSet
 from api.views import GroupViewSet, GroupRoleViewSet
 from api.views import MinorViewSet
 from api.views import NewsFeedViewSet, NewsItemViewSet
-from api.views import PersonCourseResultViewSet
 from api.views import PersonViewSet, PersonMeViewSet, AffiliationViewSet
-from api.views import TestResultViewSet, CourseResultViewSet
+from api.views import TestResultViewSet, UserCourseResultsViewSet
 from django.conf.urls import patterns, url, include
 from rest_framework.urlpatterns import format_suffix_patterns
 
@@ -49,10 +48,6 @@ person_detail = PersonViewSet.as_view({
 
 person_me = PersonMeViewSet.as_view({
     'get': 'retrieve',
-})
-
-person_detail_courseresult = PersonCourseResultViewSet.as_view({
-    'get': 'list',
 })
 
 group_list = GroupViewSet.as_view({
@@ -167,11 +162,10 @@ testresult_detail = TestResultViewSet.as_view({
     'delete': 'destroy'
 })
 
-courseresult_list = CourseResultViewSet.as_view({
-    'get': 'list',
-    'post': 'create'
+courseresult_list_by_user = UserCourseResultsViewSet.as_view({
+    'get': 'retrieve',
 })
-courseresult_detail = CourseResultViewSet.as_view({
+courseresult_detail = UserCourseResultsViewSet.as_view({
     'get': 'retrieve',
     'put': 'update',
     'patch': 'partial_update',
@@ -210,9 +204,9 @@ urlpatterns = patterns('api.views',
                        url(r'^v1/minors$', minor_list, name='minor-list'),
                        url(r'^v1/minors/(?P<pk>\w+)$', minor_detail, name='minor-detail'),
                        url(r'^v1/testresults/(?P<pk>[0-9]+)$', testresult_list_by_user, name='testresult-list-by-user'),
-                       url(r'^v1/testresults/(?P<user_pk>[0-9]+)/(?P<pk>\w+)$', testresult_detail, name='testresult-detail'),
-                       url(r'^v1/courseresults$', courseresult_list, name='courseresult-list'),
-                       url(r'^v1/courseresults/(?P<pk>\w+)$', courseresult_detail, name='courseresult-detail'),
+                       url(r'^v1/testresults/(?P<user_id>[0-9]+)/(?P<id>\w+)$', testresult_detail, name='testresult-detail'),
+                       url(r'^v1/courseresults/(?P<user_id>[0-9]+)$', courseresult_list_by_user, name='courseresult-list-by-user'),
+                       url(r'^v1/courseresults/(?P<user_id>[0-9]+)/(?P<id>\w+)$', courseresult_detail, name='courseresult-detail'),
                        )
 
 urlpatterns = format_suffix_patterns(urlpatterns)

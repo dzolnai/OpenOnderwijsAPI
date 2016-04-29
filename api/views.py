@@ -4,15 +4,15 @@ from api.models import Course, Minor
 from api.models import Group, GroupRole
 from api.models import NewsItem, NewsFeed
 from api.models import Person, Affiliation
-from api.models import TestResult, CourseResult
+from api.models import TestResult
 from api.pagination import MetadataPagination
-from api.serializers import BuildingSerializer, RoomSerializer, CourseResultListSerializer
+from api.serializers import BuildingSerializer, RoomSerializer
 from api.serializers import GroupSerializer, GroupRoleSerializer
 from api.serializers import MinorSerializer
 from api.serializers import NewsItemSerializer, NewsFeedSerializer
 from api.serializers import PersonSerializer, AffiliationSerializer
 from api.serializers import ScheduleSerializer, CourseSerializer
-from api.serializers import TestResultsSerializer, CourseResultSerializer
+from api.serializers import TestResultsSerializer
 from haystack.query import SearchQuerySet
 from haystack.utils.geo import Point, D
 from rest_framework import status
@@ -185,7 +185,6 @@ class ScheduleViewSet(AuthenticatedViewSet):
 
 
 class UserTestResultsViewSet(AuthenticatedViewSet):
-
     def get_queryset(self):
         return TestResult.objects.filter(userId=self.kwargs['pk']).order_by('lastModified')
 
@@ -206,26 +205,33 @@ class TestResultViewSet(AuthenticatedViewSet):
     pagination_class = MetadataPagination
 
     def get_queryset(self):
-        result = TestResult.objects.filter(userId=self.kwargs['user_pk'], pk=self.kwargs['pk'])
-        #print(result[0].testResultId)
-        return result
+        return TestResult.objects.filter(userId=self.kwargs['user_id'], pk=self.kwargs['pk'])
 
 
-
-class CourseResultViewSet(AuthenticatedViewSet):
-    queryset = CourseResult.objects.all()
-    serializer_class = CourseResultSerializer
-    pagination_class = MetadataPagination
-
-    def list(self, request, *args, **kwargs):
-        self.serializer_class = CourseResultListSerializer
-        return super(AuthenticatedViewSet, self).list(self, request, **kwargs)
-
-
-class PersonCourseResultViewSet(AuthenticatedViewSet):
-    serializer_class = CourseResultSerializer
+class UserCourseResultsViewSet(AuthenticatedViewSet):
+    serializer_class = TestResultsSerializer
     pagination_class = MetadataPagination
 
     def get_queryset(self):
-        person_pk = self.kwargs['person_pk']
-        return CourseResult.objects.filter(student=person_pk)
+        return TestResult.objects.filter(userId=self.kwargs['user_id']).order_by('lastModified')
+
+    def retrieve(self, request, *args, **kwargs):
+        queryset = self.get_queryset()
+        last_modified = None
+        courses = Course.objects.filter(testResults=queryset)
+        course_ids = set(map(lambda course: course.courseId, courses))
+        if queryset is not None and len(queryset) > 0:
+            last_modified = queryset[0].lastModified
+        return Response({
+            "student": kwargs['user_id'],
+            "course.lastModified": last_modified,
+            "course": course_ids
+        })
+
+
+class CourseResultViewSet(AuthenticatedViewSet):
+    serializer_class = TestResultsSerializer
+    pagination_class = MetadataPagination
+
+    def get_queryset(self):
+        return TestResult.objects.filter(userId=self.kwargs['user_id'], pk=self.kwargs['id'])
