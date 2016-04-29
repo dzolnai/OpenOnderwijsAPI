@@ -1,11 +1,11 @@
-from api.views import BuildingViewSet, RoomViewSet, BuildingRoomViewSet, UserTestResultsViewSet
+from api.views import BuildingViewSet, RoomViewSet, BuildingRoomViewSet, UserTestResultsViewSet, CourseResultsViewSet
 from api.views import CourseViewSet, ScheduleViewSet
 from api.views import GroupViewSet, GroupRoleViewSet
 from api.views import MinorViewSet
 from api.views import NewsFeedViewSet, NewsItemViewSet
 from api.views import PersonViewSet, PersonMeViewSet, AffiliationViewSet
 from api.views import TestResultViewSet, UserCourseResultsViewSet
-from django.conf.urls import patterns, url, include
+from django.conf.urls import patterns, url
 from rest_framework.urlpatterns import format_suffix_patterns
 
 newsfeed_list = NewsFeedViewSet.as_view({
@@ -165,7 +165,7 @@ testresult_detail = TestResultViewSet.as_view({
 courseresult_list_by_user = UserCourseResultsViewSet.as_view({
     'get': 'retrieve',
 })
-courseresult_detail = UserCourseResultsViewSet.as_view({
+courseresult_detail = CourseResultsViewSet.as_view({
     'get': 'retrieve',
     'put': 'update',
     'patch': 'partial_update',
@@ -206,7 +206,7 @@ urlpatterns = patterns('api.views',
                        url(r'^v1/testresults/(?P<pk>[0-9]+)$', testresult_list_by_user, name='testresult-list-by-user'),
                        url(r'^v1/testresults/(?P<user_id>[0-9]+)/(?P<id>\w+)$', testresult_detail, name='testresult-detail'),
                        url(r'^v1/courseresults/(?P<user_id>[0-9]+)$', courseresult_list_by_user, name='courseresult-list-by-user'),
-                       url(r'^v1/courseresults/(?P<user_id>[0-9]+)/(?P<id>\w+)$', courseresult_detail, name='courseresult-detail'),
+                       url(r'^v1/courseresults/(?P<user_id>[0-9]+)/(?P<course_id>\w+)$', courseresult_detail, name='courseresult-detail'),
                        )
 
 urlpatterns = format_suffix_patterns(urlpatterns)

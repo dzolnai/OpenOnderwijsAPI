@@ -1,5 +1,5 @@
 import search
-from api.models import Building, Room, Schedule
+from api.models import Building, Room, Schedule, CourseResult
 from api.models import Course, Minor
 from api.models import Group, GroupRole
 from api.models import NewsItem, NewsFeed
@@ -38,7 +38,6 @@ def api_root(request, format=None):
         'courses': reverse('course-list', request=request, format=format),
         'schedule': reverse('schedule-list', request=request, format=format),
         'minors': reverse('minor-list', request=request, format=format),
-        'courseresult': reverse('courseresult-list', request=request, format=format),
     })
 
 
@@ -229,9 +228,38 @@ class UserCourseResultsViewSet(AuthenticatedViewSet):
         })
 
 
-class CourseResultViewSet(AuthenticatedViewSet):
+class CourseResultsViewSet(AuthenticatedViewSet):
     serializer_class = TestResultsSerializer
     pagination_class = MetadataPagination
 
     def get_queryset(self):
-        return TestResult.objects.filter(userId=self.kwargs['user_id'], pk=self.kwargs['id'])
+        queryset = TestResult.objects.filter(userId=self.kwargs['user_id'], courseId=self.kwargs['course_id'])
+        course_result = CourseResult.objects.filter(userId=self.kwargs['user_id'], courseId=self.kwargs['course_id'])
+        if course_result:
+            self.kwargs['pk'] = course_result.pk
+        else:
+            self.kwargs['pk'] = None
+        return queryset
+
+    def retrieve(self, request, *args, **kwargs):
+        queryset = self.get_queryset()
+        course_result = CourseResult.objects.filter(userId=self.kwargs['user_id'], courseId=self.kwargs['course_id'])
+        last_modified = None
+        if queryset is not None and len(queryset) > 0:
+            last_modified = queryset[0].lastModified
+        last_modified = max(last_modified, course_result.lastModified)
+        grade_sum = 0
+        grade_count = 0
+        for test_result in queryset:
+            if test_result.grade is not None:
+                grade_sum += test_result.grade
+                grade_count += 1
+        grade = None if grade_count is 0 else grade_sum / float(grade_count)
+        return Response({
+            "course": kwargs['course_id'],
+            "lastModified": last_modified,
+            "testResults": map(lambda test_result: test_result.testResultId, queryset),
+            "grade": grade,
+            "comment": course_result.comment,
+            "passed": course_result.passed
+        })
