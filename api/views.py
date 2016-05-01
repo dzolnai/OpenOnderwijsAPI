@@ -166,6 +166,7 @@ class BuildingRoomViewSet(AuthenticatedViewSet):
 
 
 class CourseViewSet(AuthenticatedViewSet):
+    lookup_url_kwarg = 'course_id'
     queryset = Course.objects.all()
     serializer_class = CourseSerializer
     pagination_class = MetadataPagination

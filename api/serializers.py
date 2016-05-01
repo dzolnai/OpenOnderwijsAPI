@@ -1,4 +1,4 @@
-from api.models import Building, Room, CourseResult
+from api.models import Building, Room
 from api.models import Course, Minor
 from api.models import Group, GroupRole
 from api.models import NewsFeed, NewsItem, Schedule
@@ -108,18 +108,15 @@ class RoomSerializer(WithPk, serializers.HyperlinkedModelSerializer):
 
 # Courses
 class CourseSerializer(WithPk, serializers.HyperlinkedModelSerializer):
+    schedules = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
     # lessons = serializers.HyperlinkedRelatedField(many=True, view_name='lesson-detail')
     # minors = serializers.HyperlinkedRelatedField(many=True, blank=True, view_name='minor-detail')
 
     class Meta:
         model = Course
-        # field = ('abbr','name','description','address','postalCode','city','lat','lon')
-
-
-class CourseSummarySerializer(WithPk, serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Course
-        fields = ['courseId', 'abbreviation', 'name', 'description', 'link']
+        fields = ['schedules', 'courseId', 'name', 'abbreviation', 'ects', 'description',
+                  'goals', 'requirements', 'level', 'format', 'language', 'enrollment',
+                  'literature', 'exams', 'schedule']
 
 
 class MinorSerializer(WithPk, serializers.HyperlinkedModelSerializer):
