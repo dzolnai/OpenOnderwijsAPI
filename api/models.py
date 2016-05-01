@@ -61,8 +61,8 @@ class Person(models.Model):
     department = models.CharField(max_length=255, blank=True, null=True)
     title = models.CharField(max_length=255, blank=True, null=True, help_text='job title and/or description')
     office = models.ForeignKey('Room', blank=True, null=True)
-    lat = models.DecimalField(max_digits=9, decimal_places=6)
-    lon = models.DecimalField(max_digits=9, decimal_places=6)
+    lat = models.DecimalField(max_digits=8, decimal_places=5)
+    lon = models.DecimalField(max_digits=8, decimal_places=5)
     lastModified = models.DateTimeField(auto_now=True, default=timezone.now())
 
     def get_location(self):
@@ -110,8 +110,8 @@ class Building(models.Model):
     address = models.CharField(blank=True, null=True, max_length=256)
     postalCode = models.CharField(blank=True, null=True, max_length=16)
     city = models.CharField(max_length=255)
-    lat = models.DecimalField(blank=True, null=True, max_digits=9, decimal_places=6)
-    lon = models.DecimalField(blank=True, null=True, max_digits=9, decimal_places=6)
+    lat = models.DecimalField(max_digits=8, decimal_places=5)
+    lon = models.DecimalField(max_digits=8, decimal_places=5)
     altitude = models.DecimalField(max_digits=6, decimal_places=2, blank=True, null=True)
     lastModified = models.DateTimeField(auto_now=True, default=timezone.now())
 
