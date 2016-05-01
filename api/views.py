@@ -1,4 +1,5 @@
 import search
+from api import filters
 from api.models import Building, Room, Schedule, CourseResult
 from api.models import Course, Minor
 from api.models import Group, GroupRole
@@ -71,7 +72,7 @@ class PersonViewSet(AuthenticatedViewSet):
     queryset = Person.objects.all()
     serializer_class = PersonSerializer
     pagination_class = MetadataPagination
-    filter_fields = ['userId', 'surname']
+    filter_class = filters.PersonFilter
 
     def nearests(self, request):
         radius = 200
@@ -86,21 +87,6 @@ class PersonViewSet(AuthenticatedViewSet):
         results = SearchQuerySet().models(Person).dwithin('location', location, D(m=radius))
         serializer = PersonSerializer([q.object for q in results], many=True, context={'request': request})
         return Response(serializer.data)
-
-    def list(self, request, **kwargs):
-        entries = Person.objects.all()
-        # Search
-        if ('q' in request.GET) and request.GET['q'].strip():
-            query_string = request.GET['q']
-            # you can add additional fields if needed
-            entry_query = search.get_query(query_string,
-                                           ['givenname', 'surname', 'displayname', 'mail', 'telephonenumber'])
-            self.queryset = entries.filter(entry_query)
-        # Affiliation filter
-        if 'affiliation' in request.GET:
-            query_string = request.GET['affiliation']
-            self.queryset = entries.filter(affiliations__affiliation=query_string)
-        return super(AuthenticatedViewSet, self).list(self, request, **kwargs)
 
 
 class PersonMeViewSet(AuthenticatedViewSet):

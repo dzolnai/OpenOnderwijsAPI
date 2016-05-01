@@ -33,9 +33,10 @@ class NewsFeed(models.Model):
     class Meta:
         ordering = ('lastModified',)
 
+
 class Affiliation(models.Model):
     AFFILIATIONS = ('student', 'faculty', 'staff', 'alum', 'member', 'affiliate', 'employee')
-    affiliation = models.CharField(choices=self_zip(AFFILIATIONS), max_length=9, help_text='as defined in eduPerson')
+    affiliation = models.CharField(choices=self_zip(AFFILIATIONS), max_length=9, help_text='as defined in eduPerson', primary_key=True)
 
 
 class Person(models.Model):

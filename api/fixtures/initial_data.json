@@ -16,60 +16,46 @@
     "pk": 2
   },
   {
-    "fields": {
-      "affiliation": "student"
-    },
-    "model": "api.affiliation",
-    "pk": 1
+    "fields": {},
+    "pk": "student",
+    "model": "api.affiliation"
   },
   {
-    "fields": {
-      "affiliation": "faculty"
-    },
-    "model": "api.affiliation",
-    "pk": 2
+    "fields": {},
+    "pk": "faculty",
+    "model": "api.affiliation"
   },
   {
-    "fields": {
-      "affiliation": "staff"
-    },
-    "model": "api.affiliation",
-    "pk": 3
+    "fields": {},
+    "pk": "staff",
+    "model": "api.affiliation"
   },
   {
-    "fields": {
-      "affiliation": "alum"
-    },
-    "model": "api.affiliation",
-    "pk": 4
+    "fields": {},
+    "pk": "alum",
+    "model": "api.affiliation"
   },
   {
-    "fields": {
-      "affiliation": "member"
-    },
-    "model": "api.affiliation",
-    "pk": 5
+    "fields": {},
+    "pk": "member",
+    "model": "api.affiliation"
   },
   {
-    "fields": {
-      "affiliation": "affiliate"
-    },
-    "model": "api.affiliation",
-    "pk": 6
+    "fields": {},
+    "pk": "affiliate",
+    "model": "api.affiliation"
   },
   {
-    "fields": {
-      "affiliation": "employee"
-    },
-    "model": "api.affiliation",
-    "pk": 7
+    "fields": {},
+    "pk": "employee",
+    "model": "api.affiliation"
   },
   {
     "fields": {
       "affiliations": [
-        2,
-        5,
-        7
+        "member",
+        "affiliate",
+        "employee"
       ],
       "department": null,
       "displayname": "dr. Basje",
@@ -93,10 +79,9 @@
   {
     "fields": {
       "affiliations": [
-        2,
-        4,
-        6,
-        7
+        "alum",
+        "affiliate",
+        "member"
       ],
       "department": null,
       "displayname": "Dr. Bibber",
@@ -140,159 +125,9 @@
       "description": "For placing and answering questions about the topics discussed on the course.",
       "name": "GPU programming online support group",
       "type": "Generic",
-      "courses": ["CG-CS-PROGCPU1"]
-    },
-    "model": "api.group",
-    "pk": 3
-  },
-  {
-    "fields": {
-      "description": "test 1",
-      "title": "feed 1",
-      "groups": [
-        1,
-        2
+      "courses": [
+        "CG-CS-PROGCPU1"
       ]
-    },
-    "model": "api.newsfeed",
-    "pk": 1
-  },
-  {
-    "fields": {
-      "description": "test 2",
-      "title": "feed 2",
-      "groups": [
-        3
-      ]
-    },
-    "model": "api.newsfeed",
-    "pk": 2
-  },
-  {
-    "fields": {
-      "affiliation": "student"
-    },
-    "model": "api.affiliation",
-    "pk": 1
-  },
-  {
-    "fields": {
-      "affiliation": "faculty"
-    },
-    "model": "api.affiliation",
-    "pk": 2
-  },
-  {
-    "fields": {
-      "affiliation": "staff"
-    },
-    "model": "api.affiliation",
-    "pk": 3
-  },
-  {
-    "fields": {
-      "affiliation": "alum"
-    },
-    "model": "api.affiliation",
-    "pk": 4
-  },
-  {
-    "fields": {
-      "affiliation": "member"
-    },
-    "model": "api.affiliation",
-    "pk": 5
-  },
-  {
-    "fields": {
-      "affiliation": "affiliate"
-    },
-    "model": "api.affiliation",
-    "pk": 6
-  },
-  {
-    "fields": {
-      "affiliation": "employee"
-    },
-    "model": "api.affiliation",
-    "pk": 7
-  },
-  {
-    "fields": {
-      "affiliations": [
-        2,
-        5,
-        7
-      ],
-      "department": null,
-      "displayname": "dr. Basje",
-      "gender": "M",
-      "givenname": "Bas",
-      "mail": "basje@harderwijk.edu",
-      "mobilenumber": null,
-      "office": null,
-      "organization": null,
-      "photoSocial": null,
-      "photoOfficial": null,
-      "surname": "Zoetekouw",
-      "telephonenumber": "+31301234567",
-      "title": null,
-      "lat": "52.355133",
-      "lon": "5.616567"
-    },
-    "model": "api.person",
-    "pk": 1
-  },
-  {
-    "fields": {
-      "affiliations": [
-        2,
-        4,
-        6,
-        7
-      ],
-      "department": null,
-      "displayname": "Dr. Bibber",
-      "gender": "M",
-      "givenname": "Piet",
-      "mail": "bibber@harderwijk.edu",
-      "mobilenumber": null,
-      "office": null,
-      "organization": null,
-      "photoSocial": null,
-      "photoOfficial": null,
-      "surname": "Bibber",
-      "telephonenumber": null,
-      "title": null,
-      "lat": "52.355133",
-      "lon": "5.616567"
-    },
-    "model": "api.person",
-    "pk": 2
-  },
-  {
-    "fields": {
-      "description": "hallo een test groep",
-      "name": "test group",
-      "type": "?LesGroep"
-    },
-    "model": "api.group",
-    "pk": 1
-  },
-  {
-    "fields": {
-      "description": "Kijk, nog 1",
-      "name": "Nog een andere group",
-      "type": "affiliation"
-    },
-    "model": "api.group",
-    "pk": 2
-  },
-  {
-    "fields": {
-      "description": "hallo",
-      "name": "een derde groep",
-      "type": "Generic"
     },
     "model": "api.group",
     "pk": 3
@@ -468,12 +303,18 @@
   },
   {
     "fields": {
-      "courseId": ["LO-ABSTR-101", "LO-CONCR-101"],
+      "courseId": [
+        "LO-ABSTR-101",
+        "LO-CONCR-101"
+      ],
       "testDate": "2013-12-18",
       "description": "Tweede deeltentamen",
       "grade": "8",
       "passed": null,
-      "userId": [1, 2],
+      "userId": [
+        1,
+        2
+      ],
       "weight": 10
     },
     "model": "api.testresult",
@@ -481,12 +322,17 @@
   },
   {
     "fields": {
-      "courseId": ["CG-CS-PROGCPU1", "LO-CONCR-101"],
+      "courseId": [
+        "CG-CS-PROGCPU1",
+        "LO-CONCR-101"
+      ],
       "testDate": "2013-11-02",
       "description": "Eerste deeltentamen",
       "grade": "5",
       "passed": null,
-      "userId": [2],
+      "userId": [
+        2
+      ],
       "weight": 25
     },
     "model": "api.testresult",
@@ -494,12 +340,17 @@
   },
   {
     "fields": {
-      "courseId": ["CG-CS-PROGCPU1", "LO-CONCR-101"],
+      "courseId": [
+        "CG-CS-PROGCPU1",
+        "LO-CONCR-101"
+      ],
       "testDate": "2013-11-02",
       "description": "Eerste deeltentamen",
       "grade": 7,
       "passed": null,
-      "userId": [2],
+      "userId": [
+        2
+      ],
       "weight": 75
     },
     "model": "api.testresult",
@@ -579,13 +430,25 @@
   },
   {
     "fields": {
-      "userId": [1, 2],
-      "roomId": [1],
+      "userId": [
+        1,
+        2
+      ],
+      "roomId": [
+        1
+      ],
       "startDateTime": "2013-02-13T15:30:00.000Z",
       "endDateTime": "2013-02-13T19:30:00.000Z",
-      "courseId": ["LO-CONCR-101"],
-      "groupId": [1, 2],
-      "lecturers": [1],
+      "courseId": [
+        "LO-CONCR-101"
+      ],
+      "groupId": [
+        1,
+        2
+      ],
+      "lecturers": [
+        1
+      ],
       "description": "I don't know"
     },
     "model": "api.schedule",

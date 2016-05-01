@@ -62,7 +62,7 @@ class GroupSerializer(WithPk, serializers.HyperlinkedModelSerializer):
 
 # Persons
 class PersonSerializer(WithPk, serializers.HyperlinkedModelSerializer):
-    affiliations = serializers.SlugRelatedField(many=True, read_only=True, slug_field='affiliation')
+    affiliations = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
     groups = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
 
     class Meta:
