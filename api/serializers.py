@@ -74,10 +74,12 @@ class PersonSerializer(WithPk, serializers.HyperlinkedModelSerializer):
 
 # Buildings
 class BuildingSerializer(WithPk, serializers.HyperlinkedModelSerializer):
+    completeAddress = serializers.CharField(source='complete_address')
+
     class Meta:
         model = Building
-        fields = ('buildingId', 'abbreviation', 'name', 'description', 'address',
-                  'postalCode', 'city', 'lat', 'lon', 'altitude', 'lastModified')
+        fields = ['buildingId', 'abbreviation', 'name', 'description', 'address',
+                  'postalCode', 'city', 'lat', 'lon', 'altitude', 'lastModified', 'completeAddress']
 
 
 # Rooms

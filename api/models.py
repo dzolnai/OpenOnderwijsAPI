@@ -118,6 +118,14 @@ class Building(models.Model):
     def get_location(self):
         return Point(float(self.lon), float(self.lat))
 
+    def complete_address(self):
+        postal_code = self.postalCode if self.postalCode else ""
+        city = self.city if self.city else ""
+        address = self.address if self.address else ""
+        if self.address is None:
+            return postal_code + " " + city
+        return address + ", " + postal_code + " " + city
+
 
 class Room(models.Model):
     roomId = models.AutoField(primary_key=True)

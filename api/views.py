@@ -163,6 +163,7 @@ class RoomViewSet(AuthenticatedViewSet):
 
 
 class BuildingRoomViewSet(AuthenticatedViewSet):
+    lookup_url_kwarg = 'building_id'
     queryset = Room.objects.all()
     serializer_class = RoomSerializer
     pagination_class = MetadataPagination
