@@ -130,6 +130,7 @@ class GroupViewSet(AuthenticatedViewSet):
 
 
 class GroupRoleViewSet(AuthenticatedViewSet):
+    lookup_url_kwarg = 'grouprole_id'
     queryset = GroupRole.objects.all()
     serializer_class = GroupRoleSerializer
     pagination_class = MetadataPagination

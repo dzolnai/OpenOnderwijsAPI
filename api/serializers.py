@@ -42,10 +42,12 @@ class NewsFeedSerializer(WithPk, serializers.HyperlinkedModelSerializer):
 
 class GroupRoleSerializer(WithPk, serializers.HyperlinkedModelSerializer):
     roles = serializers.ListField(child=serializers.CharField())
+    group = serializers.PrimaryKeyRelatedField(many=False, read_only=True)
+    person = serializers.PrimaryKeyRelatedField(many=False, read_only=True)
 
     class Meta:
         model = GroupRole
-        fields = ('grouproleId', 'group', 'person', 'roles')
+        fields = ['grouproleId', 'group', 'person', 'roles']
 
 
 # Groups
