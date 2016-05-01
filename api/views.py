@@ -71,6 +71,7 @@ class PersonViewSet(AuthenticatedViewSet):
     queryset = Person.objects.all()
     serializer_class = PersonSerializer
     pagination_class = MetadataPagination
+    filter_fields = ['userId', 'surname']
 
     def nearests(self, request):
         radius = 200

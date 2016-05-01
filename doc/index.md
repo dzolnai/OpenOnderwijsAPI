@@ -32,6 +32,7 @@ First ensure your current working directory is the one you just created during t
     pip install djangorestframework==3.3.3
     pip install djangorestframework-xml
     pip install djangorestframework-yaml
+    pip install django-filter==0.11
     pip install django-rest-swagger
     pip install django-oauth2-provider
     pip install python-dateutil

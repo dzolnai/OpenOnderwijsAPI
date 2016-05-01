@@ -185,6 +185,7 @@ REST_FRAMEWORK = {
     'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.NamespaceVersioning',
     'DEFAULT_VERSION': 'v1',
     'DATETIME_FORMAT': "%Y-%m-%dT%H:%M:%SZ",
+    'DEFAULT_FILTER_BACKENDS': ('rest_framework.filters.DjangoFilterBackend',)
 }
 
 SWAGGER_SETTINGS = {
