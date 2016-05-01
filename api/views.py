@@ -1,5 +1,6 @@
 import search
 from api import filters
+from api.filters import TestResultFilter, CourseFilter
 from api.models import Building, Room, Schedule, CourseResult
 from api.models import Course, Minor
 from api.models import Group, GroupRole
@@ -162,6 +163,7 @@ class CourseViewSet(AuthenticatedViewSet):
     queryset = Course.objects.all()
     serializer_class = CourseSerializer
     pagination_class = MetadataPagination
+    filter_class = CourseFilter
 
 
 class MinorViewSet(AuthenticatedViewSet):
@@ -191,9 +193,10 @@ class UserTestResultsViewSet(AuthenticatedViewSet):
 
 
 class TestResultViewSet(AuthenticatedViewSet):
+    lookup_url_kwarg = 'test_id'
     serializer_class = TestResultsSerializer
     pagination_class = MetadataPagination
-    lookup_url_kwarg = 'test_id'
+    filter_class = TestResultFilter
 
     def get_queryset(self):
         return TestResult.objects.filter(userId=self.kwargs['user_id'], pk=self.kwargs['test_id'])

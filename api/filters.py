@@ -1,5 +1,5 @@
 import django_filters
-from api.models import Person, Building
+from api.models import Person, Building, TestResult, Course
 
 
 class OrderFilter(django_filters.FilterSet):
@@ -30,3 +30,15 @@ class BuildingFilter(OrderFilter):
     class Meta:
         model = Building
         fields = ['abbreviation', 'name', 'postalCode', 'city', 'lastModified', 'order']
+
+
+class TestResultFilter(OrderFilter):
+    class Meta:
+        model = TestResult
+        fields = ['courseId', 'passed', 'lastModified', 'order']
+
+
+class CourseFilter(OrderFilter):
+    class Meta:
+        model = Course
+        fields = ['courseId', 'name', 'lastModified', 'order']
