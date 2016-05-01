@@ -127,10 +127,10 @@ class Room(models.Model):
     totalSeats = models.PositiveIntegerField(blank=True, null=True)
     totalWorkspaces = models.PositiveIntegerField(blank=True, null=True)
     availableWorkspaces = models.PositiveIntegerField(blank=True, null=True)
-    lastModified = models.DateTimeField(auto_now=True, default=timezone.now())
     lat = models.DecimalField(max_digits=9, decimal_places=6, blank=True, null=True)
     lon = models.DecimalField(max_digits=9, decimal_places=6, blank=True, null=True)
-    altitude = models.DecimalField(max_digits=3, decimal_places=2, blank=True, null=True)
+    altitude = models.DecimalField(max_digits=6, decimal_places=2, blank=True, null=True)
+    lastModified = models.DateTimeField(auto_now=True, default=timezone.now())
 
 
 class Course(models.Model):

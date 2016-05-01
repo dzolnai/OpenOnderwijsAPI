@@ -8,6 +8,8 @@ from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer
 
 """ This mixin adds the primary key always to the result """
+
+
 class WithPk(object):
     def get_pk_field(self, model_field):
         return self.get_field(model_field)
@@ -34,20 +36,23 @@ class NewsFeedSerializer(WithPk, serializers.HyperlinkedModelSerializer):
         model = NewsFeed
         fields = ('newsfeedId', 'title', 'description', 'items', 'groups', 'lastModified')
 
+
 # Group roles
 
 
 class GroupRoleSerializer(WithPk, serializers.HyperlinkedModelSerializer):
     roles = serializers.ListField(child=serializers.CharField())
+
     class Meta:
         model = GroupRole
         fields = ('grouproleId', 'group', 'person', 'roles')
+
 
 # Groups
 
 
 class GroupSerializer(WithPk, serializers.HyperlinkedModelSerializer):
-    #members = GroupRoleSerializerGroup(many=True, read_only=True)
+    # members = GroupRoleSerializerGroup(many=True, read_only=True)
     courses = serializers.HyperlinkedRelatedField(many=True, read_only=True, view_name='course-detail')
 
     class Meta:
@@ -71,12 +76,12 @@ class AffiliationSerializer(WithPk, serializers.HyperlinkedModelSerializer):
 
 class PersonSerializer(WithPk, serializers.HyperlinkedModelSerializer):
     affiliations = serializers.SlugRelatedField(many=True, read_only=True, slug_field='affiliation')
+
     class Meta:
         model = Person
         fields = ('userId', 'givenname', 'surname', 'displayname', 'commonname', 'nickname', 'affiliations',
                   'mail', 'telephonenumber', 'mobilenumber', 'photoSocial', 'photoOfficial', 'gender',
                   'organization', 'department', 'title', 'office', 'groups', 'lat', 'lon', 'lastModified')
-
 
 
 # Buildings
@@ -93,29 +98,22 @@ class BuildingSerializer(WithPk, serializers.HyperlinkedModelSerializer):
 
 
 class RoomSerializer(WithPk, serializers.HyperlinkedModelSerializer):
-    building = serializers.HyperlinkedRelatedField(read_only=True, view_name='building-detail')
+    buildingId = serializers.PrimaryKeyRelatedField(read_only=True, many=False)
 
     class Meta:
         model = Room
-        depth = 1
-        field = (
-        'building', 'abbreviation', 'name', 'description', 'totalSeats', 'totalWorkspaces', 'availableWorkspaces')
-
-
-class RoomSummarySerializer(WithPk, serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Room
-        fields = ('roomId', 'abbreviation', 'name')
+        fields = ['roomId', 'buildingId', 'abbreviation', 'name', 'description', 'totalSeats',
+                  'totalWorkspaces', 'availableWorkspaces', 'lat', 'lon', 'altitude', 'lastModified']
 
 
 # Courses
 class CourseSerializer(WithPk, serializers.HyperlinkedModelSerializer):
-    #lessons = serializers.HyperlinkedRelatedField(many=True, view_name='lesson-detail')
-    #minors = serializers.HyperlinkedRelatedField(many=True, blank=True, view_name='minor-detail')
+    # lessons = serializers.HyperlinkedRelatedField(many=True, view_name='lesson-detail')
+    # minors = serializers.HyperlinkedRelatedField(many=True, blank=True, view_name='minor-detail')
 
     class Meta:
         model = Course
-    # field = ('abbr','name','description','address','postalCode','city','lat','lon')
+        # field = ('abbr','name','description','address','postalCode','city','lat','lon')
 
 
 class CourseSummarySerializer(WithPk, serializers.HyperlinkedModelSerializer):
@@ -125,7 +123,6 @@ class CourseSummarySerializer(WithPk, serializers.HyperlinkedModelSerializer):
 
 
 class MinorSerializer(WithPk, serializers.HyperlinkedModelSerializer):
-    #	coourses = serializers.HyperlinkedRelatedField(view_name='course-detail')
     class Meta:
         model = Minor
 
@@ -136,7 +133,6 @@ class ScheduleSerializer(WithPk, serializers.HyperlinkedModelSerializer):
     userId = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
     groupId = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
     lecturers = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
-
 
     class Meta:
         model = Schedule

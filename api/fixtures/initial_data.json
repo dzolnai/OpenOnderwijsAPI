@@ -536,7 +536,8 @@
       "totalWorkspaces": 10,
       "availableWorkspaces": 10,
       "lat": "52.355133",
-      "lon": "5.616567"
+      "lon": "5.616567",
+      "altitude": 123.11
     },
     "model": "api.room",
     "pk": 1
