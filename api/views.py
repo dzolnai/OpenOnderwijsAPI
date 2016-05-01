@@ -209,7 +209,10 @@ class TestResultViewSet(AuthenticatedViewSet):
         test_results = self.get_queryset()
         courses = Course.objects.filter(testResults=test_results)
         course_results = CourseResult.objects.filter(student=self.kwargs['user_id'], course=courses)
-        return {'courseResult': course_results, 'request': self.request}
+        course_result_ids = []
+        for course_result in course_results:
+            course_result_ids.append(course_result.courseResultId)
+        return {'courseResult': course_result_ids, 'request': self.request}
 
 
 class UserCourseResultsViewSet(AuthenticatedViewSet):

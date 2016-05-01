@@ -145,11 +145,12 @@ class ScheduleSerializer(WithPk, serializers.HyperlinkedModelSerializer):
 
 class TestResultsSerializer(WithPk, ModelSerializer):
     userId = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
-    courseResult = serializers.PrimaryKeyRelatedField(many=True, read_only=True, source='_courseResult')
+    courseResult = serializers.SerializerMethodField('_courseResult')
 
-    def _courseResult(self, obj):
+    def _courseResult(self, _):
         return self.context['courseResult']
 
     class Meta:
         model = TestResult
-        fields = ['userId', 'courseId', 'courseResult']
+        fields = ['testResultId', 'userId', 'courseId', 'courseResult', 'description',
+                  'lastModified', 'assessmentType', 'testDate', 'grade', 'comment', 'passed', 'weight']
