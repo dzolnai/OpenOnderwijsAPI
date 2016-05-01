@@ -1,6 +1,6 @@
 import search
 from api import filters
-from api.filters import TestResultFilter, CourseFilter
+from api.filters import TestResultFilter, CourseFilter, ScheduleFilter
 from api.models import Building, Room, Schedule, CourseResult
 from api.models import Course, Minor
 from api.models import Group, GroupRole
@@ -176,6 +176,7 @@ class ScheduleViewSet(AuthenticatedViewSet):
     queryset = Schedule.objects.all()
     serializer_class = ScheduleSerializer
     pagination_class = MetadataPagination
+    filter_class = ScheduleFilter
 
 
 class UserTestResultsViewSet(AuthenticatedViewSet):

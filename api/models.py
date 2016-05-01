@@ -205,9 +205,6 @@ class Schedule(models.Model):
     description = models.TextField(blank=True, null=True)
     lastModified = models.DateTimeField(auto_now=True, default=timezone.now())
 
-    def buildingId(self):
-        return self.roomId.buildingId
-
 
 class CourseResult(models.Model):
     courseResultId = models.AutoField(primary_key=True)
