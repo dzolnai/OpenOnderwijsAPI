@@ -167,7 +167,7 @@ LOGGING = {
 
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'api.pagination.MetadataPagination',
-    'PAGE_SIZE': 20,
+    'PAGE_SIZE': 10,
     'COERCE_DECIMAL_TO_STRING': False,
     'DEFAULT_PARSER_CLASSES': (
         'rest_framework_xml.parsers.XMLParser',
@@ -183,7 +183,8 @@ REST_FRAMEWORK = {
         #'rest_framework.authentication.OAuth2Authentication',
     ),
     'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.NamespaceVersioning',
-    'DEFAULT_VERSION': 'v1'
+    'DEFAULT_VERSION': 'v1',
+    'DATETIME_FORMAT': "%Y-%m-%dT%H:%M:%SZ",
 }
 
 SWAGGER_SETTINGS = {
