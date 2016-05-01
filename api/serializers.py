@@ -109,14 +109,13 @@ class RoomSerializer(WithPk, serializers.HyperlinkedModelSerializer):
 # Courses
 class CourseSerializer(WithPk, serializers.HyperlinkedModelSerializer):
     schedules = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
-    # lessons = serializers.HyperlinkedRelatedField(many=True, view_name='lesson-detail')
-    # minors = serializers.HyperlinkedRelatedField(many=True, blank=True, view_name='minor-detail')
+    groups = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
 
     class Meta:
         model = Course
         fields = ['schedules', 'courseId', 'name', 'abbreviation', 'ects', 'description',
                   'goals', 'requirements', 'level', 'format', 'language', 'enrollment',
-                  'literature', 'exams', 'schedule']
+                  'literature', 'exams', 'schedule', 'groups']
 
 
 class MinorSerializer(WithPk, serializers.HyperlinkedModelSerializer):

@@ -73,11 +73,12 @@ class Group(models.Model):
     GROUP_TYPES = ('?LesGroep', '?LeerGroep', 'ou', 'affiliation', 'Generic')
 
     groupId = models.AutoField(primary_key=True)
-    type = models.CharField(max_length=32, choices=self_zip(GROUP_TYPES))
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True)
-    lastModified = models.DateTimeField(auto_now=True, default=timezone.now())
+    type = models.CharField(max_length=32, choices=self_zip(GROUP_TYPES))
+    courses = models.ManyToManyField('Course', related_name="groups", blank=True, null=True)
     members = models.ManyToManyField('Person', through='GroupRole', related_name="groups", blank=True, null=True)
+    lastModified = models.DateTimeField(auto_now=True, default=timezone.now())
 
 
 class GroupRole(models.Model):
@@ -154,7 +155,6 @@ class Course(models.Model):
     organization = models.CharField(max_length=255, blank=True, null=True)
     department = models.CharField(max_length=255, blank=True, null=True)
     lecturers = models.ForeignKey('Person', related_name='courses', blank=True, null=True)
-    groups = models.ManyToManyField('Group', related_name='courses', blank=True, null=True)
     lastModified = models.DateTimeField(auto_now=True, default=timezone.now())
 
     class Meta:

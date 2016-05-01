@@ -31,13 +31,14 @@ def api_root(request, format=None):
         'persons-nearests': reverse('person-list-nearests', request=request, format=format),
         'groups': reverse('group-list', request=request, format=format),
         'grouproles': reverse('grouprole-list', request=request, format=format),
-        'affiliations': reverse('affiliation-list', request=request, format=format),
         'buildings': reverse('building-list', request=request, format=format),
         'buildings-nearests': reverse('building-list-nearests', request=request, format=format),
         'rooms': reverse('room-list', request=request, format=format),
         'courses': reverse('course-list', request=request, format=format),
         'schedule': reverse('schedule-list', request=request, format=format),
-        'minors': reverse('minor-list', request=request, format=format),
+        # Affiliations and minors should not be exposed
+        #'affiliations': reverse('affiliation-list', request=request, format=format),
+        #'minors': reverse('minor-list', request=request, format=format),
     })
 
 

@@ -137,9 +137,10 @@
   },
   {
     "fields": {
-      "description": "hallo",
-      "name": "een derde groep",
-      "type": "Generic"
+      "description": "For placing and answering questions about the topics discussed on the course.",
+      "name": "GPU programming online support group",
+      "type": "Generic",
+      "courses": ["CG-CS-PROGCPU1"]
     },
     "model": "api.group",
     "pk": 3
@@ -380,10 +381,7 @@
       "organization": "University of Harderwijk",
       "requirements": "Advanced Mathematics 401, Field Theory 401",
       "schedule": "wednesday mornings",
-      "link": null,
-      "groups": [
-        1
-      ]
+      "link": null
     },
     "model": "api.course"
   },
@@ -406,11 +404,7 @@
       "organization": "Universiteit van Harderwijk",
       "requirements": "Algemene programmeerkennis, succesvol afgeronde cursus Introductie programmeren, en minimaal een 8 voor CPU architectures",
       "schedule": "maandag- en woensdagmiddag en vrijdag",
-      "link": null,
-      "groups": [
-        2,
-        3
-      ]
+      "link": null
     },
     "model": "api.course"
   },
@@ -433,9 +427,7 @@
       "organization": "Universiteit van Harderwijk",
       "requirements": "Een gezond verstand",
       "schedule": "Maandag-, dinsdag- en donderdagochtend van 8-12.",
-      "link": "",
-      "groups": [
-      ]
+      "link": ""
     },
     "model": "api.course"
   },
@@ -458,9 +450,7 @@
       "organization": "Universiteit van Harderwijk",
       "requirements": "Het is aan te raden eerst ABSTR101 met minimaal een 8 te hebben afgerond",
       "schedule": "Donderdagmiddag en vrijdag.  Veldwerk in week 17",
-      "link": "",
-      "groups": [
-      ]
+      "link": ""
     },
     "model": "api.course"
   },
