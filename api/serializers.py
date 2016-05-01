@@ -49,31 +49,16 @@ class GroupRoleSerializer(WithPk, serializers.HyperlinkedModelSerializer):
 
 
 # Groups
-
-
 class GroupSerializer(WithPk, serializers.HyperlinkedModelSerializer):
-    # members = GroupRoleSerializerGroup(many=True, read_only=True)
-    courses = serializers.HyperlinkedRelatedField(many=True, read_only=True, view_name='course-detail')
+    members = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+    courses = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
 
     class Meta:
         model = Group
-        fields = ('groupId', 'name', 'description', 'type', 'members', 'courses')
-
-
-# Affiliations
-
-
-class AffiliationSerializer(WithPk, serializers.HyperlinkedModelSerializer):
-    persons = serializers.HyperlinkedRelatedField(many=True, read_only=True, view_name='person-detail')
-
-    class Meta:
-        model = Affiliation
-        fields = ('id', 'affiliation', 'persons')
+        fields = ['groupId', 'name', 'description', 'type', 'members', 'courses', 'lastModified']
 
 
 # Persons
-
-
 class PersonSerializer(WithPk, serializers.HyperlinkedModelSerializer):
     affiliations = serializers.SlugRelatedField(many=True, read_only=True, slug_field='affiliation')
 
@@ -85,8 +70,6 @@ class PersonSerializer(WithPk, serializers.HyperlinkedModelSerializer):
 
 
 # Buildings
-
-
 class BuildingSerializer(WithPk, serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Building
@@ -95,8 +78,6 @@ class BuildingSerializer(WithPk, serializers.HyperlinkedModelSerializer):
 
 
 # Rooms
-
-
 class RoomSerializer(WithPk, serializers.HyperlinkedModelSerializer):
     buildingId = serializers.PrimaryKeyRelatedField(read_only=True, many=False)
 
@@ -116,11 +97,6 @@ class CourseSerializer(WithPk, serializers.HyperlinkedModelSerializer):
         fields = ['schedules', 'courseId', 'name', 'abbreviation', 'ects', 'description',
                   'goals', 'requirements', 'level', 'format', 'language', 'enrollment',
                   'literature', 'exams', 'schedule', 'groups']
-
-
-class MinorSerializer(WithPk, serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Minor
 
 
 class ScheduleSerializer(WithPk, serializers.HyperlinkedModelSerializer):
@@ -146,3 +122,16 @@ class TestResultsSerializer(WithPk, ModelSerializer):
         model = TestResult
         fields = ['testResultId', 'userId', 'courseId', 'courseResult', 'description',
                   'lastModified', 'assessmentType', 'testDate', 'grade', 'comment', 'passed', 'weight']
+
+# Unused stuff
+class MinorSerializer(WithPk, serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Minor
+
+# Affiliations
+class AffiliationSerializer(WithPk, serializers.HyperlinkedModelSerializer):
+    persons = serializers.HyperlinkedRelatedField(many=True, read_only=True, view_name='person-detail')
+
+    class Meta:
+        model = Affiliation
+        fields = ('id', 'affiliation', 'persons')

@@ -123,6 +123,7 @@ class PersonMeViewSet(AuthenticatedViewSet):
 
 
 class GroupViewSet(AuthenticatedViewSet):
+    lookup_url_kwarg = 'group_id'
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
     pagination_class = MetadataPagination
