@@ -127,6 +127,7 @@ class BuildingViewSet(AuthenticatedViewSet):
     queryset = Building.objects.all()
     pagination_class = MetadataPagination
     serializer_class = BuildingSerializer
+    filter_class = filters.BuildingFilter
 
     def nearests(self, request):
         radius = 200

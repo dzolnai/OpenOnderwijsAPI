@@ -167,7 +167,7 @@ class Course(models.Model):
     lastModified = models.DateTimeField(auto_now=True, default=timezone.now())
 
     class Meta:
-        ordering = ('lastModified',)
+        ordering = ['-lastModified']
 
 
 # Not included in v1 API spec - do not remove, might be used in the future
@@ -219,3 +219,4 @@ class CourseResult(models.Model):
 
     class Meta:
         unique_together = ("student", "course")
+        ordering = ["-lastModified"]

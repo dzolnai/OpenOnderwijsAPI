@@ -1,5 +1,5 @@
 import django_filters
-from api.models import Person
+from api.models import Person, Building
 
 
 class OrderFilter(django_filters.FilterSet):
@@ -24,3 +24,9 @@ class PersonFilter(OrderFilter):
         model = Person
         fields = ['userId', 'surname', 'displayname', 'affiliations', 'gender', 'organization',
                   'department', 'office', 'groups', 'lat', 'lon', 'order']
+
+
+class BuildingFilter(OrderFilter):
+    class Meta:
+        model = Building
+        fields = ['abbreviation', 'name', 'postalCode', 'city', 'lastModified', 'order']
