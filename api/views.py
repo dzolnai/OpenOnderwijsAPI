@@ -1,6 +1,6 @@
-import search
 from api import filters
-from api.filters import TestResultFilter, CourseFilter, ScheduleFilter
+from django.db.models import F
+from api.filters import TestResultFilter, CourseFilter, ScheduleFilter, RoomFilter
 from api.models import Building, Room, Schedule, CourseResult
 from api.models import Course, Minor
 from api.models import Group, GroupRole
@@ -15,6 +15,7 @@ from api.serializers import NewsItemSerializer, NewsFeedSerializer
 from api.serializers import PersonSerializer, AffiliationSerializer
 from api.serializers import ScheduleSerializer, CourseSerializer
 from api.serializers import TestResultsSerializer
+from django.db.models.expressions import RawSQL
 from haystack.query import SearchQuerySet
 from haystack.utils.geo import Point, D
 from rest_framework import status
@@ -149,6 +150,7 @@ class RoomViewSet(AuthenticatedViewSet):
     queryset = Room.objects.all()
     serializer_class = RoomSerializer
     pagination_class = MetadataPagination
+    filter_class = RoomFilter
 
 
 class BuildingRoomViewSet(AuthenticatedViewSet):
@@ -173,7 +175,7 @@ class MinorViewSet(AuthenticatedViewSet):
 
 
 class ScheduleViewSet(AuthenticatedViewSet):
-    queryset = Schedule.objects.all()
+    queryset = Schedule.objects.all().annotate(buildingId=F('roomId__buildingId'))
     serializer_class = ScheduleSerializer
     pagination_class = MetadataPagination
     filter_class = ScheduleFilter

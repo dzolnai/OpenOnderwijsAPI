@@ -2,7 +2,8 @@
   {
     "fields": {
       "description": "test 1",
-      "title": "feed 1"
+      "title": "feed 1",
+      "lastModified": "2013-12-24T09:36:13Z"
     },
     "model": "api.newsfeed",
     "pk": 1
@@ -10,7 +11,8 @@
   {
     "fields": {
       "description": "test 2",
-      "title": "feed 2"
+      "title": "feed 2",
+      "lastModified": "2013-12-24T09:39:54Z"
     },
     "model": "api.newsfeed",
     "pk": 2
@@ -71,7 +73,9 @@
       "telephonenumber": "+31301234567",
       "title": null,
       "lat": "52.355133",
-      "lon": "5.616567"
+      "lon": "5.616567",
+      "lastModified": "2014-01-01T08:00:00Z"
+
     },
     "model": "api.person",
     "pk": 1
@@ -97,7 +101,8 @@
       "telephonenumber": null,
       "title": null,
       "lat": "52.355133",
-      "lon": "5.616567"
+      "lon": "5.616567",
+      "lastModified": "2014-01-01T08:02:00Z"
     },
     "model": "api.person",
     "pk": 2
@@ -106,7 +111,8 @@
     "fields": {
       "description": "hallo een test groep",
       "name": "test group",
-      "type": "?LesGroep"
+      "type": "?LesGroep",
+      "lastModified": "2014-01-01T08:00:00Z"
     },
     "model": "api.group",
     "pk": 1
@@ -115,7 +121,8 @@
     "fields": {
       "description": "Kijk, nog 1",
       "name": "Nog een andere group",
-      "type": "affiliation"
+      "type": "affiliation",
+      "lastModified": "2014-01-01T08:01:00Z"
     },
     "model": "api.group",
     "pk": 2
@@ -127,7 +134,8 @@
       "type": "Generic",
       "courses": [
         "CG-CS-PROGCPU1"
-      ]
+      ],
+      "lastModified": "2014-01-01T08:03:00Z"
     },
     "model": "api.group",
     "pk": 3
@@ -139,7 +147,8 @@
       "roles": [
         "administrator",
         "member"
-      ]
+      ],
+      "lastModified": "2014-01-01T07:00:00Z"
     },
     "model": "api.grouprole",
     "pk": 1
@@ -151,7 +160,8 @@
       "roles": [
         "manager",
         "member"
-      ]
+      ],
+      "lastModified": "2014-01-01T08:00:00Z"
     },
     "model": "api.grouprole",
     "pk": 2
@@ -163,7 +173,8 @@
       "roles": [
         "administrator",
         "manager"
-      ]
+      ],
+      "lastModified": "2014-01-01T08:01:00Z"
     },
     "model": "api.grouprole",
     "pk": 3
@@ -178,7 +189,8 @@
       "lon": "5.616567",
       "name": "Albert-Einsteingebouw",
       "postalCode": "1114FG",
-      "altitude": 115.12
+      "altitude": 115.12,
+      "lastModified": "2014-01-01T08:00:00Z"
     },
     "model": "api.building",
     "pk": 1
@@ -193,7 +205,8 @@
       "lon": "5.617567",
       "name": "Washingtongebouw",
       "postalCode": "1234AB",
-      "altitude": 139.77
+      "altitude": 139.77,
+      "lastModified": "2014-01-01T09:00:00Z"
     },
     "model": "api.building",
     "pk": 2
@@ -216,7 +229,8 @@
       "organization": "University of Harderwijk",
       "requirements": "Advanced Mathematics 401, Field Theory 401",
       "schedule": "wednesday mornings",
-      "link": null
+      "link": null,
+      "lastModified": "2014-01-01T08:00:00Z"
     },
     "model": "api.course"
   },
@@ -239,7 +253,8 @@
       "organization": "Universiteit van Harderwijk",
       "requirements": "Algemene programmeerkennis, succesvol afgeronde cursus Introductie programmeren, en minimaal een 8 voor CPU architectures",
       "schedule": "maandag- en woensdagmiddag en vrijdag",
-      "link": null
+      "link": null,
+      "lastModified": "2014-01-01T09:00:00Z"
     },
     "model": "api.course"
   },
@@ -262,7 +277,8 @@
       "organization": "Universiteit van Harderwijk",
       "requirements": "Een gezond verstand",
       "schedule": "Maandag-, dinsdag- en donderdagochtend van 8-12.",
-      "link": ""
+      "link": "",
+      "lastModified": "2014-01-01T10:00:00Z"
     },
     "model": "api.course"
   },
@@ -285,7 +301,8 @@
       "organization": "Universiteit van Harderwijk",
       "requirements": "Het is aan te raden eerst ABSTR101 met minimaal een 8 te hebben afgerond",
       "schedule": "Donderdagmiddag en vrijdag.  Veldwerk in week 17",
-      "link": ""
+      "link": "",
+      "lastModified": "2014-01-01T11:00:00Z"
     },
     "model": "api.course"
   },
@@ -296,7 +313,8 @@
         4
       ],
       "description": "In deze minor wordt diep ingegaan op het abstraheren van concrete concepten.  Je leert het verschil tussen abstract en concreet en bereidt je voor op een beroep als abstracticeur.",
-      "name": "Abstractiekunde"
+      "name": "Abstractiekunde",
+      "lastModified": "2014-01-01T08:00:00Z"
     },
     "model": "api.minor",
     "pk": 1
@@ -315,7 +333,8 @@
         1,
         2
       ],
-      "weight": 10
+      "weight": 10,
+      "lastModified": "2014-01-01T08:00:00Z"
     },
     "model": "api.testresult",
     "pk": 1
@@ -333,7 +352,8 @@
       "userId": [
         2
       ],
-      "weight": 25
+      "weight": 25,
+      "lastModified": "2014-01-01T09:00:00Z"
     },
     "model": "api.testresult",
     "pk": 2
@@ -351,7 +371,8 @@
       "userId": [
         2
       ],
-      "weight": 75
+      "weight": 75,
+      "lastModified": "2014-01-01T10:00:00Z"
     },
     "model": "api.testresult",
     "pk": 2
@@ -378,7 +399,8 @@
       "availableWorkspaces": 10,
       "lat": "52.355133",
       "lon": "5.616567",
-      "altitude": 123.11
+      "altitude": 123.11,
+      "lastModified": "2014-01-01T08:00:00Z"
     },
     "model": "api.room",
     "pk": 1
@@ -393,7 +415,8 @@
       "totalWorkspaces": 0,
       "availableWorkspaces": 0,
       "lat": "52.355133",
-      "lon": "5.616567"
+      "lon": "5.616567",
+      "lastModified": "2014-01-01T09:00:00Z"
     },
     "model": "api.room",
     "pk": 2
@@ -408,7 +431,8 @@
       "totalWorkspaces": 2,
       "availableWorkspaces": 2,
       "lat": "52.355133",
-      "lon": "5.616567"
+      "lon": "5.616567",
+      "lastModified": "2014-01-01T10:00:00Z"
     },
     "model": "api.room",
     "pk": 3
@@ -423,7 +447,8 @@
       "totalWorkspaces": 3,
       "availableWorkspaces": 1,
       "lat": "52.355133",
-      "lon": "5.616567"
+      "lon": "5.616567",
+      "lastModified": "2014-01-01T11:00:00Z"
     },
     "model": "api.room",
     "pk": 4
@@ -435,7 +460,8 @@
         2
       ],
       "roomId": [
-        1
+        1,
+        3
       ],
       "startDateTime": "2013-02-13T15:30:00.000Z",
       "endDateTime": "2013-02-13T19:30:00.000Z",
@@ -449,7 +475,8 @@
       "lecturers": [
         1
       ],
-      "description": "I don't know"
+      "description": "I don't know",
+      "lastModified": "2014-01-01T08:00:00Z"
     },
     "model": "api.schedule",
     "pk": 1

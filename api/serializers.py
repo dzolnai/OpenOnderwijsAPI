@@ -107,6 +107,7 @@ class CourseSerializer(WithPk, serializers.HyperlinkedModelSerializer):
 class ScheduleSerializer(WithPk, serializers.HyperlinkedModelSerializer):
     roomId = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
     courseId = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+    buildingId = serializers.PrimaryKeyRelatedField(many=False, read_only=True)
     userId = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
     groupId = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
     lecturers = serializers.PrimaryKeyRelatedField(many=True, read_only=True)

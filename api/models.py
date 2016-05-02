@@ -28,7 +28,7 @@ class NewsFeed(models.Model):
     title = models.CharField(max_length=255, blank=False, null=False)
     description = models.TextField(blank=True, null=True)
     groups = models.ManyToManyField('Group', related_name='feeds', blank=True, null=True)
-    lastModified = models.DateTimeField(auto_now=True, default=timezone.now())
+    lastModified = models.DateTimeField(auto_now=True)
 
     class Meta:
         ordering = ('lastModified',)
@@ -65,7 +65,7 @@ class Person(models.Model):
     office = models.ForeignKey('Room', blank=True, null=True)
     lat = models.DecimalField(max_digits=8, decimal_places=5)
     lon = models.DecimalField(max_digits=8, decimal_places=5)
-    lastModified = models.DateTimeField(auto_now=True, default=timezone.now())
+    lastModified = models.DateTimeField(auto_now=True)
 
     def get_location(self):
         return Point(float(self.lon), float(self.lat))
@@ -80,7 +80,7 @@ class Group(models.Model):
     type = models.CharField(max_length=32, choices=self_zip(GROUP_TYPES))
     courses = models.ManyToManyField('Course', related_name="groups", blank=True, null=True)
     members = models.ManyToManyField('Person', through='GroupRole', related_name="groups", blank=True, null=True)
-    lastModified = models.DateTimeField(auto_now=True, default=timezone.now())
+    lastModified = models.DateTimeField(auto_now=True)
 
 
 class GroupRole(models.Model):
@@ -88,7 +88,7 @@ class GroupRole(models.Model):
     grouproleId = models.AutoField(primary_key=True)
     person = models.ForeignKey('Person', related_name='person')
     group = models.ForeignKey('Group', related_name='group')
-    lastModified = models.DateTimeField(auto_now=True, default=timezone.now())
+    lastModified = models.DateTimeField(auto_now=True)
     roles = ListField(choices=self_zip(ROLES), null=False, blank=False, max_length=255)
 
     class Meta:
@@ -115,7 +115,7 @@ class Building(models.Model):
     lat = models.DecimalField(max_digits=8, decimal_places=5)
     lon = models.DecimalField(max_digits=8, decimal_places=5)
     altitude = models.DecimalField(max_digits=6, decimal_places=2, blank=True, null=True)
-    lastModified = models.DateTimeField(auto_now=True, default=timezone.now())
+    lastModified = models.DateTimeField(auto_now=True)
 
     def get_location(self):
         return Point(float(self.lon), float(self.lat))
@@ -141,7 +141,7 @@ class Room(models.Model):
     lat = models.DecimalField(max_digits=9, decimal_places=6, blank=True, null=True)
     lon = models.DecimalField(max_digits=9, decimal_places=6, blank=True, null=True)
     altitude = models.DecimalField(max_digits=6, decimal_places=2, blank=True, null=True)
-    lastModified = models.DateTimeField(auto_now=True, default=timezone.now())
+    lastModified = models.DateTimeField(auto_now=True)
 
 
 class Course(models.Model):
@@ -165,7 +165,7 @@ class Course(models.Model):
     organization = models.CharField(max_length=255, blank=True, null=True)
     department = models.CharField(max_length=255, blank=True, null=True)
     lecturers = models.ForeignKey('Person', related_name='courses', blank=True, null=True)
-    lastModified = models.DateTimeField(auto_now=True, default=timezone.now())
+    lastModified = models.DateTimeField(auto_now=True)
 
     class Meta:
         ordering = ['-lastModified']
@@ -176,7 +176,7 @@ class Minor(models.Model):
     name = models.CharField(max_length=255, unique=True)
     description = models.TextField()
     courses = models.ManyToManyField('Course', related_name='minors')
-    lastModified = models.DateTimeField(auto_now=True, default=timezone.now())
+    lastModified = models.DateTimeField(auto_now=True)
 
 
 class TestResult(models.Model):
@@ -184,7 +184,7 @@ class TestResult(models.Model):
     courseId = models.ManyToManyField('Course', related_name="testResults", blank=False, null=False)
     userId = models.ManyToManyField('Person', related_name="testResults", blank=True, null=True)
     description = models.CharField(max_length=255)
-    lastModified = models.DateTimeField(auto_now=True, default=timezone.now())
+    lastModified = models.DateTimeField(auto_now=True)
     testDate = models.DateField()
     assessmentType = models.CharField(max_length=255)
     grade = models.CharField(max_length=255)
@@ -196,21 +196,21 @@ class TestResult(models.Model):
 class Schedule(models.Model):
     scheduleId = models.AutoField(primary_key=True)
     userId = models.ManyToManyField('Person', related_name="+", null=True)
-    roomId = models.ManyToManyField('Room', related_name='+', null=True)
+    roomId = models.ManyToManyField('Room', related_name='rooms', null=True)
     courseId = models.ManyToManyField('Course', related_name='schedules', null=True)
     startDateTime = models.DateTimeField(blank=True, null=True)
     endDateTime = models.DateTimeField(blank=True, null=True)
     groupId = models.ManyToManyField('Group', related_name="+", null=True)
     lecturers = models.ManyToManyField('Person', related_name="+", null=True)
     description = models.TextField(blank=True, null=True)
-    lastModified = models.DateTimeField(auto_now=True, default=timezone.now())
+    lastModified = models.DateTimeField(auto_now=True)
 
 
 class CourseResult(models.Model):
     courseResultId = models.AutoField(primary_key=True)
     student = models.ForeignKey('Person')
     course = models.ForeignKey('Course', blank=False, null=False)
-    lastModified = models.DateTimeField(auto_now=True, default=timezone.now())
+    lastModified = models.DateTimeField(auto_now=True)
     grade = models.DecimalField(max_digits=3, decimal_places=2, blank=True, null=True)
     comment = models.CharField(blank=True, null=True, max_length=15)
     passed = models.NullBooleanField()

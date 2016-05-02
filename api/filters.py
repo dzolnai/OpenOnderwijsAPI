@@ -1,5 +1,5 @@
 import django_filters
-from api.models import Person, Building, TestResult, Course, Schedule
+from api.models import Person, Building, TestResult, Course, Schedule, Room
 
 
 class OrderFilter(django_filters.FilterSet):
@@ -45,13 +45,16 @@ class CourseFilter(OrderFilter):
 
 
 class ScheduleFilter(OrderFilter):
-    buildingId = django_filters.MethodFilter(action='filter_building_id')
-
-    def filter_building_id(self, queryset, value):
-        print("Filtering")
-        #queryset.filter(buildingId=value)
 
     class Meta:
         model = Schedule
-        fields = ['scheduleId', 'roomId', 'buildingId', 'courseId', 'startDateTime', 'endDateTime',
+        fields = ['scheduleId', 'roomId', 'courseId', 'startDateTime', 'endDateTime',
                   'groupId', 'lecturers', 'lastModified', 'order']
+
+
+class RoomFilter(OrderFilter):
+
+    class Meta:
+        model = Room
+        fields = ['buildingId', 'roomId', 'abbreviation', 'name', 'totalSeats',
+                  'totalSeats', 'availableWorkspaces', 'lat', 'lon', 'lastModified', 'order']
