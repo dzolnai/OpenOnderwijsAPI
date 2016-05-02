@@ -28,7 +28,7 @@ First ensure your current working directory is the one you just created during t
 
 ### Step 3: Install python modules
 
-    pip install django==1.7.11
+    pip install django==1.8.2
     pip install djangorestframework==3.3.3
     pip install djangorestframework-xml
     pip install djangorestframework-yaml

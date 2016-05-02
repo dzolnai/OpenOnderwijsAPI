@@ -1,5 +1,5 @@
 import django_filters
-from api.models import Person, Building, TestResult, Course, Schedule, Room
+from api.models import Person, Building, TestResult, Course, Schedule, Room, Group
 
 
 class OrderFilter(django_filters.FilterSet):
@@ -58,3 +58,10 @@ class RoomFilter(OrderFilter):
         model = Room
         fields = ['buildingId', 'roomId', 'abbreviation', 'name', 'totalSeats',
                   'totalSeats', 'availableWorkspaces', 'lat', 'lon', 'lastModified', 'order']
+
+
+class GroupFilter(OrderFilter):
+
+    class Meta:
+        model = Group
+        fields = ['groupId', 'name', 'type', 'members', 'courses', 'order']

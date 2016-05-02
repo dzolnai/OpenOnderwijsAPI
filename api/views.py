@@ -1,6 +1,6 @@
 from api import filters
 from django.db.models import F
-from api.filters import TestResultFilter, CourseFilter, ScheduleFilter, RoomFilter
+from api.filters import TestResultFilter, CourseFilter, ScheduleFilter, RoomFilter, GroupFilter
 from api.models import Building, Room, Schedule, CourseResult
 from api.models import Course, Minor
 from api.models import Group, GroupRole
@@ -116,6 +116,7 @@ class GroupViewSet(AuthenticatedViewSet):
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
     pagination_class = MetadataPagination
+    filter_class = GroupFilter
 
 
 class GroupRoleViewSet(AuthenticatedViewSet):

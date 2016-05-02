@@ -27,7 +27,7 @@ class NewsFeed(models.Model):
     newsfeedId = models.AutoField(primary_key=True)
     title = models.CharField(max_length=255, blank=False, null=False)
     description = models.TextField(blank=True, null=True)
-    groups = models.ManyToManyField('Group', related_name='feeds', blank=True, null=True)
+    groups = models.ManyToManyField('Group', related_name='feeds')
     lastModified = models.DateTimeField(auto_now=True)
 
     class Meta:
@@ -78,8 +78,8 @@ class Group(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True)
     type = models.CharField(max_length=32, choices=self_zip(GROUP_TYPES))
-    courses = models.ManyToManyField('Course', related_name="groups", blank=True, null=True)
-    members = models.ManyToManyField('Person', through='GroupRole', related_name="groups", blank=True, null=True)
+    courses = models.ManyToManyField('Course', related_name="groups")
+    members = models.ManyToManyField('Person', through='GroupRole', related_name="groups")
     lastModified = models.DateTimeField(auto_now=True)
 
 
@@ -181,8 +181,8 @@ class Minor(models.Model):
 
 class TestResult(models.Model):
     testResultId = models.AutoField(primary_key=True)
-    courseId = models.ManyToManyField('Course', related_name="testResults", blank=False, null=False)
-    userId = models.ManyToManyField('Person', related_name="testResults", blank=True, null=True)
+    courseId = models.ManyToManyField('Course', related_name="testResults")
+    userId = models.ManyToManyField('Person', related_name="testResults")
     description = models.CharField(max_length=255)
     lastModified = models.DateTimeField(auto_now=True)
     testDate = models.DateField()
@@ -195,13 +195,13 @@ class TestResult(models.Model):
 
 class Schedule(models.Model):
     scheduleId = models.AutoField(primary_key=True)
-    userId = models.ManyToManyField('Person', related_name="+", null=True)
-    roomId = models.ManyToManyField('Room', related_name='rooms', null=True)
-    courseId = models.ManyToManyField('Course', related_name='schedules', null=True)
+    userId = models.ManyToManyField('Person', related_name="+")
+    roomId = models.ManyToManyField('Room', related_name='rooms')
+    courseId = models.ManyToManyField('Course', related_name='schedules')
     startDateTime = models.DateTimeField(blank=True, null=True)
     endDateTime = models.DateTimeField(blank=True, null=True)
-    groupId = models.ManyToManyField('Group', related_name="+", null=True)
-    lecturers = models.ManyToManyField('Person', related_name="+", null=True)
+    groupId = models.ManyToManyField('Group', related_name="+")
+    lecturers = models.ManyToManyField('Person', related_name="+")
     description = models.TextField(blank=True, null=True)
     lastModified = models.DateTimeField(auto_now=True)
 
