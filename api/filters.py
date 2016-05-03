@@ -1,5 +1,5 @@
 import django_filters
-from api.models import Person, Building, TestResult, Course, Schedule, Room, Group
+from api.models import Person, Building, TestResult, Course, Schedule, Room, Group, GroupRole, NewsFeed, NewsItem
 
 
 class OrderFilter(django_filters.FilterSet):
@@ -65,3 +65,24 @@ class GroupFilter(OrderFilter):
     class Meta:
         model = Group
         fields = ['groupId', 'name', 'type', 'members', 'courses', 'order']
+
+
+class GroupRoleFilter(OrderFilter):
+
+    class Meta:
+        model = GroupRole
+        fields = ['grouproleId', 'group', 'person', 'roles', 'order']
+
+
+class NewsFeedFilter(OrderFilter):
+
+    class Meta:
+        model = NewsFeed
+        fields = ['newsfeedId', 'title', 'lastModified', 'order']
+
+
+class NewsItemFilter(OrderFilter):
+
+    class Meta:
+        model = NewsItem
+        fields = ['newsitemId', 'feeds', 'publishDate', 'authors', 'order']

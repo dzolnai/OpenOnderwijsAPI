@@ -34,7 +34,7 @@ First ensure your current working directory is the one you just created during t
     pip install djangorestframework-yaml
     pip install django-filter==0.11
     pip install django-rest-swagger
-    pip install django-oauth2-provider
+    pip install django-oauth-toolkit
     pip install python-dateutil
     pip install django-haystack
 

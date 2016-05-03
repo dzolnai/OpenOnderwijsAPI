@@ -1,6 +1,6 @@
 from api import filters
-from django.db.models import F
-from api.filters import TestResultFilter, CourseFilter, ScheduleFilter, RoomFilter, GroupFilter
+from api.filters import TestResultFilter, CourseFilter, ScheduleFilter, RoomFilter, GroupFilter, GroupRoleFilter, \
+    NewsFeedFilter, NewsItemFilter
 from api.models import Building, Room, Schedule, CourseResult
 from api.models import Course, Minor
 from api.models import Group, GroupRole
@@ -15,12 +15,14 @@ from api.serializers import NewsItemSerializer, NewsFeedSerializer
 from api.serializers import PersonSerializer, AffiliationSerializer
 from api.serializers import ScheduleSerializer, CourseSerializer
 from api.serializers import TestResultsSerializer
-from django.db.models.expressions import RawSQL
+from django.db.models import F
 from haystack.query import SearchQuerySet
 from haystack.utils.geo import Point, D
+from oauth2_provider.ext.rest_framework import OAuth2Authentication
 from rest_framework import status
 from rest_framework import viewsets
 from rest_framework.decorators import api_view
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
 
@@ -46,22 +48,33 @@ def api_root(request, format=None):
 
 
 class AuthenticatedViewSet(viewsets.ModelViewSet):
-    # replace the empty braces with the commented line to enable authentication on the whole API
-    permission_classes = []  # [permissions.IsAuthenticated]
-    # when authentication is enabled: 1. request an access token from /oauth2/access_token
-    # 2. include the access token in your request headers: --- Authorization: Bearer YOURTOKEN ---
+    authentication_classes = [OAuth2Authentication]
+    permission_classes = [IsAuthenticated]
+
+    def get_user(self, request):
+        user = request.user
+        username = user.username
+        person = Person.objects.filter(displayName=username)
+        if len(person) is not 1:
+            return None
+        else:
+            return person[0]
+
+
 
 
 class NewsItemViewSet(AuthenticatedViewSet):
     queryset = NewsItem.objects.all()
     serializer_class = NewsItemSerializer
     pagination_class = MetadataPagination
+    filter_class = NewsItemFilter
 
 
 class NewsFeedViewSet(AuthenticatedViewSet):
     queryset = NewsFeed.objects.all()
     serializer_class = NewsFeedSerializer
     pagination_class = MetadataPagination
+    filter_class = NewsFeedFilter
 
 
 class AffiliationViewSet(AuthenticatedViewSet):
@@ -97,16 +110,14 @@ class PersonMeViewSet(AuthenticatedViewSet):
 
     def retrieve(self, request, pk=None):
         # Use it like this after installing authentication and session middlewares
-        #  >>> current_user = request.user
+        current_user = request.user
         # You should create a connection between the django.contrib.auth.User object
         # and between the Person object, for example, by adding a username field to
         # the Person object.
-        #  >>> username = current_user.username
+        current_user.username
         # you can check if user is authenticated with:
         #  >>> if request.user.is_authenticated():
-        # Now we just test with displayName instead of username
-        userName = "Dr. Bibber"
-        queryset = Person.objects.get(displayname=userName)  # here you could compare to a userName field
+        # Now we just test with displayName instead of username        queryset = Person.objects.get(displayname=userName)  # here you could compare to a userName field
         serializer = PersonSerializer(queryset, context={'request': request})
         return Response(serializer.data)
 
@@ -124,6 +135,7 @@ class GroupRoleViewSet(AuthenticatedViewSet):
     queryset = GroupRole.objects.all()
     serializer_class = GroupRoleSerializer
     pagination_class = MetadataPagination
+    filter_class = GroupRoleFilter
 
 
 class BuildingViewSet(AuthenticatedViewSet):
